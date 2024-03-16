@@ -1,6 +1,7 @@
 # Practice
 Manon Galian
-hiiii
-
 Joel Jojan
-hiiii
+Theresa James
+Maria Faro
+Maria 
+Nandana Arun
