@@ -14,7 +14,8 @@ void settings()
 
 void setup()
 {
-  loadData();
+  loadData();    // loads the CSV data into the objects
+  collectData(); // loads a bunch of variables for you to use for graphs
    
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
