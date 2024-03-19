@@ -7,6 +7,7 @@ Screen mainScreen, screenFlightsOTD, reliabilityScreen;
 MiniScreen chyronMiniScreen;
 Chyron chyronFOTD;
 ArrayList<Flight> specificAirline; // This is for the pie chart / reliability screen
+ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 pieChart firstPieChart = new pieChart();
 void settings()
 {
@@ -15,6 +16,9 @@ void settings()
 
 void setup()
 {
+  
+  
+  specificAirline = new ArrayList<>();
   loadData();    // loads the CSV data into the objects
   collectData("AA"); // loads a bunch of variables for you to use for graphs
    
@@ -38,33 +42,8 @@ void setup()
   reliabilityScreen.addWidget(PieChartWidget);
 }
 
-void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time
-{
-  int cancelled = 0;
-  int diverted = 0;
-  int flightsOnTime = 0;
-  
-  for (int i =0; i < specificAirline.size(); i++)
-  {
-    Flight flight = specificAirline.get(i);
-    if (flight.cancelled == true)
-    {
-      cancelled +=1;
-    }
-    else if (flight.diverted == true)
-    {
-      diverted += 1;
-    }      
-  }
-  flightsOnTime = specificAirline.size() - cancelled - diverted;
-  ArrayList <Integer> reliabilityData = new ArrayList <Integer>();
-  reliabilityData.add(flightsOnTime);
-  reliabilityData.add(diverted);
-  reliabilityData.add(cancelled);
-  firstPieChart.pie_chart(reliabilityData);
-}
-
 void draw()
 {
   screens.get(currentScreenNumber).draw();
+  flightStatus();
 }

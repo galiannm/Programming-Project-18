@@ -30,6 +30,32 @@ void collectData(String airline){
     
     if (flight.cancelled){ numberCancelled++; }
     if (flight.diverted){numberDiverted++;}
-    if (flight.provider == airline) { specificAirline.add(flight);}
+    if (flight.provider.equals(airline)) { specificAirline.add(flight);}
   }
 }  
+
+void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time
+{
+  int cancelled = 0;
+  int diverted = 0;
+  int flightsOnTime = 0;
+  
+  for (int i =0; i < specificAirline.size(); i++)
+  {
+    Flight flight = specificAirline.get(i);
+    if (flight.cancelled == true)
+    {
+      cancelled +=1;
+    }
+    else if (flight.diverted == true)
+    {
+      diverted += 1;
+    }      
+  }
+  println("Diverted " + diverted);
+  println("Cancelled " + cancelled);
+  flightsOnTime = specificAirline.size() - cancelled - diverted;
+  reliabilityData.add(flightsOnTime);
+  reliabilityData.add(diverted);
+  reliabilityData.add(cancelled);
+}
