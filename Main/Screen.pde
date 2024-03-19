@@ -1,10 +1,12 @@
 class Screen {
   ArrayList<Widget> widgets;
-  color backgroundColor;
-  Screen(color backgroundColor)
+  Gradient backgroundGradient;
+  color[] backgroundColors;
+  Screen(color[] backgroundColors)
   {
     this.widgets = new ArrayList<Widget>();
-    this.backgroundColor = backgroundColor;
+    this.backgroundColors = backgroundColors;
+    backgroundGradient = new Gradient(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, backgroundColors);
   }
 
   void addWidget(Widget widget)
@@ -14,7 +16,8 @@ class Screen {
 
   void draw()
   {
-    background(backgroundColor);
+    backgroundGradient.setGradient();
+    //background(backgroundColor);
     for (Widget widget : widgets)
     {
       widget.draw();
