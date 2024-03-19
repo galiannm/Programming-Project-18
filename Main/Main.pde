@@ -36,7 +36,7 @@ void setup()
   currentScreenNumber = 0;
 
   //Pie Chart Screen / Reliability Screen
-  reliabilityScreen = new Screen(purple);
+  reliabilityScreen = new Screen(backgroundColors);
   screens.add(reliabilityScreen);
   pieChartWidget PieChartWidget = new pieChartWidget(5, 10,0, 0, "reliability", purple, titleFont, 10, firstPieChart);
   reliabilityScreen.addWidget(PieChartWidget);
