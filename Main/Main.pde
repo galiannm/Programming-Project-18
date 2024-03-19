@@ -9,7 +9,7 @@ Chyron chyronFOTD;
 
 void settings()
 {
-  size(SCREEN_WIDTH, SCREENY_HEIGHT);
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 void setup()
@@ -20,7 +20,7 @@ void setup()
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
 
-  screenFlightsOTD = new Screen(beige);
+  screenFlightsOTD = new Screen(backgroundColors);
   screens.add(screenFlightsOTD);
   
   chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
