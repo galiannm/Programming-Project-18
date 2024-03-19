@@ -1,6 +1,5 @@
 // This file was originally brought to you by Manon, but later edited by Joel :D
 
-
 // Below are the variable for which data will be collected
 int numberDelayed = 0;
 int numberDiverted = 0;
@@ -21,7 +20,7 @@ void loadData() {
 
 // This is where we can collect the data to use in our graphing. (Note: I haven't got to making all neccesary variables.) It is important to program what variables you need in this loop
 // to prevent lag throughout the program.
-void collectData(){
+void collectData(String airline){
   for(int i = 0; i < flights.size(); i++){
     Flight flight = flights.get(i);
     
@@ -31,5 +30,6 @@ void collectData(){
     
     if (flight.cancelled){ numberCancelled++; }
     if (flight.diverted){numberDiverted++;}
+    if (flight.provider == airline) { specificAirline.add(flight);}
   }
 }  
