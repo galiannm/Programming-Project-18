@@ -40,7 +40,7 @@ class MiniScreen extends Widget
   int textSize;
   int labelHeight;
   int miniScreenWidth, miniScreenHeight;
-  MiniScreen(int x, int y, int miniScreenWidth, int miniScreenHeight, String label, 
+  MiniScreen(int x, int y, int miniScreenWidth, int miniScreenHeight, String label,
     int textSize, int labelHeight, color widgetColor, PFont widgetFont)
   {
     super(x, y, miniScreenWidth, miniScreenHeight, label, widgetColor, widgetFont, 0);
@@ -49,7 +49,7 @@ class MiniScreen extends Widget
     this.miniScreenWidth = miniScreenWidth;
     this.miniScreenHeight = miniScreenHeight;
   }
-  
+
   void drawText()
   {
     textFont(widgetFont);
@@ -69,9 +69,9 @@ class InteractiveWidget extends Widget
 
   boolean mouseIntercept(int mX, int mY)
   {
-    return (mX > x && mX < x + widgetWidth && mY > y && mY < y + widgetHeight);
+    return ((mX > x && mX < x + widgetWidth && mY > y && mY < y + widgetHeight));
   }
-  
+
   void draw()
   {
     if (mouseIntercept(mouseX, mouseY)) {
@@ -155,5 +155,45 @@ class Slider extends InteractiveWidget
     textSize(20);
     text(label, barX, barY - 20);
     text(currentValue, barX + 80, barY - 20);
+  }
+}
+
+
+//Built checkboxes
+class Checkbox extends InteractiveWidget {
+  boolean isChecked;
+  boolean clickHandled; // Flag to track if a click has been handled
+
+  Checkbox(int x, int y, int checkboxSize, String label, color widgetColor, PFont widgetFont, int gap, boolean initialState) {
+    super(x, y, checkboxSize, checkboxSize, label, widgetColor, widgetFont, gap);
+    isChecked = initialState;
+    clickHandled = false; // Initialize the flag
+  }
+
+  void draw() {
+    super.draw();
+    if (isChecked) {
+      fill(0); // Fill with black if checked
+      rect(x + 5, y + 5, widgetWidth - 10, widgetHeight - 10);
+    }
+    if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !clickHandled) {
+      isChecked = !isChecked;
+      clickHandled = true; // Set the flag to indicate the click has been handled
+    }
+    if (!mousePressed) {
+      clickHandled = false;
+    }
+    drawText();
+  }
+
+  void drawText() {
+    textFont(widgetFont);
+    textSize(16);
+    fill(labelColor);
+    text(label, x + widgetWidth + gap, y + widgetHeight - gap);
+  }
+
+  boolean mouseIntercept(int mX, int mY) {
+    return ((mX > x && mX < x + widgetWidth && mY > y && mY < y + widgetHeight));
   }
 }
