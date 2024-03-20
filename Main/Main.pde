@@ -40,7 +40,7 @@ void setup()
   
   
   
-  //TestCode for checkbox
+  //TestCode for checkbox - Joel
   Checkbox checkbox1 = new Checkbox(0, 50, 20, "TestCheckbox", color(200), createFont("Arial", 12), 5, false);
   screenFlightsOTD.addWidget(checkbox1);
   

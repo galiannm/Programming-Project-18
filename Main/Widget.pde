@@ -159,7 +159,7 @@ class Slider extends InteractiveWidget
 }
 
 
-//Built checkboxes
+//Built checkboxes - Joel
 class Checkbox extends InteractiveWidget {
   boolean isChecked;
   boolean clickHandled; // Flag to track if a click has been handled
