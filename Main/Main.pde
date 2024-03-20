@@ -41,8 +41,10 @@ void setup()
   
   
   //TestCode for checkbox - Joel
-  Checkbox checkbox1 = new Checkbox(0, 50, 20, "TestCheckbox", color(200), createFont("Arial", 12), 5, false);
-  screenFlightsOTD.addWidget(checkbox1);
+  //Checkbox checkbox1 = new Checkbox(0, 50, 20, "TestCheckbox", color(200), textFont, 5, false);
+  //screenFlightsOTD.addWidget(checkbox1);
+  //Checkbox checkbox2 = new Checkbox(0, 100, 20, "Box2", color(200), textFont, 5, false);
+  //screenFlightsOTD.addWidget(checkbox2);
   
   reliabilityScreen.addWidget(PieChartWidget);
 }
