@@ -8,7 +8,8 @@ MiniScreen chyronMiniScreen;
 Chyron chyronFOTD;
 ArrayList<Flight> specificAirline; // This is for the pie chart / reliability screen
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
-pieChart firstPieChart = new pieChart();
+pieChart firstPieChart;
+String airline = "WN";
 void settings()
 {
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -16,9 +17,8 @@ void settings()
 
 void setup()
 {
-  specificAirline = new ArrayList<>();
   loadData();    // loads the CSV data into the objects
-  collectData("AA"); // loads a bunch of variables for you to use for graphs
+  collectData(airline); // loads a bunch of variables for you to use for graphs
 
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
@@ -28,29 +28,23 @@ void setup()
 
   chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
   chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600, "JFK",
-    beige, textFont, 20, chyronMiniScreen, "1/3/2022 12:00:00 AM");
+  beige, textFont, 20, chyronMiniScreen, "1/3/2022 12:00:00 AM");
 
   screenFlightsOTD.addWidget(chyronFOTD);
   currentScreenNumber = 0;
 
   //Pie Chart Screen / Reliability Screen - Theresa James
+  specificAirline = new ArrayList<>();
+  flightStatus();
+  firstPieChart = new pieChart(reliabilityData);
+  firstPieChart.pie_chart();
   reliabilityScreen = new Screen(backgroundColors);
   screens.add(reliabilityScreen);
-  pieChartWidget PieChartWidget = new pieChartWidget(5, 10, 0, 0, "reliability", purple, titleFont, 10, firstPieChart);
-  
-  
-  
-  //TestCode for checkbox - Joel
-  //Checkbox checkbox1 = new Checkbox(0, 50, 20, "TestCheckbox", color(200), textFont, 5, false);
-  //screenFlightsOTD.addWidget(checkbox1);
-  //Checkbox checkbox2 = new Checkbox(0, 100, 20, "Box2", color(200), textFont, 5, false);
-  //screenFlightsOTD.addWidget(checkbox2);
-  
+  pieChartWidget PieChartWidget = new pieChartWidget(500, 10,0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
   reliabilityScreen.addWidget(PieChartWidget);
 }
 
 void draw()
 {
   screens.get(currentScreenNumber).draw();
-  //flightStatus();
 }
