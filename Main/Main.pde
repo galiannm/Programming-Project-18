@@ -33,11 +33,7 @@ void settings()
 
 void setup()
 {
-  frames = new PImage[NUMBER_OF_FRAMES+1];
-  for (int i = 1; i <= NUMBER_OF_FRAMES; i++) {
-    frames[i-1] = loadImage("frame_" + i + ".gif");
-  }
-  frames[NUMBER_OF_FRAMES] = frames[0];
+  gifSetup();
 
   Thread dataLoadingThread = new Thread(new Runnable() {
     public void run() {
@@ -66,16 +62,7 @@ void draw()
   rectMode(CORNER);
 
   if (isLoading) {
-    image(frames[frameIndex], 0, 0, width, height);
-    if (millis() - lastFrameChangeTime > frameChangeInterval) {
-      frameIndex = (frameIndex + 1) % frames.length;
-      if (frameIndex == frames.length - 1) {
-        // If it's the last frame, reset frameIndex to 0
-        frameIndex = 2;
-      }
-      lastFrameChangeTime = millis();
-    }
-    
+    gifAnim();
   } else {
     screens.get(currentScreenNumber).draw();
   }
@@ -100,5 +87,27 @@ void mouseDragged(MouseEvent event)
     {
       ((Slider) widget).actions(event);
     }
+  }
+}
+
+
+//Loading Screen Code
+void gifSetup() {
+  frames = new PImage[NUMBER_OF_FRAMES+1];
+  for (int i = 1; i <= NUMBER_OF_FRAMES; i++) {
+    frames[i-1] = loadImage("frame_" + i + ".gif");
+  }
+  frames[NUMBER_OF_FRAMES] = frames[0];
+}
+
+void gifAnim() {
+  image(frames[frameIndex], 0, 0, width, height);
+  if (millis() - lastFrameChangeTime > frameChangeInterval) {
+    frameIndex = (frameIndex + 1) % frames.length;
+    if (frameIndex == frames.length - 1) {
+      // If it's the last frame, reset frameIndex to 0
+      frameIndex = 2;
+    }
+    lastFrameChangeTime = millis();
   }
 }
