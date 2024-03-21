@@ -23,6 +23,7 @@ void loadData() {
 // This is where we can collect the data to use in our graphing. (Note: I haven't got to making all neccesary variables.) It is important to program what variables you need in this loop
 // to prevent lag throughout the program.
 void collectData(String airline){
+
   for(int i = 0; i < flights.size(); i++){
     Flight flight = flights.get(i);
     
@@ -32,7 +33,7 @@ void collectData(String airline){
     
     if (flight.cancelled){ numberCancelled++; }
     if (flight.diverted){numberDiverted++;}
-    if (flight.provider.equals(airline)) { specificAirline.add(flight);}
+    if (flight.provider.contains(airline)) { specificAirline.add(flight);}
   }
 }  
 
@@ -43,7 +44,7 @@ void flightStatus() //This function checks the amount of flights that are cancel
   int flightsOnTime = 0;
   int delayedFlights = 0;
   int expectedTimeTaken = 0;
-  int totalNumOfFlights = specificAirline.size();
+  //int totalNumOfFlights = specificAirline.size();
   for (int i =0; i < specificAirline.size(); i++)
   {
     Flight flight = specificAirline.get(i);
