@@ -20,6 +20,7 @@ void loadData() {
   for (int i = 1; i < rows.length; i++){
     String[] data = rows[i].split(",");
     flights.add(new Flight(data));
+    println(i);
   }
 }
 

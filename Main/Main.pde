@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.lang.Thread;
+import gifAnimation.*;
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
@@ -16,6 +18,9 @@ ImageWidget homeBtn;
 Widget signHolder;
 AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn, pieChartReliabilityBtn, lineGrapheReliabilityBtn,
   disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn;
+Gif loadingGif;
+boolean isLoading = true;
+
 void settings()
 {
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -23,25 +28,41 @@ void settings()
 
 void setup()
 {
-  loadData();    // loads the CSV data into the objects
-  collectData(airline, "1/1/2022", "NY"); // loads a bunch of variables for you to use for graphs
+  loadingGif = new Gif(this, "loading.gif");
+  loadingGif.loop();
+
+  Thread dataLoadingThread = new Thread(new Runnable() {
+    public void run() {
+      loadData(); // Load CSV data
+      collectData(airline, "1/1/2022", "NY"); // Process data
+      flightStatus();
+      currentScreenNumber = 0;
+
+      addWidgetsToSetup();
+      interactiveWidgetActions();
+      isLoading = false; // Set loading flag to false once data loading is complete
+    }
+  }
+  );
+  dataLoadingThread.start();
+
   homeBtnPic = loadImage("HomeButtonImg.png");
 
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
-
-  flightStatus();
-  currentScreenNumber = 0;
-  
-  addWidgetsToSetup();
-  interactiveWidgetActions();
 }
 
 void draw()
 {
   textAlign(LEFT);
   rectMode(CORNER);
+  
+  if(isLoading){
+    image(loadingGif, 0, 0, width, height);
+  }
+  else{
   screens.get(currentScreenNumber).draw();
+  }
 }
 
 void mousePressed(MouseEvent event)
