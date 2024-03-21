@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.lang.Thread;
-import gifAnimation.*;
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
@@ -18,8 +17,14 @@ ImageWidget homeBtn;
 Widget signHolder;
 AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn, pieChartReliabilityBtn, lineGrapheReliabilityBtn,
   disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn;
-Gif loadingGif;
+
 boolean isLoading = true;
+PImage[] frames;
+int frameIndex = 0;
+int frameChangeInterval = 100; // Time between frame changes in milliseconds
+long lastFrameChangeTime = 0;
+int NUMBER_OF_FRAMES = 21;
+
 
 void settings()
 {
@@ -28,8 +33,11 @@ void settings()
 
 void setup()
 {
-  loadingGif = new Gif(this, "loading.gif");
-  loadingGif.loop();
+  frames = new PImage[NUMBER_OF_FRAMES+1];
+  for (int i = 1; i <= NUMBER_OF_FRAMES; i++) {
+    frames[i-1] = loadImage("frame_" + i + ".gif");
+  }
+  frames[NUMBER_OF_FRAMES] = frames[0];
 
   Thread dataLoadingThread = new Thread(new Runnable() {
     public void run() {
@@ -56,12 +64,20 @@ void draw()
 {
   textAlign(LEFT);
   rectMode(CORNER);
-  
-  if(isLoading){
-    image(loadingGif, 0, 0, width, height);
-  }
-  else{
-  screens.get(currentScreenNumber).draw();
+
+  if (isLoading) {
+    image(frames[frameIndex], 0, 0, width, height);
+    if (millis() - lastFrameChangeTime > frameChangeInterval) {
+      frameIndex = (frameIndex + 1) % frames.length;
+      if (frameIndex == frames.length - 1) {
+        // If it's the last frame, reset frameIndex to 0
+        frameIndex = 2;
+      }
+      lastFrameChangeTime = millis();
+    }
+    
+  } else {
+    screens.get(currentScreenNumber).draw();
   }
 }
 
