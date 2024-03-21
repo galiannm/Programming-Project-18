@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Thread;
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
@@ -16,6 +17,15 @@ ImageWidget homeBtn;
 Widget signHolder;
 AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn, pieChartReliabilityBtn, lineGrapheReliabilityBtn,
   disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn;
+
+boolean isLoading = true;
+PImage[] frames;
+int frameIndex = 0;
+int frameChangeInterval = 100; // Time between frame changes in milliseconds
+long lastFrameChangeTime = 0;
+int NUMBER_OF_FRAMES = 21;
+
+
 void settings()
 {
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -23,25 +33,52 @@ void settings()
 
 void setup()
 {
-  loadData();    // loads the CSV data into the objects
-  collectData(airline, "1/1/2022", "NY"); // loads a bunch of variables for you to use for graphs
+  frames = new PImage[NUMBER_OF_FRAMES+1];
+  for (int i = 1; i <= NUMBER_OF_FRAMES; i++) {
+    frames[i-1] = loadImage("frame_" + i + ".gif");
+  }
+  frames[NUMBER_OF_FRAMES] = frames[0];
+
+  Thread dataLoadingThread = new Thread(new Runnable() {
+    public void run() {
+      loadData(); // Load CSV data
+      collectData(airline, "1/1/2022", "NY"); // Process data
+      flightStatus();
+      currentScreenNumber = 0;
+
+      addWidgetsToSetup();
+      interactiveWidgetActions();
+      isLoading = false; // Set loading flag to false once data loading is complete
+    }
+  }
+  );
+  dataLoadingThread.start();
+
   homeBtnPic = loadImage("HomeButtonImg.png");
 
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
-
-  flightStatus();
-  currentScreenNumber = 0;
-  
-  addWidgetsToSetup();
-  interactiveWidgetActions();
 }
 
 void draw()
 {
   textAlign(LEFT);
   rectMode(CORNER);
-  screens.get(currentScreenNumber).draw();
+
+  if (isLoading) {
+    image(frames[frameIndex], 0, 0, width, height);
+    if (millis() - lastFrameChangeTime > frameChangeInterval) {
+      frameIndex = (frameIndex + 1) % frames.length;
+      if (frameIndex == frames.length - 1) {
+        // If it's the last frame, reset frameIndex to 0
+        frameIndex = 2;
+      }
+      lastFrameChangeTime = millis();
+    }
+    
+  } else {
+    screens.get(currentScreenNumber).draw();
+  }
 }
 
 void mousePressed(MouseEvent event)
