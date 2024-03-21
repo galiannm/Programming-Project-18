@@ -17,7 +17,6 @@ class Screen {
   void draw()
   {
     backgroundGradient.setGradient();
-    //background(backgroundColor);
     for (Widget widget : widgets)
     {
       widget.draw();

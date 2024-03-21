@@ -1,3 +1,4 @@
+// charts and bubble chart brought to you by Manon :)
 class Chart extends Widget
 {
   int x, y, widgetWidth, widgetHeight, gap;
@@ -5,7 +6,7 @@ class Chart extends Widget
   color widgetColor;
   Chart(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, String title, String xLabel, String yLabel)
   {
-    super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap);
+    super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, 0, true);
     this.x = x;
     this.y = y;
     this.widgetWidth = widgetWidth;
@@ -22,7 +23,7 @@ class Chart extends Widget
   {
     fill(44);
     noStroke();
-    rect(width/2, 500, 600, 500);
+    rect(x, y, widgetWidth+100, widgetHeight+100, curve);
   }
 
   void drawFrame()
@@ -36,7 +37,7 @@ class Chart extends Widget
   void drawTitle()
   {
     textAlign(CENTER);
-    textSize(35);
+    textSize(45);
     text(title, SCREEN_WIDTH/2, 60);
   }
 
@@ -77,14 +78,14 @@ class Chart extends Widget
 class BubbleChart extends Chart
 {
   int[] dataX, dataY, dataSize;
-  String[] dataLabel;
+  ArrayList<String> dataLabel;
   color[] dataColor;
   int minDataX, minDataY, minDataSize, maxDataX, maxDataY, maxDataSize;
   int minX, maxX, minY, maxY, intervalX, intervalY;
   float scale;
   String xLabel, yLabel, legendLabel;
   BubbleChart(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor,
-    PFont widgetFont, int gap, String title, int[] dataX, int[] dataY, int[] dataSize, String[] dataLabel,
+    PFont widgetFont, int gap, String title, int[] dataX, int[] dataY, int[] dataSize, ArrayList<String> dataLabel,
     color[] dataColor, float scale, String xLabel, String yLabel, String legendLabel)
   {
     super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, title, xLabel, yLabel);
@@ -104,19 +105,17 @@ class BubbleChart extends Chart
   void drawLegend()
   {
     stroke(44);
-    //line(x+widgetWidth/2, y-widgetHeight/2, x+widgetWidth/2, (y-widgetHeight/2)+50);
-    //line(x+widgetWidth/2, y-widgetHeight/2, (x+widgetWidth/2)-90, y-widgetHeight/2);
-    line(x+widgetWidth/2, (y-widgetHeight/2)+50, (x+widgetWidth/2)-90, (y-widgetHeight/2)+50);
-    line((x+widgetWidth/2)-90, y-widgetHeight/2, (x+widgetWidth/2)-90, (y-widgetHeight/2)+50);
+    line(x+widgetWidth/2, (y-widgetHeight/2)+50, (x+widgetWidth/2)-110, (y-widgetHeight/2)+50);
+    line((x+widgetWidth/2)-110, y-widgetHeight/2, (x+widgetWidth/2)-110, (y-widgetHeight/2)+50);
 
     fill(44);
-    textSize(8);
+    textSize(12);
     textAlign(LEFT);
-    text("Legend :", (x+widgetWidth/2)-85, y-widgetHeight/2 + 12);
-    text(legendLabel, (x+widgetWidth/2)-65, y-widgetHeight/2 + 35);
+    text("Legend :", (x+widgetWidth/2)-100, y-widgetHeight/2 + 12);
+    text(legendLabel, (x+widgetWidth/2)-85, y-widgetHeight/2 + 35);
     fill(44, 44, 44, 95);
     noStroke();
-    circle((x+widgetWidth/2)-75, y-widgetHeight/2 + 30, 12);
+    circle((x+widgetWidth/2)-95, y-widgetHeight/2 + 30, 12);
   }
 
   void findMinMax()
@@ -137,14 +136,11 @@ class BubbleChart extends Chart
     float baseMultiplier = (float) Math.pow(10, n - 1);
     intervalTemp = Math.round(intervalTemp / baseMultiplier) * baseMultiplier;
     intervalY = (int) intervalTemp;
-    //intervalY = 1000;
     intervalTemp = (maxDataX / dataX.length)*2;
     n = (int) Math.log10(intervalTemp) + 1;
     baseMultiplier = (float) Math.pow(10, n - 1);
     intervalTemp = Math.round(intervalTemp / baseMultiplier) * baseMultiplier;
     intervalX = (int) intervalTemp;
-    //intervalX = 5000;
-    //println(intervalX);
     minY = 0;
     maxY = max(dataY)+intervalY;
     minX = 0;
@@ -160,7 +156,7 @@ class BubbleChart extends Chart
 
       noStroke();
       fill(44);
-      text(dataLabel[i], mappedX, mappedY);
+      text(dataLabel.get(i), mappedX, mappedY);
       fill(dataColor[i], 95);
       circle(mappedX, mappedY, dataSize[i]*scale);
     }
@@ -168,21 +164,20 @@ class BubbleChart extends Chart
 
   void drawNumberOnAxes()
   {
-
     fill(255);
-    textSize(10);
+    textSize(12);
     textAlign(CENTER, CENTER);
 
     // Draw y-axis numbers
     for (int i = minY; i <= maxY; i += intervalY) {
-      float yPos = map(i, minY, maxY, y + widgetHeight / 2, y - widgetHeight / 2);
-      text(nf(i, 1), x - widgetWidth / 2 - 10, yPos);
+      float yPos = map(i, minY, maxY, y + widgetHeight / 2, y - widgetHeight / 2 - 75);
+      text(i, x - widgetWidth / 2 - 13, yPos);
     }
 
     // Draw x-axis numbers
     for (int i = minX; i <= maxX; i += intervalX) {
-      float xPos = map(i, minX, maxX, x - widgetWidth / 2, x + widgetWidth / 2);
-      text(nf(i, 1), xPos, y + widgetHeight / 2+10);
+      float xPos = map(i, minX, maxX, x - widgetWidth / 2 + 75, x + widgetWidth / 2);
+      text(i, xPos, y + widgetHeight / 2+10);
     }
   }
 

@@ -7,6 +7,10 @@ int numberCancelled = 0;
 int delayedFlights = 0;
 int expectedTimeTaken = 0;
 int totalNumOfFlights = specificAirline.size();
+int[][] reliabilityBubbleChart = new int[3][10];
+ArrayList<String> airlines = new ArrayList<String>();
+ArrayList<Flight> flightsOfTheDay = new ArrayList<Flight>();
+int count = 0;
 
 // This loads the data from the csv into objects
 void loadData() {
@@ -22,8 +26,8 @@ void loadData() {
 
 // This is where we can collect the data to use in our graphing. (Note: I haven't got to making all neccesary variables.) It is important to program what variables you need in this loop
 // to prevent lag throughout the program.
-void collectData(String airline){
-
+void collectData(String airline, String date, String state){
+  airlines.add(flights.get(0).provider);
   for(int i = 0; i < flights.size(); i++){
     Flight flight = flights.get(i);
     
@@ -34,6 +38,35 @@ void collectData(String airline){
     if (flight.cancelled){ numberCancelled++; }
     if (flight.diverted){numberDiverted++;}
     if (flight.provider.contains(airline)) { specificAirline.add(flight);}
+    
+    // processing data for chyron
+    if (flight.flightDate.equalsIgnoreCase(date) && flight.originState.equalsIgnoreCase(state))
+    {
+      flightsOfTheDay.add(flight);
+    }
+    
+    // processing data for the bubble chart
+    if (flight.provider.equalsIgnoreCase(airlines.get(count)))
+    {
+
+      if (flight.cancelled == true)
+      {
+        reliabilityBubbleChart[0][airlines.indexOf(airlines.get(count))] += 1; // cancelled
+      } 
+      else if (flight.diverted == true)
+      {
+        reliabilityBubbleChart[1][airlines.indexOf(airlines.get(count))] += 1; // diverted 
+      } 
+      else if (flight.expectedDepTime - Integer.parseInt(flight.depTime) > 10)
+      {
+        reliabilityBubbleChart[2][airlines.indexOf(airlines.get(count))] += 1; // delayed
+      }
+    } 
+    else
+    {
+      airlines.add(flight.provider);
+      count = airlines.indexOf(flight.provider);
+    }
   }
 }  
 

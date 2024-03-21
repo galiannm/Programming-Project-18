@@ -56,7 +56,7 @@ class pieChartWidget extends Widget
   pieChart chart;
   pieChartWidget(int x, int y,int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, pieChart chart)
   {
-    super(x, y, 0, 0, label, 0, widgetFont,  0);
+    super(x, y, 0, 0, label, 0, widgetFont,  0, 0, false);
     this.x = x; this.y = y; this.widgetWidth = widgetWidth; this.widgetHeight = widgetHeight; this.label = label; this.widgetColor  = widgetColor;
     this.widgetFont = widgetFont; this.gap = gap;
     this.chart = chart;
