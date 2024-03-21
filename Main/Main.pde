@@ -21,7 +21,7 @@ AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn,
 boolean isLoading = true;
 PImage[] frames;
 int frameIndex = 0;
-int frameChangeInterval = 100; // Time between frame changes in milliseconds
+int frameChangeInterval = 70; // Time between frame changes in milliseconds
 long lastFrameChangeTime = 0;
 int NUMBER_OF_FRAMES = 21;
 
@@ -70,22 +70,26 @@ void draw()
 
 void mousePressed(MouseEvent event)
 {
-  for (Widget widget : screens.get(currentScreenNumber).widgets)
-  {
-    if (widget instanceof InteractiveWidget)
+  if (!isLoading) {
+    for (Widget widget : screens.get(currentScreenNumber).widgets)
     {
-      ((InteractiveWidget) widget).actions(event);
+      if (widget instanceof InteractiveWidget)
+      {
+        ((InteractiveWidget) widget).actions(event);
+      }
     }
   }
 }
 
 void mouseDragged(MouseEvent event)
 {
-  for (Widget widget : screens.get(currentScreenNumber).widgets)
-  {
-    if (widget instanceof Slider)
+  if (!isLoading) {
+    for (Widget widget : screens.get(currentScreenNumber).widgets)
     {
-      ((Slider) widget).actions(event);
+      if (widget instanceof Slider)
+      {
+        ((Slider) widget).actions(event);
+      }
     }
   }
 }
