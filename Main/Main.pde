@@ -6,7 +6,7 @@ int currentScreenNumber;
 Screen mainScreen, screenFlightsOTD, reliabilityScreen;
 MiniScreen chyronMiniScreen;
 Chyron chyronFOTD;
-ArrayList<Flight> specificAirline = new ArrayList<Flight>(); //<>//
+ArrayList<Flight> specificAirline = new ArrayList<Flight>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 pieChart firstPieChart;
 String airline = "HA";
@@ -16,7 +16,7 @@ void settings()
 }
 
 void setup()
-{ //<>//
+{
   loadData();    // loads the CSV data into the objects
   collectData(airline); // loads a bunch of variables for you to use for graphs
 
