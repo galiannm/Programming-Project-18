@@ -4,7 +4,9 @@
 int numberDelayed = 0;
 int numberDiverted = 0;
 int numberCancelled = 0;
-
+int delayedFlights = 0;
+int expectedTimeTaken = 0;
+int totalNumOfFlights = specificAirline.size();
 
 // This loads the data from the csv into objects
 void loadData() {
@@ -39,7 +41,9 @@ void flightStatus() //This function checks the amount of flights that are cancel
   int cancelled = 0;
   int diverted = 0;
   int flightsOnTime = 0;
-  
+  int delayedFlights = 0;
+  int expectedTimeTaken = 0;
+  int totalNumOfFlights = specificAirline.size();
   for (int i =0; i < specificAirline.size(); i++)
   {
     Flight flight = specificAirline.get(i);
@@ -50,12 +54,30 @@ void flightStatus() //This function checks the amount of flights that are cancel
     else if (flight.diverted == true)
     {
       diverted += 1;
-    }      
+    }  
+    if(flight.depTime == "") flight.depTime = "0";
+    if (flight.arrTime =="") flight.arrTime = "0";
+    expectedTimeTaken = flight.expectedArrTime - flight.expectedDepTime;
+    int arrivalTime = Integer.parseInt(flight.arrTime);
+    int depTime = Integer.parseInt(flight.depTime);
+    int actualTimeTaken = arrivalTime - depTime;
+    if ((actualTimeTaken - expectedTimeTaken) > 10)
+    {
+      delayedFlights +=1;
+    }
+    else 
+    {
+     flightsOnTime +=1;
+     }
   }
+  
+  println("Total number of flights " + totalNumOfFlights);
+  println("Flights on time " + flightsOnTime);
+  println("Delayed " + delayedFlights);
   println("Diverted " + diverted);
   println("Cancelled " + cancelled);
-  flightsOnTime = specificAirline.size() - cancelled - diverted;
   reliabilityData.add(flightsOnTime);
+  reliabilityData.add(delayedFlights);
   reliabilityData.add(diverted);
   reliabilityData.add(cancelled);
 }
