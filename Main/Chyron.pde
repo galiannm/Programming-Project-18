@@ -1,4 +1,4 @@
-
+// chyron made brought to you by Manon :)
 class Chyron extends Widget
 {
   int chyronWidth, chyronHeight;
@@ -11,7 +11,7 @@ class Chyron extends Widget
   Chyron(int x, int y, int chyronWidth, int chyronHeight, String airport,
     color textColor, PFont widgetFont, int gap, MiniScreen miniScreen, String date)
   {
-    super(x, y, chyronWidth, chyronHeight, "", textColor, widgetFont, gap);
+    super(x, y, chyronWidth, chyronHeight, "", textColor, widgetFont, gap, 0, false);
     this.miniScreen = miniScreen;
     this.airport = airport;
     this.date = date;
@@ -30,7 +30,7 @@ class Chyron extends Widget
     noStroke();
     fill(darkGray);
     rect(chyronWidth, chyronHeight, miniScreen.miniScreenWidth, 40);
-    fill(beige);
+    fill(darkBlueGray);
     rect(chyronWidth, miniScreen.miniScreenHeight+chyronHeight, miniScreen.miniScreenWidth, 60);
   }
 
@@ -50,9 +50,9 @@ class Chyron extends Widget
   {
     miniScreen.draw();
     fill(255, 0, 0);
-    for (int i = max(speed/gap - 1, 0); i<min(flights.size(), speed); i++) //removing /gap+36 makes a cool animation
+    for (int i = max(speed/gap - 1, 0); i<min(flightsOfTheDay.size(), speed); i++) //removing /gap+36 makes a cool animation
     {
-      Flight flight = flights.get(i);
+      Flight flight = flightsOfTheDay.get(i);
       if ((y+i*gap - speed) > chyronHeight+30)
       {
         textFont(widgetFont);
@@ -83,12 +83,12 @@ class Chyron extends Widget
         //Printing out each flight onto the chyron
         text(flight.provider, x, y+i*gap - speed); // carrier
         text(flight.flightNumber, x + gap * 4, y+i*gap - speed); // flight number
-        text(flight.originAirport+", "+flight.originCity+" "+flight.originState, x + gap * 9, y+i*gap - speed); // origin aiport
-        text(flight.destAirport+", "+flight.destCity+" "+flight.destState, x + gap * 20.5, y+i*gap - speed); // dest airport
+        text(flight.originAirport +", "+flight.originCity+" "+flight.originState, x + gap * 9, y+i*gap - speed); // origin aiport
+        text(flight.destAirport +", "+flight.destCity+" "+flight.destState, x + gap * 20.5, y+i*gap - speed); // dest airport
         text(standardDepTime + " / " + standardArrTime, x + gap * 32.5, y+i*gap - speed); // departure and arrival time
       }
     }
-    speed+=1;
+    speed+=2;
     drawHeaderFooterBox();
     drawHeaders();
   }

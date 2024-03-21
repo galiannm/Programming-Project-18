@@ -1,0 +1,69 @@
+//This class is brought to you by Theresa James :))
+class pieChart
+{
+  String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
+  ArrayList <Integer> data;
+  pieChart(ArrayList<Integer> data)
+  {
+    this.data = data;
+  }
+  void setup()
+  {
+    noStroke();
+    noLoop();
+  }
+
+  void pie_chart()
+  {
+    float total = 0;
+    float startAngle = 0;
+    for (int i =0; i < data.size(); i++)
+    {
+      total += data.get(i);
+    }
+    color [] sectorColors = {#CBB9FE, #F8DECB, #FDC2EB, #B0E3EA, #FDC2EB, #F8DECB };
+    for (int i = 0; i < data.size(); i++)
+    {
+      //float purple = map(i, 0, data.size(), 50, 255);
+      //fill (purple * 0.8, 0, purple);
+      fill(sectorColors [i % sectorColors.length]);
+      float angle = map(data.get(i), 0, total, 0, TWO_PI);
+      arc (width/2, height/2, PIECHART_DIAMETER, PIECHART_DIAMETER, startAngle, startAngle + angle);
+      startAngle += angle;
+    }
+    //Drawing the legend
+    float legendX = width - 850;
+    float legendY = 100;
+    float boxSize = 20;
+    for (int i =0; i < data.size(); i++)
+    {
+      fill(sectorColors [i % sectorColors.length]);
+      rect(legendX, legendY+i*25, boxSize, boxSize);
+      fill(0);
+      textAlign(LEFT, CENTER);
+      text(labels[i], legendX + boxSize + 5, legendY + i * 25 + boxSize/2);
+    }
+}
+  void draw()
+  {
+    //background(100); 
+    pie_chart();
+  }
+}
+
+class pieChartWidget extends Widget
+{
+  pieChart chart;
+  pieChartWidget(int x, int y,int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, pieChart chart)
+  {
+    super(x, y, 0, 0, label, 0, widgetFont,  0, 0, false);
+    this.x = x; this.y = y; this.widgetWidth = widgetWidth; this.widgetHeight = widgetHeight; this.label = label; this.widgetColor  = widgetColor;
+    this.widgetFont = widgetFont; this.gap = gap;
+    this.chart = chart;
+  }
+  void draw()
+  {
+    super.draw();
+    chart.draw();
+  }
+}
