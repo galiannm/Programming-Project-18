@@ -91,7 +91,7 @@ void mouseDragged(MouseEvent event)
 }
 
 
-//Loading Screen Code
+//Loading Screen Code - Joel
 void gifSetup() {
   frames = new PImage[NUMBER_OF_FRAMES+1];
   for (int i = 1; i <= NUMBER_OF_FRAMES; i++) {
