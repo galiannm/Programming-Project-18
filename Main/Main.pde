@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-ArrayList<Flight> flights; //<>//
+ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
 int currentScreenNumber;
