@@ -7,11 +7,6 @@ class pieChart
   {
     this.data = data;
   }
-  void setup()
-  {
-    noStroke();
-    noLoop();
-  }
 
   void pie_chart()
   {
@@ -47,6 +42,7 @@ class pieChart
   }
   void draw()
   {
+    noStroke(); noLoop();
     //background(100);
     pie_chart(); //<>//
   }
