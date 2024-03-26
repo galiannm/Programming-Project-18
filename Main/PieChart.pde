@@ -1,7 +1,7 @@
 //This class is brought to you by Theresa James :))
 class pieChart
 {
-
+  String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
   ArrayList <Integer> data;
   pieChart(ArrayList<Integer> data)
   {

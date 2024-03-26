@@ -28,4 +28,4 @@ color darkBlue = color(51, 153, 255);
 color purple = color(178, 102, 255);
 color[] colorOfCarriers = new color[]{blue, red, orange, pink, green, darkGreen, darkPink, darkBlue, purple, yellow};
 
-String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
+//String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
