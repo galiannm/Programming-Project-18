@@ -64,7 +64,7 @@ class pieChartWidget extends Widget
     this.widgetHeight = widgetHeight;
     this.label = label;
     this.widgetColor  = widgetColor;
-    this.widgetFont = titleFont;
+    this.widgetFont = widgetFont;
     this.gap = gap;
     this.chart = chart;
   }
