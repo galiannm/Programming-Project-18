@@ -12,7 +12,7 @@ MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
 pieChart firstPieChart;
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
-BarChart secondBarChart; // The bar chart on total distance travelled by carrier 
+BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 BubbleChart bubbleChart;
 InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4;
 ImageWidget homeBtn;
@@ -62,21 +62,26 @@ void draw()
   textAlign(LEFT);
   rectMode(CORNER);
 
-  if (isLoading) {
-    gifAnim();
-  } else {
-    screens.get(currentScreenNumber).draw();
+
+  synchronized(this) {
+    if (isLoading) {
+      gifAnim();
+    } else {
+      screens.get(currentScreenNumber).draw();
+    }
   }
 }
 
 void mousePressed(MouseEvent event)
 {
-  if (!isLoading) {
-    for (Widget widget : screens.get(currentScreenNumber).widgets)
-    {
-      if (widget instanceof InteractiveWidget)
+  synchronized(this) {
+    if (!isLoading) {
+      for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
-        ((InteractiveWidget) widget).actions(event);
+        if (widget instanceof InteractiveWidget)
+        {
+          ((InteractiveWidget) widget).actions(event);
+        }
       }
     }
   }
@@ -84,12 +89,14 @@ void mousePressed(MouseEvent event)
 
 void mouseDragged(MouseEvent event)
 {
-  if (!isLoading) {
-    for (Widget widget : screens.get(currentScreenNumber).widgets)
-    {
-      if (widget instanceof Slider)
+  synchronized(this) {
+    if (!isLoading) {
+      for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
-        ((Slider) widget).actions(event);
+        if (widget instanceof Slider)
+        {
+          ((Slider) widget).actions(event);
+        }
       }
     }
   }
