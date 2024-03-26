@@ -92,7 +92,6 @@ void addWidgetsToSetup()
   screenPieChartReliability.addWidget(homeBtn);
   screenPieChartReliability.addWidget(PieChartWidget);
   
-  
   screenNumFlightsPerAirline.addWidget(firstBarChart);
   screenNumFlightsPerAirline.addWidget(homeBtn);
  
