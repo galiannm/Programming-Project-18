@@ -33,7 +33,7 @@ void addWidgetsToSetup()
   // Theresa's pie chart
   firstPieChart = new pieChart(reliabilityData);
   firstPieChart.pie_chart();
-  pieChartWidget PieChartWidget = new pieChartWidget(500, 10,0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
+  pieChartWidget PieChartWidget = new pieChartWidget(500, 25,0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
 
   // Nandana's bar charts
   firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",

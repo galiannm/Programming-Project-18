@@ -88,7 +88,9 @@ void flightStatus() //This function checks the amount of flights that are cancel
   int flightsOnTime = 0;
   int delayedFlights = 0;
   int expectedTimeTaken = 0;
-  //int totalNumOfFlights = specificAirline.size();
+  int totalNumOfFlights = specificAirline.size();
+  
+  
   for (int i =0; i < specificAirline.size(); i++)
   {
     Flight flight = specificAirline.get(i);
