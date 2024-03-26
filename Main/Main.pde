@@ -33,10 +33,10 @@ void settings()
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void setup()
+void setup() 
 {
   gifSetup();
-
+  //Threads to load data while displaying a gif - Joel
   Thread dataLoadingThread = new Thread(new Runnable() {
     public void run() {
       loadData(); // Load CSV data
