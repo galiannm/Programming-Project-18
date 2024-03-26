@@ -6,7 +6,7 @@ ArrayList<Screen> screens = new ArrayList<>();
 int currentScreenNumber;
 ArrayList<Flight> specificAirline = new ArrayList<Flight>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
-String airline = "HA";
+String airline = "AA";
 Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability, screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo;
 MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
@@ -51,7 +51,6 @@ void setup()
   }
   );
   dataLoadingThread.start();
-
   homeBtnPic = loadImage("HomeButtonImg.png");
 
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
