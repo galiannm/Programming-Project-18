@@ -35,6 +35,15 @@ void addWidgetsToSetup()
   firstPieChart.pie_chart();
   pieChartWidget PieChartWidget = new pieChartWidget(500, 10,0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
 
+  // Nandana's bar charts
+  firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
+    color(240), textFont, 0, "Bar Chart : Number Of Flights Per Carrier", "Carriers",
+    "Number of Flights", numFlightsPerCarrier[0], airlines);
+                         
+  secondBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
+    color(240), textFont, 0, "Bar Chart : Total Distance Travelled Per Carrier", "Carriers",
+    "Distance (in kilometers)", totalDistancePerCarrier[0], airlines);
+  
   mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Main Screen", 25, 50, silverBlue, titleFont);
   signHolder = new Widget(SCREEN_WIDTH/2, mainScreenMiniScreen.y + 20, 15, mainScreenMiniScreen.widgetHeight - 12, "", darkBlueGray, textFont, 8, (mainScreenMiniScreen.widgetHeight -20)/2, false);
   mainBtn1 = new InteractiveWidget(SCREEN_WIDTH/2, 150, 220, 140, "Reliability Of Airlines", lightBlue, textFont, 8, 220/12, true);
@@ -82,6 +91,15 @@ void addWidgetsToSetup()
   
   screenPieChartReliability.addWidget(homeBtn);
   screenPieChartReliability.addWidget(PieChartWidget);
+  
+  
+  screenNumFlightsPerAirline.addWidget(firstBarChart);
+  screenNumFlightsPerAirline.addWidget(homeBtn);
+ 
+  
+  screenDisPerAirline.addWidget(secondBarChart);
+  screenDisPerAirline.addWidget(homeBtn);
+  
   
   screenLineGrapheReliability.addWidget(homeBtn);
   screenDisPerAirline.addWidget(homeBtn);

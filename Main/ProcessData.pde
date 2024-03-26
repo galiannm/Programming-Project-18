@@ -10,6 +10,10 @@ int totalNumOfFlights = specificAirline.size();
 int[][] reliabilityBubbleChart = new int[3][10];
 ArrayList<String> airlines = new ArrayList<String>();
 ArrayList<Flight> flightsOfTheDay = new ArrayList<Flight>();
+String[] airlinesArray = airlines.toArray(new String[0]); // Convert ArrayList to array
+
+int[][] totalDistancePerCarrier = new int[10][10];
+int[][] numFlightsPerCarrier = new int[10][10]; 
 int count = 0;
 
 // This loads the data from the csv into objects
@@ -66,6 +70,13 @@ void collectData(String airline, String date, String state){
     {
       airlines.add(flight.provider);
       count = airlines.indexOf(flight.provider);
+    }
+    
+   int carrierIndex = airlines.indexOf(flight.provider);
+   if (carrierIndex != -1) 
+   {
+      numFlightsPerCarrier[0][carrierIndex]++; // Increment the number of flights for the carrier
+      totalDistancePerCarrier[0][carrierIndex] += flight.distance;// Add the distance of the flight to the total distance for the carrier
     }
   }
 }  

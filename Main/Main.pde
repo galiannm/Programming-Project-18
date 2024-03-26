@@ -11,6 +11,8 @@ Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChar
 MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
 pieChart firstPieChart;
+BarChart firstBarChart;   // The bar chart on number of flights per carrier
+BarChart secondBarChart; // The bar chart on total distance travelled by carrier 
 BubbleChart bubbleChart;
 InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4;
 ImageWidget homeBtn;
