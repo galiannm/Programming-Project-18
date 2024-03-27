@@ -97,12 +97,12 @@ inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65);
   screenPieChartReliability.addWidget(PieChartWidget);
   
   screenNumFlightsPerAirline.addWidget(firstBarChart);
+  screenNumFlightsPerAirline.addWidget(new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5));
   screenNumFlightsPerAirline.addWidget(homeBtn);
- 
   
   screenDisPerAirline.addWidget(secondBarChart);
   screenDisPerAirline.addWidget(homeBtn);
-  
+  screenDisPerAirline.addWidget(new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5));
   
   screenLineGrapheReliability.addWidget(homeBtn);
   screenDisPerAirline.addWidget(homeBtn);

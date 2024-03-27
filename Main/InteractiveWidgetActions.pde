@@ -67,7 +67,7 @@ void interactiveWidgetActions()
   yourFlightInfoBtn.addListn((e, w) -> {
     if (yourFlightInfoBtn.mouseIntercept(mouseX, mouseY))
     {
-      println("your light information screen");
+      println("your flight information screen");
       currentScreenNumber = 7;
     }
   }
