@@ -1,4 +1,6 @@
 // widget, interactive widget, slider, Mini screen, image widget and AnimatedWidget brought to you by Manon 
+// the slider was then later edited by Nandana 
+
 class Widget {
   int x, y, widgetWidth, widgetHeight, gap;
   String label;
@@ -247,6 +249,8 @@ class Slider extends InteractiveWidget
   int barX, barY;
   int currentValue;
   boolean isDragging;
+  int minValue, maxValue; //Store minimum and maximum values
+  int sliderColor;        
 
   MouseActionListener onDrag = (e, s) ->
   {
@@ -254,20 +258,20 @@ class Slider extends InteractiveWidget
 
     if (slider.mouseIntercept(mouseX, mouseY))
     {
-      isDragging = true;
+      slider.isDragging = true;
     }
     if (isDragging)
     {
       slider.x = constrain(mouseX-slider.thumbWidth/2, slider.barX, slider.barX + slider.barWidth - slider.thumbWidth);
-      slider.currentValue = (int) map(slider.x, slider.barX, slider.barX + slider.barWidth - slider.thumbWidth, 0, 100);
+      slider.currentValue = (int) map(slider.x, slider.barX, slider.barX + slider.barWidth - slider.thumbWidth, slider.minValue, slider.maxValue);
     }
     if (e.getAction() == MouseEvent.RELEASE)
     {
-      isDragging = false;
+      slider.isDragging = false;
     }
   };
 
-  Slider(int barX, int barY, int thumbWidth, int thumbHeight, int barWidth, int barHeight, String label,
+  Slider(int barX, int barY, int thumbWidth, int thumbHeight, int barWidth, int barHeight, String label, int minValue, int maxValue,
     color sliderColor, PFont widgetFont, int gap)
   {
     super(barX, barY - thumbHeight / 2, thumbWidth, thumbHeight, label, sliderColor, widgetFont, gap, 0, false);
@@ -280,24 +284,39 @@ class Slider extends InteractiveWidget
     currentValue = 0;
     isDragging = false;
     this.addListn(onDrag);
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+    this.sliderColor = sliderColor;
   }
 
   void draw()
   {
+    rectMode(CORNER);
     noStroke();
     fill(100);
     rect(barX, barY, barWidth, barHeight, barHeight*0.4);
-    fill(150);
+    fill(sliderColor);
     rect(x, y+thumbHeight/4, thumbWidth, thumbHeight, thumbHeight*0.5);
     drawText();
+    drawMinMaxValues(); //Displays the minimum and maximum values of the slider 
   }
 
   void drawText()
   {
     textFont(widgetFont);
     textSize(20);
-    text(label, barX, barY - 20);
+    text(label, barX +barWidth/2, barY - 20);
     text(currentValue, barX + 80, barY - 20);
+  }
+  
+  void drawMinMaxValues()
+  {
+    textAlign(LEFT, CENTER);
+    fill(labelColor);
+    textSize(16);
+    text(minValue, barX, barY + barHeight + gap*3);  // Displays the minimum value below the left most point in the slider bar
+    textAlign(RIGHT, CENTER);
+    text(maxValue, barX + barWidth, barY + barHeight + gap*3);  // Displays the maximum value below the right most point in the slider bar
   }
 }
 
