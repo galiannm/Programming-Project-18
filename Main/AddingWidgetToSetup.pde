@@ -25,6 +25,8 @@ void addWidgetsToSetup()
   chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600, "NY",
     beige, textFont, 20, chyronMiniScreen, "1/3/2022 12:00:00 AM");
 
+inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65);
+
   bubbleChart = new BubbleChart(SCREEN_WIDTH/2, 500, 850, 500, "Bubble Chart",
     color(240), textFont, 0, "Bubble Chart : Overall Reliability Of Carriers", reliabilityBubbleChart[0],
     reliabilityBubbleChart[2], reliabilityBubbleChart[1], airlines, colorOfCarriers, 1, "Number of Cancelled Flights",
@@ -78,6 +80,7 @@ void addWidgetsToSetup()
   mainScreen.addWidget(newFlightInfoBtn);
   // main buttons
   mainScreen.addWidget(mainBtn1);
+  //mainScreen.addWidget(inputBox);
   mainScreen.addWidget(mainBtn2);
   mainScreen.addWidget(mainBtn3);
   mainScreen.addWidget(mainBtn4);
@@ -85,6 +88,7 @@ void addWidgetsToSetup()
 
   screenFlightsOTD.addWidget(chyronFOTD);
   screenFlightsOTD.addWidget(homeBtn);
+  
   
   screenReliabilityBubbleChart.addWidget(bubbleChart);
   screenReliabilityBubbleChart.addWidget(homeBtn);
