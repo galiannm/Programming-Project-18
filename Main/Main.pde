@@ -10,6 +10,7 @@ String airline = "AA";
 Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability, screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo;
 MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
+InputBox inputBox;
 pieChart firstPieChart;
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
@@ -61,8 +62,7 @@ void draw()
 {
   textAlign(LEFT);
   rectMode(CORNER);
-
-
+   
   synchronized(this) {
     if (isLoading) {
       gifAnim();
@@ -70,6 +70,7 @@ void draw()
       screens.get(currentScreenNumber).draw();
     }
   }
+  
 }
 
 void mousePressed(MouseEvent event)
@@ -122,4 +123,7 @@ void gifAnim() {
     }
     lastFrameChangeTime = millis();
   }
+}
+void keyPressed() {
+  inputBox.keyPressed();
 }
