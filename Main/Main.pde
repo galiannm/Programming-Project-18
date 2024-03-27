@@ -66,7 +66,7 @@ void draw()
   synchronized(this) {
     if (isLoading) {
       gifAnim();
-    } else {
+    } else if (!isLoading) {
       screens.get(currentScreenNumber).draw();
     }
   }

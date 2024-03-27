@@ -42,7 +42,19 @@ class pieChart
       rect(legendX, legendY+i*25, boxSize, boxSize);
       fill(0);
       textAlign(LEFT, CENTER);
-      text(labels[i], legendX + boxSize + 5, legendY + i * 25 + boxSize/2);
+      try {
+        text(labels[i], legendX + boxSize + 5, legendY + i * 25 + boxSize/2);
+      }
+      catch (NullPointerException e) {
+        // Handle the NullPointerException here
+        println("NullPointerException occurred: " + e.getMessage());
+        // You can also log the values of variables involved to debug further
+        println("Value of labels: " + labels);
+        println("Value of i: " + i);
+        println("Value of legendX: " + legendX);
+        println("Value of boxSize: " + boxSize);
+        println("Value of legendY: " + legendY);
+      }
     }
   }
   void draw()
