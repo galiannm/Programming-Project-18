@@ -95,6 +95,9 @@ void mousePressed(MouseEvent event)
 {
   synchronized(this) {
     if (!isLoading) {
+      //Temp Line
+      firstHeatMapWidget.toggleShowArrivals();
+      //Change the way we change it
       for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
         if (widget instanceof InteractiveWidget)
