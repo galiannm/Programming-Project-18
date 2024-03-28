@@ -7,6 +7,10 @@ int currentScreenNumber;
 ArrayList<Flight> specificAirline = new ArrayList<Flight>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
+//List of the US states: Filled in process data. - Joel
+ArrayList<String> states = new ArrayList<String>();
+PShape USA;
+
 Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability, screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo;
 MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
