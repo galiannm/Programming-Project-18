@@ -114,6 +114,9 @@ void collectData(String airline, String date, String state) {
   }
 }
 
+  data = new FlightData(flights);
+}  
+
 void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time
 {
   int cancelled = 0;

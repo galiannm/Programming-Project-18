@@ -17,6 +17,10 @@ Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChar
 MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
 InputBox inputBox;
+FlightData data;
+RadioButton []radioButtons ;
+CheckboxExtended check;
+lineGraph myLineGraph;
 pieChart firstPieChart;
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
