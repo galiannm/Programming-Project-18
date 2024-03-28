@@ -10,10 +10,14 @@ int totalNumOfFlights = specificAirline.size();
 int[][] reliabilityBubbleChart = new int[3][10];
 ArrayList<String> airlines = new ArrayList<String>();
 ArrayList<Flight> flightsOfTheDay = new ArrayList<Flight>();
+ArrayList<ArrayList<Object>> distBetweenStates = new ArrayList<ArrayList<Object>>();
 String[] airlinesArray = airlines.toArray(new String[0]); // Convert ArrayList to array
 
 int[][] totalDistancePerCarrier = new int[10][10];
 int[][] numFlightsPerCarrier = new int[10][10];
+
+Flight userFligthInfo;
+String origineDestState = "";
 int count = 0;
 
 //Departures and Arrivals per state - Joel
@@ -35,6 +39,7 @@ void loadData() {
 // to prevent lag throughout the program.
 void collectData(String airline, String date, String state) {
   airlines.add(flights.get(0).provider);
+
   
   //Collecting an arraylist of States for heatmap: - Joel
   for (int i = 0; i<flights.size(); i++) {
@@ -65,6 +70,11 @@ void collectData(String airline, String date, String state) {
     stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
     }
 
+  initialisationOfData();
+  for (int i = 0; i < flights.size(); i++) {
+    Flight flight = flights.get(i);
+
+
     if (int(flight.depTime) - flight.expectedDepTime > 0) {
       numberDelayed++;
     }
@@ -83,6 +93,11 @@ void collectData(String airline, String date, String state) {
     if (flight.flightDate.equalsIgnoreCase(date) && flight.originState.equalsIgnoreCase(state))
     {
       flightsOfTheDay.add(flight);
+    }
+
+    }
+    if (flight.provider.contains(airline)) {
+      specificAirline.add(flight);
     }
 
     // processing data for the bubble chart
@@ -111,8 +126,65 @@ void collectData(String airline, String date, String state) {
       numFlightsPerCarrier[0][carrierIndex]++; // Increment the number of flights for the carrier
       totalDistancePerCarrier[0][carrierIndex] += flight.distance;// Add the distance of the flight to the total distance for the carrier
     }
+
+    //collect data for flight path Map
+    flightPathData(flight, i);
   }
   data = new FlightData(flights);
+}
+
+
+void initialisationOfData()
+{
+  for (int i = 0; i < 4; i++) {
+    distBetweenStates.add(new ArrayList<>());
+  }
+  if (flights.get(0).originState.compareTo(flights.get(0).destState) < 0)
+  {
+    origineDestState = flights.get(0).originState + flights.get(0).destState;
+  } else
+  {
+    origineDestState = flights.get(0).destState + flights.get(0).originState;
+  }
+  //println(origineDestState);
+  distBetweenStates.get(0).add(origineDestState);
+  distBetweenStates.get(1).add(1);
+  distBetweenStates.get(2).add(flights.get(0).distance);
+  distBetweenStates.get(3).add(0);
+}
+
+// processing data for the flight path map
+void flightPathData(Flight flight, int i)
+{
+  origineDestState = "";
+  if (flights.get(i).originState.compareTo(flights.get(i).destState) < 0)
+  {
+    origineDestState = flights.get(i).originState + flights.get(i).destState;
+  } else
+  {
+    origineDestState = flights.get(i).destState + flights.get(i).originState;
+  }
+  if (!distBetweenStates.get(0).contains(origineDestState))
+  {
+    distBetweenStates.get(0).add(origineDestState);
+    distBetweenStates.get(1).add(1); // Initialize flight count
+    distBetweenStates.get(2).add(flight.distance);
+    distBetweenStates.get(3).add(0);
+  } else
+  {
+    distBetweenStates.get(1).set(distBetweenStates.get(0).indexOf(origineDestState),
+      (int)(distBetweenStates.get(1).get(distBetweenStates.get(0).indexOf(origineDestState)))+1);
+    distBetweenStates.get(2).set(distBetweenStates.get(0).indexOf(origineDestState),
+      (int)(distBetweenStates.get(2).get(distBetweenStates.get(0).indexOf(origineDestState)))+flight.distance);
+  }
+}
+
+void getAverageDistance()
+{
+  for (int i = 0; i < distBetweenStates.get(2).size(); i++)
+  {
+    distBetweenStates.get(3).add(i, (int)(distBetweenStates.get(2).get(i))/(int)(distBetweenStates.get(1).get(i)));
+  }
 }
 
 void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time
@@ -159,4 +231,41 @@ void flightStatus() //This function checks the amount of flights that are cancel
   reliabilityData.add(delayedFlights);
   reliabilityData.add(diverted);
   reliabilityData.add(cancelled);
+}
+
+// processing data for the user's flight informational sheet
+void getFlightInfoSheetInformation(String userInput) //1101, date, airport, carrier, state, deststate
+{
+  String[] information = userInput.split(", ");
+  int flightNum = Integer.parseInt(information[0]);
+  String date = information[1];
+  String airport = information[2];
+  String carrier = information[3];
+  String origineState = information[4];
+  String destState = information[5];
+  for (int i = 0; i < flights.size(); i++) {
+    Flight flight = flights.get(i);
+    if (flight.flightNumber == flightNum && flight.flightDate.equalsIgnoreCase(date) && 
+        flight.originAirport.equalsIgnoreCase(airport) && flight.provider.equalsIgnoreCase(carrier) &&
+        flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destState))
+    {
+      userFligthInfo = flight;
+    }
+  } 
+}
+
+// processing information for the chyron
+void getFlightOTDInformation(String userInput) // date, airport
+{
+  String[] information = userInput.split(", ");
+  String date = information[0];
+  String state = information[1];
+  for (int i = 0; i < flights.size(); i++) {
+    Flight flight = flights.get(i);
+    // processing data for chyron
+    if (flight.flightDate.equalsIgnoreCase(date) && flight.originState.equalsIgnoreCase(state))
+    {
+      flightsOfTheDay.add(flight);
+    }
+  }
 }

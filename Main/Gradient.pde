@@ -1,3 +1,4 @@
+// gradient code - manon
 class Gradient
 {
   int x, y;

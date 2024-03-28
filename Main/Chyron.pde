@@ -1,26 +1,27 @@
-// chyron made brought to you by Manon :)
+// chyron brought to you by Manon :)
 class Chyron extends Widget
 {
   int chyronWidth, chyronHeight;
-  String airport, date;
+  String userInput, state, date;
   color textColor;
   MiniScreen miniScreen;
   int speed;
   color cancelledColor, divertedColor, delayedColor;
 
-  Chyron(int x, int y, int chyronWidth, int chyronHeight, String airport,
-    color textColor, PFont widgetFont, int gap, MiniScreen miniScreen, String date)
+  Chyron(int x, int y, int chyronWidth, int chyronHeight,
+    color textColor, PFont widgetFont, int gap, MiniScreen miniScreen, String userInput)
   {
     super(x, y, chyronWidth, chyronHeight, "", textColor, widgetFont, gap, 0, false);
     this.miniScreen = miniScreen;
-    this.airport = airport;
-    this.date = date;
+    this.userInput = userInput;
     this.chyronHeight = miniScreen.y;
     this.chyronWidth = miniScreen.x;
     this.textColor = textColor;
-    this.cancelledColor = color(247, 187, 107);
-    this.delayedColor = color(245, 101, 101);
-    this.divertedColor = color(255, 253, 278);
+    this.cancelledColor = color(red);
+    this.delayedColor = color(orange);
+    this.divertedColor = color(blue);
+    date = "";
+    state = "";
     speed = 0;
   }
 
@@ -42,7 +43,7 @@ class Chyron extends Widget
     text("Carrier", x, y+38); // carrier
     text("Flight No.", x + gap * 4, y+38); // flight number
     text("Origin", x + gap * 9, y+38); // origine aiport
-    text("Destination", x + gap * 20.5, y+38); // dest airport
+    text("Destination", x + gap * 21.5, y+38); // dest airport
     text("Departure / Arrival Time", x + gap * 32.5, y+38); // dest airport
   }
 
@@ -84,8 +85,9 @@ class Chyron extends Widget
         text(flight.provider, x, y+i*gap - speed); // carrier
         text(flight.flightNumber, x + gap * 4, y+i*gap - speed); // flight number
         text(flight.originAirport +", "+flight.originCity+" "+flight.originState, x + gap * 9, y+i*gap - speed); // origin aiport
-        text(flight.destAirport +", "+flight.destCity+" "+flight.destState, x + gap * 20.5, y+i*gap - speed); // dest airport
-        text(standardDepTime + " / " + standardArrTime, x + gap * 32.5, y+i*gap - speed); // departure and arrival time
+        text(flight.destAirport +", "+flight.destCity+" "+flight.destState, x + gap * 21.5, y+i*gap - speed); // dest airport
+        text(standardDepTime + " / " + standardArrTime, x + gap * 38.5, y+i*gap - speed); // departure and arrival time
+        // 32.5
       }
     }
     speed+=2;

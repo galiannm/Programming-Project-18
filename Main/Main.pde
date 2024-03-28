@@ -6,6 +6,8 @@ PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
 int currentScreenNumber;
 ArrayList<Flight> specificAirline = new ArrayList<Flight>();
+ArrayList<RadioButton> radioButtonsUserFlightInfo = new ArrayList<>();
+ArrayList<RadioButton> radioButtonsUserFlightInfo2 = new ArrayList<>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
 //List of the US states: Filled in process data. - Joel
@@ -13,27 +15,36 @@ ArrayList<String> states = new ArrayList<String>();
 PShape USA;
 
 Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability,
-  screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo, screenHeatMap;
-MiniScreen chyronMiniScreen, mainScreenMiniScreen;
+  screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo, screenMapFligthPath, screenHeatMap;
+MiniScreen chyronMiniScreen, mainScreenMiniScreen, yourFlightInfoMiniScreen, newflightInfoMiniScreen;
+
 Chyron chyronFOTD;
-InputBox inputBox;
+InputBox inputBox, yourFlightInfoInputBox, newFlightInfoInputBox, chyronInputBox, flightPathInputBox;
 FlightData data;
-RadioButton []radioButtons ;
+MapOfFlightPath mapOfFlightPath;
+RadioButton radioBtnUserFlight1, radioBtnUserFlight2, radioBtnUserFlight3, radioBtnUserFlight4;
 CheckboxExtended check;
 lineGraph myLineGraph;
 pieChart firstPieChart;
-BarChart firstBarChart;   // The bar chart on number of flights per carrier
-BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 BubbleChart bubbleChart;
+
 HeatMapWidget firstHeatMapWidget;
-InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4;
-ImageWidget homeBtn;
+
+InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear;
+ImageWidget homeBtn, flightInfoCard;
+infoSheetInformation userFlightInformation;
+
 Widget signHolder;
 AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn, pieChartReliabilityBtn, lineGrapheReliabilityBtn,
-  disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn;
+  disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn, flightPathBtn, heatMapBtn;
+
+BarChart firstBarChart;   // The bar chart on number of flights per carrier
+BarChart secondBarChart; // The bar chart on total distance travelled by carrier
+//RadioButton []radioButtons ;
 
 boolean isLoading = true;
 PImage[] frames;
+PImage mapOfUSA, infoSheet;
 int frameIndex = 0;
 int frameChangeInterval = 70; // Time between frame changes in milliseconds
 long lastFrameChangeTime = 0;
@@ -54,6 +65,7 @@ void setup()
     public void run() {
       loadData(); // Load CSV data
       collectData(airline, "1/1/2022", "NY"); // Process data
+      getAverageDistance();
       flightStatus();
       currentScreenNumber = 0;
 
@@ -65,7 +77,8 @@ void setup()
   );
   dataLoadingThread.start();
   homeBtnPic = loadImage("HomeButtonImg.png");
-
+  mapOfUSA = loadImage("USAMap.png");
+  infoSheet = loadImage("infoSheet.png");
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
 }
@@ -75,6 +88,8 @@ void draw()
   textAlign(LEFT);
   rectMode(CORNER);
 
+  imageMode(CORNER);
+  
   synchronized(this) {
     if (isLoading) {
       gifAnim();
@@ -96,6 +111,19 @@ void mousePressed(MouseEvent event)
         {
           ((InteractiveWidget) widget).actions(event);
         }
+      }
+    }
+  }
+}
+
+void keyPressed(KeyEvent event)
+{
+  if (!isLoading) {
+    for (Widget widget : screens.get(currentScreenNumber).widgets)
+    {
+      if (widget instanceof InputBox)
+      {
+        ((InputBox) widget).keyActions(event);
       }
     }
   }
@@ -141,3 +169,4 @@ void gifAnim() {
 void keyPressed() {
   inputBox.keyPressed();
 }
+
