@@ -98,7 +98,7 @@ void addWidgetsToSetup()
   yourFlightInfoBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+5, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Your Flight", airportYellow, 10, slidingBtn4.speed, true);
   newFlightInfoBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+40, slidingBtn4.amountOfPxToTravel*2, 20, 20, "New Flight", airportYellow, 10, slidingBtn4.speed, true);
   flightPathBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+75, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Flight Path Map", airportYellow, 10, slidingBtn4.speed, true);
-  heatMapBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+110, slidingBtn4.amountOfPxToTravel*2, 20, 20, "flights heat map", airportYellow, 10, slidingBtn4.speed, true);
+  heatMapBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+110, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Flights Heat Map", airportYellow, 10, slidingBtn4.speed, true);
   
   mainScreen.addWidget(mainScreenMiniScreen);
   mainScreen.addWidget(slidingBtn1);

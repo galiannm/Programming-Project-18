@@ -21,7 +21,7 @@ class HeatMapWidget extends InteractiveWidget {
     colorStates();
     labelStates();
     checkHover();
-  } //<>//
+  } 
 
   void colorStates() {
     for (String stateAbbrev : states) {
