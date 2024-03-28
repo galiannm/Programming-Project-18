@@ -10,6 +10,7 @@ void addWidgetsToSetup()
   screenNumFlightsPerAirline = new Screen(backgroundColors);
   screenYourFlightInfo = new Screen(backgroundColors);
   screenNewFlightInfo = new Screen(backgroundColors);
+  screenHeatMap = new Screen(backgroundColors);
 
   screens.add(mainScreen);
   screens.add(screenFlightsOTD);
@@ -20,32 +21,35 @@ void addWidgetsToSetup()
   screens.add(screenNumFlightsPerAirline);
   screens.add(screenYourFlightInfo);
   screens.add(screenNewFlightInfo);
+  screens.add(screenHeatMap);
 
   chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
   chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600, "NY",
     beige, textFont, 20, chyronMiniScreen, "1/3/2022 12:00:00 AM");
 
-inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65);
+  inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65);
 
   bubbleChart = new BubbleChart(SCREEN_WIDTH/2, 500, 850, 500, "Bubble Chart",
     color(240), textFont, 0, "Bubble Chart : Overall Reliability Of Carriers", reliabilityBubbleChart[0],
     reliabilityBubbleChart[2], reliabilityBubbleChart[1], airlines, colorOfCarriers, 1, "Number of Cancelled Flights",
     "Number Of Delayed Flights", "diverted flights");
-  
+
   // Theresa's pie chart
   firstPieChart = new pieChart(reliabilityData);
   //firstPieChart.pie_chart();
-  pieChartWidget PieChartWidget = new pieChartWidget(500, 25,0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
+  pieChartWidget PieChartWidget = new pieChartWidget(500, 25, 0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
 
   // Nandana's bar charts
   firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
     color(240), textFont, 0, "Bar Chart : Number Of Flights Per Carrier", "Carriers",
     "Number of Flights", numFlightsPerCarrier[0], airlines);
-                         
+
   secondBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
     color(240), textFont, 0, "Bar Chart : Total Distance Travelled Per Carrier", "Carriers",
     "Distance (in kilometers)", totalDistancePerCarrier[0], airlines);
-  
+
+  firstHeatMapWidget = new HeatMapWidget(0, 0, width, height, USA, stateDeparturesArrivals, states, true);
+
   mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Main Screen", 25, 50, silverBlue, titleFont);
   signHolder = new Widget(SCREEN_WIDTH/2, mainScreenMiniScreen.y + 20, 15, mainScreenMiniScreen.widgetHeight - 12, "", darkBlueGray, textFont, 8, (mainScreenMiniScreen.widgetHeight -20)/2, false);
   mainBtn1 = new InteractiveWidget(SCREEN_WIDTH/2, 150, 220, 140, "Reliability Of Airlines", lightBlue, textFont, 8, 220/12, true);
@@ -88,27 +92,30 @@ inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65);
 
   screenFlightsOTD.addWidget(chyronFOTD);
   screenFlightsOTD.addWidget(homeBtn);
-  
-  
+
+
   screenReliabilityBubbleChart.addWidget(bubbleChart);
   screenReliabilityBubbleChart.addWidget(homeBtn);
-  
+
   screenPieChartReliability.addWidget(homeBtn);
   screenPieChartReliability.addWidget(PieChartWidget);
-  
+
   screenNumFlightsPerAirline.addWidget(firstBarChart);
   screenNumFlightsPerAirline.addWidget(new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5));
   screenNumFlightsPerAirline.addWidget(homeBtn);
-  
+
   screenDisPerAirline.addWidget(secondBarChart);
   screenDisPerAirline.addWidget(homeBtn);
   screenDisPerAirline.addWidget(new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5));
-  
+
   screenLineGrapheReliability.addWidget(homeBtn);
   screenDisPerAirline.addWidget(homeBtn);
   screenNumFlightsPerAirline.addWidget(homeBtn);
   screenYourFlightInfo.addWidget(homeBtn);
   screenNewFlightInfo.addWidget(homeBtn);
   
+  screenHeatMap.addWidget(firstHeatMapWidget);
+  screenHeatMap.addWidget(homeBtn);
+
   currentScreenNumber = 0;
 }

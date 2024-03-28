@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.lang.Thread;
+import java.util.Random;
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
@@ -11,7 +12,8 @@ String airline = "AA";
 ArrayList<String> states = new ArrayList<String>();
 PShape USA;
 
-Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability, screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo;
+Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability,
+  screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo, screenHeatMap;
 MiniScreen chyronMiniScreen, mainScreenMiniScreen;
 Chyron chyronFOTD;
 InputBox inputBox;
@@ -19,6 +21,7 @@ pieChart firstPieChart;
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 BubbleChart bubbleChart;
+HeatMapWidget firstHeatMapWidget;
 InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4;
 ImageWidget homeBtn;
 Widget signHolder;
@@ -38,8 +41,9 @@ void settings()
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void setup() 
+void setup()
 {
+  USA = loadShape("USA.svg");
   gifSetup();
   //Threads to load data while displaying a gif - Joel
   Thread dataLoadingThread = new Thread(new Runnable() {
@@ -66,21 +70,21 @@ void draw()
 {
   textAlign(LEFT);
   rectMode(CORNER);
-   
+
   synchronized(this) {
     if (isLoading) {
       gifAnim();
     } else if (!isLoading) {
-      screens.get(currentScreenNumber).draw();
+      screens.get(9).draw();
     }
   }
-  
 }
 
 void mousePressed(MouseEvent event)
 {
   synchronized(this) {
     if (!isLoading) {
+      firstHeatMapWidget.toggleShowArrivals();
       for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
         if (widget instanceof InteractiveWidget)
