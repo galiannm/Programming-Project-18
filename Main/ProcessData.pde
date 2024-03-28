@@ -13,15 +13,18 @@ ArrayList<Flight> flightsOfTheDay = new ArrayList<Flight>();
 String[] airlinesArray = airlines.toArray(new String[0]); // Convert ArrayList to array
 
 int[][] totalDistancePerCarrier = new int[10][10];
-int[][] numFlightsPerCarrier = new int[10][10]; 
+int[][] numFlightsPerCarrier = new int[10][10];
 int count = 0;
+
+//Departures and Arrivals per state - Joel
+HashMap<String, HashMap<String, Integer>> stateDeparturesArrivals = new HashMap<>();
 
 // This loads the data from the csv into objects
 void loadData() {
   flights = new ArrayList<Flight>();
   String[] rows = loadStrings("flights_full.csv");
-  
-  for (int i = 1; i < rows.length; i++){
+
+  for (int i = 1; i < rows.length; i++) {
     String[] data = rows[i].split(",");
     flights.add(new Flight(data));
   }
@@ -30,25 +33,58 @@ void loadData() {
 
 // This is where we can collect the data to use in our graphing. (Note: I haven't got to making all neccesary variables.) It is important to program what variables you need in this loop
 // to prevent lag throughout the program.
-void collectData(String airline, String date, String state){
+void collectData(String airline, String date, String state) {
   airlines.add(flights.get(0).provider);
-  for(int i = 0; i < flights.size(); i++){
+  
+  //Collecting an arraylist of States for heatmap: - Joel
+  for (int i = 0; i<flights.size(); i++) {
+    Flight flight = flights.get(i);
+    if (!states.contains(flight.originState)) {
+      states.add(flight.originState);
+    }
+    if (!states.contains(flight.destState)) {
+      states.add(flight.destState);
+    }
+  }
+
+  //Initialized a hashmap in the format: "TX" : {"arrived" : 0 , "departed" : 0}
+  for (String stateAbbrev : states) {
+    if (!stateDeparturesArrivals.containsKey(stateAbbrev)) {
+      stateDeparturesArrivals.put(stateAbbrev, new HashMap<>());
+      stateDeparturesArrivals.get(stateAbbrev).put("departed", 0);
+      stateDeparturesArrivals.get(stateAbbrev).put("arrived", 0);
+    }
+  }
+  
+  
+  for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
     
-    if(int(flight.depTime) - flight.expectedDepTime > 0) {
+    if(!flight.cancelled && !flight.diverted){
+    stateDeparturesArrivals.get(flight.originState).put("departed",  stateDeparturesArrivals.get(flight.originState).get("departed")+1);
+    stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
+    }
+
+    if (int(flight.depTime) - flight.expectedDepTime > 0) {
       numberDelayed++;
     }
-    
-    if (flight.cancelled){ numberCancelled++; }
-    if (flight.diverted){numberDiverted++;}
-    if (flight.provider.contains(airline)) { specificAirline.add(flight);}
-    
+
+    if (flight.cancelled) {
+      numberCancelled++;
+    }
+    if (flight.diverted) {
+      numberDiverted++;
+    }
+    if (flight.provider.contains(airline)) {
+      specificAirline.add(flight);
+    }
+
     // processing data for chyron
     if (flight.flightDate.equalsIgnoreCase(date) && flight.originState.equalsIgnoreCase(state))
     {
       flightsOfTheDay.add(flight);
     }
-    
+
     // processing data for the bubble chart
     if (flight.provider.equalsIgnoreCase(airlines.get(count)))
     {
@@ -56,29 +92,28 @@ void collectData(String airline, String date, String state){
       if (flight.cancelled == true)
       {
         reliabilityBubbleChart[0][airlines.indexOf(airlines.get(count))] += 1; // cancelled
-      } 
-      else if (flight.diverted == true)
+      } else if (flight.diverted == true)
       {
-        reliabilityBubbleChart[1][airlines.indexOf(airlines.get(count))] += 1; // diverted 
-      } 
-      else if (flight.expectedDepTime - Integer.parseInt(flight.depTime) > 10)
+        reliabilityBubbleChart[1][airlines.indexOf(airlines.get(count))] += 1; // diverted
+      } else if (flight.expectedDepTime - Integer.parseInt(flight.depTime) > 10)
       {
         reliabilityBubbleChart[2][airlines.indexOf(airlines.get(count))] += 1; // delayed
       }
-    } 
-    else
+    } else
     {
       airlines.add(flight.provider);
       count = airlines.indexOf(flight.provider);
     }
-    
-   int carrierIndex = airlines.indexOf(flight.provider);
-   if (carrierIndex != -1) 
-   {
+
+    int carrierIndex = airlines.indexOf(flight.provider);
+    if (carrierIndex != -1)
+    {
       numFlightsPerCarrier[0][carrierIndex]++; // Increment the number of flights for the carrier
       totalDistancePerCarrier[0][carrierIndex] += flight.distance;// Add the distance of the flight to the total distance for the carrier
     }
   }
+}
+
   data = new FlightData(flights);
 }  
 
@@ -90,20 +125,19 @@ void flightStatus() //This function checks the amount of flights that are cancel
   int delayedFlights = 0;
   int expectedTimeTaken = 0;
   int totalNumOfFlights = specificAirline.size();
-  
-  
+
+
   for (int i =0; i < specificAirline.size(); i++)
   {
     Flight flight = specificAirline.get(i);
     if (flight.cancelled == true)
     {
       cancelled +=1;
-    }
-    else if (flight.diverted == true)
+    } else if (flight.diverted == true)
     {
       diverted += 1;
-    }  
-    if(flight.depTime == "") flight.depTime = "0";
+    }
+    if (flight.depTime == "") flight.depTime = "0";
     if (flight.arrTime =="") flight.arrTime = "0";
     expectedTimeTaken = flight.expectedArrTime - flight.expectedDepTime;
     int arrivalTime = Integer.parseInt(flight.arrTime);
@@ -112,13 +146,12 @@ void flightStatus() //This function checks the amount of flights that are cancel
     if ((actualTimeTaken - expectedTimeTaken) > 10)
     {
       delayedFlights +=1;
-    }
-    else 
+    } else
     {
-     flightsOnTime +=1;
-     }
+      flightsOnTime +=1;
+    }
   }
-  
+
   println("Total number of flights " + totalNumOfFlights);
   println("Flights on time " + flightsOnTime);
   println("Delayed " + delayedFlights);
