@@ -19,6 +19,9 @@ Flight userFligthInfo;
 String origineDestState = "";
 int count = 0;
 
+//Departures and Arrivals per state - Joel
+HashMap<String, HashMap<String, Integer>> stateDeparturesArrivals = new HashMap<>();
+
 // This loads the data from the csv into objects
 void loadData() {
   flights = new ArrayList<Flight>();
@@ -36,8 +39,32 @@ void loadData() {
 void collectData(String airline, String date, String state) {
   airlines.add(flights.get(0).provider);
   initialisationOfData();
+    //Collecting an arraylist of States for heatmap: - Joel
+  for (int i = 0; i<flights.size(); i++) {
+    Flight flight = flights.get(i);
+    if (!states.contains(flight.originState)) {
+      states.add(flight.originState);
+    }
+    if (!states.contains(flight.destState)) {
+      states.add(flight.destState);
+    }
+  }
+
+  //Initialized a hashmap in the format: "TX" : {"arrived" : 0 , "departed" : 0}
+  for (String stateAbbrev : states) {
+    if (!stateDeparturesArrivals.containsKey(stateAbbrev)) {
+      stateDeparturesArrivals.put(stateAbbrev, new HashMap<>());
+      stateDeparturesArrivals.get(stateAbbrev).put("departed", 0);
+      stateDeparturesArrivals.get(stateAbbrev).put("arrived", 0);
+    }
+  }
+
   for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
+    if(!flight.cancelled && !flight.diverted){
+    stateDeparturesArrivals.get(flight.originState).put("departed",  stateDeparturesArrivals.get(flight.originState).get("departed")+1);
+    stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
+    }
 
     if (int(flight.depTime) - flight.expectedDepTime > 0) {
       numberDelayed++;
