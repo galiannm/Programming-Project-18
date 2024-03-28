@@ -1,4 +1,4 @@
-// widget, interactive widget, slider, Mini screen, image widget and AnimatedWidget brought to you by Manon 
+// widget, interactive widget, slider, Mini screen, image widget, infoSheetInformation and AnimatedWidget brought to you by Manon 
 // the slider was then later edited by Nandana 
 
 class Widget {
@@ -22,10 +22,12 @@ class Widget {
     this.labelColor = color(darkGray);
     this.curve = curve;
     this.drawStroke = drawStroke;
-    //isMouseOver = false;
   }
 
   void draw() {
+    textAlign(LEFT);
+    rectMode(CORNER);
+    imageMode(CORNER);
     if (!drawStroke)
     {
       noStroke();
@@ -41,6 +43,160 @@ class Widget {
     textFont(widgetFont);
     textSize(16);
     text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
+  }
+}
+
+class infoSheetInformation extends Widget
+{
+  int xImg, yImg, wImg, hImg;
+  color textColor;
+  PFont textFont;
+  String to, from, date, airportOrigine, airportArr;
+  int departureTime, arrivalTime, distance, flightNo;
+  boolean delayedDep, delayedArr, flightExists, draw, canShowFlightInfo, lookAgain;
+  infoSheetInformation(int xImg, int yImg, int wImg, int hImg, color textColor, PFont textFont)
+  {
+    super(xImg, yImg, wImg, hImg, "", textColor, textFont, 0, 0, false);
+    this.xImg = xImg;
+    this.yImg = yImg;
+    this.wImg = wImg;
+    this.hImg = hImg;
+    this.textColor = textColor;
+    this.textFont = textFont;
+    draw = false;
+    canShowFlightInfo = false;
+    lookAgain = false;
+  }
+
+  void draw()
+  {
+    if (draw)
+    {
+      settingLabels();
+      settingUserInput();
+    }
+  }
+
+  void settingLabels()
+  {
+    fill(textColor);
+    textSize(20);
+    text("FROM: ", xImg + 10, yImg + 130);
+    text("TO: ", xImg + 10, yImg + 180);
+    text("FLIGHT No: ", xImg + 10, yImg + 230);
+    text("DATE:", xImg + 570, yImg + 130);
+    text("DISTANCE:", xImg + 570, yImg + 180);
+    text("DEPARTURE TIME:", xImg + 260, yImg + 230);
+    text("ARRIVAL TIME:", xImg + 570, yImg + 230);
+  }
+
+  void settingUserInput()
+  {
+    if (flightExists && !userFligthInfo.cancelled)
+    {
+      fill(textColor);
+      textSize(20);
+      text(airportOrigine, xImg + 85, yImg + 130);
+      text(to, xImg + 135, yImg + 130);
+      text(airportArr, xImg + 55, yImg + 180);
+      text(from, xImg + 105, yImg + 180);
+      text(date, xImg + 640, yImg + 130);
+      text(distance, xImg + 688, yImg + 180);
+      text(flightNo, xImg + 130, yImg + 230);
+
+      if (delayedDep)
+      {
+        fill(orange);
+        text(departureTime, xImg + 450, yImg + 230);
+      } else
+      {
+        fill(textColor);
+        text(departureTime, xImg + 450, yImg + 230);
+      }
+      if (delayedArr)
+      {
+        fill(orange);
+        text(arrivalTime, xImg + 725, yImg + 230);
+      } else
+      {
+        fill(textColor);
+        text(arrivalTime, xImg + 725, yImg + 230);
+      }
+    } else if (flightExists && userFligthInfo.cancelled)
+    {
+      fill(red);
+      textSize(35);
+      pushMatrix();
+      translate(300, 300);
+      rotate(PI / 6);
+      text("Flight Cancelled", 0, 0);
+      popMatrix();
+
+      textSize(30);
+      fill(silverBlue);
+      text("Would you like to find other flights ?", xImg, (hImg + 290) - yImg);
+    } else if (!flightExists)
+    {
+      textSize(30);
+      pushMatrix();
+      translate(300, 300);
+      rotate(PI / 6);
+      text("This flight does not exist", 0, 0);
+      popMatrix();
+
+      textSize(30);
+      fill(silverBlue);
+      text("Would you like to find other flights ?", xImg, (hImg + 290) - yImg);
+    }
+    textSize(30);
+    fill(silverBlue);
+    text("Would like the information for another flight ?", xImg, (hImg + 180) - yImg);
+  }
+
+  void getData()
+  {
+    if (userFligthInfo != null)
+    {
+      flightExists = true;
+      canShowFlightInfo = true;
+      to = userFligthInfo.originCity;
+      from = userFligthInfo.destCity;
+      date = userFligthInfo.flightDate;
+      airportOrigine = userFligthInfo.originAirport;
+      airportArr = userFligthInfo.destAirport;
+      distance = userFligthInfo.distance;
+      flightNo = userFligthInfo.flightNumber;
+      departureTime = userFligthInfo.expectedDepTime;
+      arrivalTime = userFligthInfo.expectedArrTime;
+
+      if (userFligthInfo.cancelled)
+      {
+        canShowFlightInfo = false;
+      }
+
+      if (!userFligthInfo.cancelled)
+      {
+        if (userFligthInfo.expectedDepTime - Integer.parseInt(userFligthInfo.depTime) > 15)
+        {
+          delayedDep = true;
+        } else
+        {
+          delayedDep = false;
+        }
+
+        if (userFligthInfo.expectedArrTime - Integer.parseInt(userFligthInfo.arrTime) > 15)
+        {
+          delayedArr = true;
+        } else
+        {
+          delayedArr = false;
+        }
+      }
+    } else
+    {
+      flightExists = false;
+      canShowFlightInfo = false;
+    }
   }
 }
 
@@ -60,6 +216,9 @@ class MiniScreen extends Widget
   }
 
   void draw() {
+    textAlign(LEFT);
+    rectMode(CORNER);
+    imageMode(CORNER);
     noStroke();
     super.draw();
   }
@@ -183,7 +342,6 @@ class AnimatedWidget extends InteractiveWidget
       if (x+30 < startx-120)
       {
         textAlign(LEFT);
-        //fill(darkBlueGray);
         fill(airportYellow);
         textSize(15);
         text(label, x+30, y+widgetWidth);
@@ -225,7 +383,8 @@ class ImageWidget extends InteractiveWidget
 {
   int x, y, widgetWidth, widgetHeight;
   PImage widgetImg;
-  ImageWidget(int x, int y, int widgetWidth, int widgetHeight, PImage widgetImg)
+  boolean draw;
+  ImageWidget(int x, int y, int widgetWidth, int widgetHeight, PImage widgetImg, boolean draw)
   {
     super(x, y, widgetWidth, widgetHeight, "", color(0), textFont, 0, 0, false);
     this.x = x;
@@ -233,11 +392,16 @@ class ImageWidget extends InteractiveWidget
     this.widgetWidth = widgetWidth;
     this.widgetHeight = widgetHeight;
     this.widgetImg = widgetImg;
+    this.draw = draw;
   }
 
   void draw()
   {
-    image(widgetImg, x, y, widgetWidth, widgetHeight);
+    if (draw)
+    {
+      imageMode(CORNER);
+      image(widgetImg, x, y, widgetWidth, widgetHeight);
+    }
   }
 }
 
@@ -372,42 +536,69 @@ void draw ()
 
 }
 }
-// Class RadioButton added by Maria Ceanuri
+// Class RadioButton added by Maria Ceanuri then modified my manon 
 class RadioButton extends InteractiveWidget {
- boolean selected = false;
-  RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap) {
-    super(x, y, widgetWidth, widgetWidth, label, widgetColor, widgetFont, gap, 0, true);
+  boolean selected, draw;
+  RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean draw) {
+    super(x, y, widgetWidth, widgetWidth, label, widgetColor, widgetFont, gap, curve, draw);
+    selected = false;
+    this.draw = draw;
   }
-  
-   void draw() {
+
+  void draw() {
     // Draw the radio button
-    super.draw();
-    stroke(0);
-    fill(255);
-    rect(x, y, widgetWidth, widgetWidth);
-    
-    // If selected, draw a dot in the center
-    if (selected) {
-      fill(0);
-      rect(x, y, widgetWidth / 2, widgetWidth / 2);
+    if (draw)
+    {
+      super.draw();
+      noStroke();
+      fill(255);
+      rect(x, y, widgetWidth, widgetWidth, curve);
+
+      // If selected, draw a dot in the center
+      if (selected) {
+        fill(0);
+        rect(x + widgetWidth/4 + 1, y + widgetWidth/4 + 1, widgetWidth/2, widgetWidth/2, curve);
+      }
+
+      // Display the label
+      fill(widgetColor);
+      textAlign(LEFT, CENTER);
+      text(label, x + gap, y + gap/2);
     }
-    
-    // Display the label
-    fill(0);
-    textAlign(LEFT, CENTER);
-    text(label, x + 20, y);
   }
-  
-  void handleClick() {
-    // Check if the mouse click is within the button
-    if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !selected) {
-      // Toggle selection
+
+  public void addListn(MouseActionListener listn)
+  {
+    eventListn.add(listn);
+  }
+
+  public void actions(MouseEvent e)
+  {
+    for (MouseActionListener listn : eventListn)
+    {
+      listn.performAction(e, this);
+    }
+  }
+
+  void mouseIntercept()
+  {
+    super.mouseIntercept(mouseX, mouseY);
+    if (mouseIntercept(mouseX, mouseY))
+    {
       selected = !selected;
-      // Deselect other buttons
-      for (RadioButton radioButton : radioButtons) {
-        if (radioButton != this) {
-          radioButton.selected = false;
-        }
+    }
+    if (mouseIntercept(mouseX, mouseY)) {
+      stroke(255); // White border if the mouse is over
+    } else {
+      stroke(widgetColor); // Black border otherwise
+    }
+  }
+
+  void handleClick(ArrayList<RadioButton> radioButtons) {
+    mouseIntercept();
+    for (RadioButton radioButton : radioButtons) {
+      if (radioButton != this) {
+        radioButton.selected = false;
       }
     }
   }

@@ -1,7 +1,5 @@
 // This class was brought to you by Joel Jojan :D
-// Modified by Maria Ceanuri by modifying class flight by adding 
-//function get day and propteries and adding classes: groupedfligth, 
-//flightday, flightprovider and flightdata
+// Modified by Maria Ceanuri by modifying class flight by adding function get day and propteries and adding classes: groupedfligth, flightday, flightprovider and flightdata
 import java.util.ArrayList;
 import java.util.regex.*;
 import java.text.*;
