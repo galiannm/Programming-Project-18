@@ -98,11 +98,11 @@ class HeatMapWidget extends InteractiveWidget {
           text(stateLabel, stateX, stateY); // Draw the state label at the calculated position
         }
         catch(NullPointerException e) {
-          println("Error: Vertex count not available for state " + stateAbbrev);
+          //println("Error: Vertex count not available for state " + stateAbbrev);
           continue;
         }
       } else {
-        println("Error: Null shape for state " + stateAbbrev);
+        //println("Error: Null shape for state " + stateAbbrev);
         continue;
         }
     }

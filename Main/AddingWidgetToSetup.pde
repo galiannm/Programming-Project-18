@@ -23,10 +23,10 @@ void addWidgetsToSetup()
   screens.add(screenNewFlightInfo);
   screens.add(screenHeatMap);
 
- //Maria Ceanuri's line graph
- myLineGraph = new lineGraph(SCREEN_WIDTH/2, 500, 850, 500, "Graph", "Lateness by airline", "days", "lateness", titleFont, data, color(240));
- chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
- chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600, "NY",
+  //Maria Ceanuri's line graph
+  myLineGraph = new lineGraph(SCREEN_WIDTH/2, 500, 850, 500, "Graph", "Lateness by airline", "days", "lateness", titleFont, data, color(240));
+  chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
+  chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600, "NY",
     beige, textFont, 20, chyronMiniScreen, "1/3/2022 12:00:00 AM");
 
   inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65);
@@ -114,9 +114,9 @@ void addWidgetsToSetup()
   screenLineGrapheReliability.addWidget(myLineGraph);
   int i=0;
   // checkboxes for the reliability line graph
-  for (FlightProvider provider : data.providerList.values()) 
+  for (FlightProvider provider : data.providerList.values())
   {
-    check = new CheckboxExtended(60 + i * 90, 120, 25, provider.provider, provider.providerColor, textFont, 25, provider.visible,provider);
+    check = new CheckboxExtended(60 + i * 90, 120, 25, provider.provider, provider.providerColor, textFont, 25, provider.visible, provider);
     screenLineGrapheReliability.addWidget(check);
     i++;
   }
@@ -124,9 +124,10 @@ void addWidgetsToSetup()
   screenNumFlightsPerAirline.addWidget(homeBtn);
   screenYourFlightInfo.addWidget(homeBtn);
   screenNewFlightInfo.addWidget(homeBtn);
-  
+
   screenHeatMap.addWidget(firstHeatMapWidget);
   screenHeatMap.addWidget(homeBtn);
+
 
   currentScreenNumber = 0;
 }

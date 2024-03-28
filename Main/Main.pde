@@ -79,7 +79,7 @@ void draw()
     if (isLoading) {
       gifAnim();
     } else if (!isLoading) {
-      screens.get(9).draw();
+      screens.get(currentScreenNumber).draw();
     }
   }
 }
@@ -88,6 +88,8 @@ void mousePressed(MouseEvent event)
 {
   synchronized(this) {
     if (!isLoading) {
+
+
       for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
         if (widget instanceof InteractiveWidget)
