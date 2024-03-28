@@ -84,7 +84,6 @@ void mousePressed(MouseEvent event)
 {
   synchronized(this) {
     if (!isLoading) {
-      firstHeatMapWidget.toggleShowArrivals();
       for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
         if (widget instanceof InteractiveWidget)
@@ -132,6 +131,7 @@ void gifAnim() {
     lastFrameChangeTime = millis();
   }
 }
+
 void keyPressed() {
   inputBox.keyPressed();
 }
