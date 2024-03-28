@@ -9,6 +9,9 @@ ArrayList<RadioButton> radioButtonsUserFlightInfo = new ArrayList<>();
 ArrayList<RadioButton> radioButtonsUserFlightInfo2 = new ArrayList<>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
+//List of the US states: Filled in process data. - Joel
+ArrayList<String> states = new ArrayList<String>();
+PShape USA;
 Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability,
   screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo, screenMapFligthPath, screenHeatMap;
 MiniScreen chyronMiniScreen, mainScreenMiniScreen, yourFlightInfoMiniScreen, newflightInfoMiniScreen;
@@ -21,6 +24,7 @@ CheckboxExtended check;
 lineGraph myLineGraph;
 pieChart firstPieChart;
 BubbleChart bubbleChart;
+HeatMapWidget firstHeatMapWidget;
 InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear;
 ImageWidget homeBtn, flightInfoCard;
 infoSheetInformation userFlightInformation;
@@ -48,6 +52,7 @@ void settings()
 
 void setup()
 {
+  USA = loadShape("USA.svg");
   gifSetup();
   //Threads to load data while displaying a gif - Joel
   Thread dataLoadingThread = new Thread(new Runnable() {
@@ -149,4 +154,7 @@ void gifAnim() {
     }
     lastFrameChangeTime = millis();
   }
+}
+void keyPressed() {
+  inputBox.keyPressed();
 }
