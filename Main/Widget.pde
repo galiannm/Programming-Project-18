@@ -335,7 +335,7 @@ class Checkbox extends InteractiveWidget {
     super.draw();
     if (isChecked) {
       fill(0); // Fill with black if checked
-      rect(x + 5, y + 5, widgetWidth - 10, widgetHeight - 10);
+      rect(x , y , widgetWidth - 10, widgetHeight - 10);
     }
     if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !clickHandled) {
       isChecked = !isChecked;
@@ -356,5 +356,59 @@ class Checkbox extends InteractiveWidget {
 
   boolean mouseIntercept(int mX, int mY) {
     return ((mX > x && mX < x + widgetWidth && mY > y && mY < y + widgetHeight));
+  }
+}
+// Added by Maria Ceanuri to control chekcboxes in reliability line graph
+class CheckboxExtended extends Checkbox{
+  FlightProvider provider;
+  CheckboxExtended(int x, int y, int checkboxSize, String label, color widgetColor, PFont widgetFont, int gap, boolean initialState, FlightProvider provider)
+{super ( x,  y,  checkboxSize, label,  widgetColor,  widgetFont,  gap, initialState);
+this.provider = provider;
+}
+void draw ()
+{
+  super.draw();
+  provider.visible = isChecked;
+
+}
+}
+// Class RadioButton added by Maria Ceanuri
+class RadioButton extends InteractiveWidget {
+ boolean selected = false;
+  RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap) {
+    super(x, y, widgetWidth, widgetWidth, label, widgetColor, widgetFont, gap, 0, true);
+  }
+  
+   void draw() {
+    // Draw the radio button
+    super.draw();
+    stroke(0);
+    fill(255);
+    rect(x, y, widgetWidth, widgetWidth);
+    
+    // If selected, draw a dot in the center
+    if (selected) {
+      fill(0);
+      rect(x, y, widgetWidth / 2, widgetWidth / 2);
+    }
+    
+    // Display the label
+    fill(0);
+    textAlign(LEFT, CENTER);
+    text(label, x + 20, y);
+  }
+  
+  void handleClick() {
+    // Check if the mouse click is within the button
+    if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !selected) {
+      // Toggle selection
+      selected = !selected;
+      // Deselect other buttons
+      for (RadioButton radioButton : radioButtons) {
+        if (radioButton != this) {
+          radioButton.selected = false;
+        }
+      }
+    }
   }
 }
