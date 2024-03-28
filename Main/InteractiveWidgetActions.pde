@@ -256,9 +256,14 @@ void interactiveWidgetActions()
 
     if (!flightPathInputBox.allUserInputs.equals(""))
     {
+      try{
       mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ' '))[0];
       mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ' '))[1];
       mapOfFlightPath.getCoords();
+      }
+      catch (Exception inputFailed){
+        println("Invalid Input Entered in Flight Path");
+      }
     }
   }
   );
