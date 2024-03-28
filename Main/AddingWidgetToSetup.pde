@@ -76,6 +76,8 @@ void addWidgetsToSetup()
     color(240), textFont, 0, "Bar Chart : Total Distance Travelled Per Carrier", "Carriers",
     "Distance (in kilometers)", totalDistancePerCarrier[0], airlines);
 
+  firstHeatMapWidget = new HeatMapWidget(0, 0, width, height, USA, stateDeparturesArrivals, states, true);
+
   mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Main Screen", 25, 50, silverBlue, titleFont);
   signHolder = new Widget(SCREEN_WIDTH/2, mainScreenMiniScreen.y + 20, 15, mainScreenMiniScreen.widgetHeight - 12, "", darkBlueGray, textFont, 8, (mainScreenMiniScreen.widgetHeight -20)/2, false);
   mainBtn1 = new InteractiveWidget(SCREEN_WIDTH/2, 150, 220, 140, "Reliability Of Airlines", lightBlue, textFont, 8, 220/12, true);
@@ -165,7 +167,8 @@ void addWidgetsToSetup()
   screenMapFligthPath.addWidget(flightPathInputBox);
   screenMapFligthPath.addWidget(mapOfFlightPath);
   screenMapFligthPath.addWidget(homeBtn);
-  
+
+  screenHeatMap.addWidget(firstHeatMapWidget);
   screenHeatMap.addWidget(homeBtn);
 
   currentScreenNumber = 0;
