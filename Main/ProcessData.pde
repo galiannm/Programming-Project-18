@@ -79,6 +79,7 @@ void collectData(String airline, String date, String state){
       totalDistancePerCarrier[0][carrierIndex] += flight.distance;// Add the distance of the flight to the total distance for the carrier
     }
   }
+  data = new FlightData(flights);
 }  
 
 void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time

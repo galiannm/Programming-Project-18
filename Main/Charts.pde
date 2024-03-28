@@ -30,8 +30,8 @@ class Chart extends Widget
   {
     noStroke();
     strokeWeight(2);
-    fill(widgetColor);
-    rect(x, y, widgetWidth, widgetHeight);
+    fill(widgetColor); //<>//
+    rect(x, y, widgetWidth, widgetHeight); //<>//
   }
 
   void drawTitle()
