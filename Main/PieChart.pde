@@ -36,14 +36,16 @@ class pieChart
     float legendX = SCREEN_WIDTH - 850;
     float legendY = 100;
     float boxSize = 20;
-    for (int i =0; i < data.size(); i++)
+    for (int i =0; i < 4; i++)
     {
       fill(sectorColors [i % sectorColors.length]);
       rect(legendX, legendY+i*25, boxSize, boxSize);
       fill(0);
       textAlign(LEFT, CENTER);
       try {
+        textSize(16);
         text(labels[i], legendX + boxSize + 5, legendY + i * 25 + boxSize/2);
+        textSize(30);
       }
       catch (NullPointerException e) {
         // Handle the NullPointerException here
@@ -80,9 +82,16 @@ class pieChartWidget extends Widget
     this.gap = gap;
     this.chart = chart;
   }
+  void drawtext()
+  {
+    textFont(widgetFont);
+    textSize(30);
+    text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
+  }
   void draw()
   {
-    super.draw();
+    //super.draw();
+    drawtext();
     chart.draw();
   }
 }
