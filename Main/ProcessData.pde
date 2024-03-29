@@ -165,7 +165,7 @@ void getAverageDistance()
     distBetweenStates.get(3).add(i, (int)(distBetweenStates.get(2).get(i))/(int)(distBetweenStates.get(1).get(i)));
   }
 }
-
+//flightStautus function was created by Theresa James.
 void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time
 {
   int cancelled = 0;
@@ -216,7 +216,7 @@ void flightStatus() //This function checks the amount of flights that are cancel
 void getFlightInfoSheetInformation(String userInput) //1101, date, airport, carrier, state, deststate
 {
   String[] information = userInput.split(", ");
-  int flightNum = Integer.parseInt(information[0]);
+    int flightNum = Integer.parseInt(information[0]);
   String date = information[1];
   String airport = information[2];
   String carrier = information[3];

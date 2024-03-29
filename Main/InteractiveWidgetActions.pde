@@ -256,12 +256,12 @@ void interactiveWidgetActions()
 
     if (!flightPathInputBox.allUserInputs.equals(""))
     {
-      try{
-      mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ' '))[0];
-      mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ' '))[1];
-      mapOfFlightPath.getCoords();
+      try {
+        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ' '))[0];
+        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ' '))[1];
+        mapOfFlightPath.getCoords();
       }
-      catch (Exception inputFailed){
+      catch (Exception inputFailed) {
         println("Invalid Input Entered in Flight Path");
       }
     }
@@ -304,6 +304,17 @@ void interactiveWidgetActions()
       if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
       {
         radioButton.handleClick(radioButtonsUserFlightInfo2);
+      }
+    }
+    );
+  }
+
+  for (RadioButton radioButton : radioButtonsPieChart)
+  {
+    radioButton.addListn((e, w) -> {
+      if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
+      {
+        radioButton.handleClick(radioButtonsPieChart);
       }
     }
     );

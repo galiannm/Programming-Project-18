@@ -66,6 +66,10 @@ void addWidgetsToSetup()
   firstPieChart = new pieChart(reliabilityData);
   //firstPieChart.pie_chart();
   pieChartWidget PieChartWidget = new pieChartWidget(500, 25, 0, 0, "Reliability of " + airline, 0, titleFont, 10, firstPieChart);
+  radioBtnAirlineAA = new RadioButton(SCREEN_WIDTH - 100, SCREEN_HEIGHT - 300, 10, "AA", silverBlue, textFont, 35, 560/2, false);
+  
+  radioButtonsPieChart.add(radioBtnAirlineAA);
+
 
   // Nandana's bar charts
   firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",

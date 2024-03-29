@@ -7,6 +7,7 @@ int currentScreenNumber;
 ArrayList<Flight> specificAirline = new ArrayList<Flight>();
 ArrayList<RadioButton> radioButtonsUserFlightInfo = new ArrayList<>();
 ArrayList<RadioButton> radioButtonsUserFlightInfo2 = new ArrayList<>();
+ArrayList<RadioButton> radioButtonsPieChart = new ArrayList<>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
 //List of the US states: Filled in process data. - Joel
@@ -35,6 +36,7 @@ AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn,
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 //RadioButton []radioButtons ;
+RadioButton radioBtnAirlineAA;
 
 boolean isLoading = true;
 PImage[] frames;
