@@ -53,11 +53,11 @@ void settings()
 
 void setup()
 {
-  USA = loadShape("USA.svg");
   gifSetup();
   //Threads to load data while displaying a gif - Joel
   Thread dataLoadingThread = new Thread(new Runnable() {
     public void run() {
+      USA = loadShape("USA.svg");
       loadData(); // Load CSV data
       collectData(airline, "1/1/2022", "NY"); // Process data
       getAverageDistance();
