@@ -1,4 +1,4 @@
-// This extension of the Chart class was brought to you by Nandana :)
+// This extension of the Chart class (BarChart) was brought to you by Nandana :)
 import java.util.ArrayList;
 
 class BarChart extends Chart {

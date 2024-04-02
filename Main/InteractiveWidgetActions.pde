@@ -104,6 +104,7 @@ void interactiveWidgetActions()
     if (chyronClear.mouseIntercept(mouseX, mouseY))
     {
       chyronInputBox.allUserInputs = "";
+      chyronInputBox.typing = false;
       flightsOfTheDay = new ArrayList<Flight>();
     }
   }
@@ -165,9 +166,7 @@ void interactiveWidgetActions()
       {
         for (RadioButton radioButton2 : radioButtonsUserFlightInfo2)
         {
-          println(radioButton2.draw);
           radioButton2.draw = true;
-          println(radioButton2.draw);
         }
       }
       yourFlightInfoInputBox.allUserInputs = "";
@@ -183,6 +182,7 @@ void interactiveWidgetActions()
       flightInfoCard.draw = false;
       userFlightInformation.draw = false;
       radioBtnUserFlight1.selected = false;
+      yourFlightInfoInputBox.typing = false;
       for (RadioButton radioButton : radioButtonsUserFlightInfo)
       {
         radioButton.draw = false;
@@ -231,16 +231,60 @@ void interactiveWidgetActions()
     }
   }
   );
+  
+  newFlightInfoClear.addListn((e, w) -> {
+    if (newFlightInfoClear.mouseIntercept(mouseX, mouseY))
+    {
+      newFlightInfoInputBox.allUserInputs = "";
+      newFlightInfoInputBox.typing = false;
+      newFlightInformationData = new ArrayList<Flight>();
+    }
+  }
+  );
 
   newFlightInfoInputBox.addKeyListn((e, w) -> {
     newFlightInfoInputBox.keyPressed();
 
     if (!newFlightInfoInputBox.allUserInputs.equals(""))
     {
-      println();
+      getScrollPageInformation(newFlightInfoInputBox.allUserInputs);
     }
   }
   );
+  
+  sortDateBtn.addListn((e, w) -> {
+    if (sortDateBtn.mouseIntercept(mouseX, mouseY))
+    {
+      println("sort by date");
+      newFlightInfoScroll.sortColumn("date");
+    }
+  }
+  ); 
+  sortByCarrierBtn.addListn((e, w) -> {
+    if (sortByCarrierBtn.mouseIntercept(mouseX, mouseY))
+    {
+      println("sort by carrier");
+      newFlightInfoScroll.sortColumn("carrier");
+    }
+  }
+  ); 
+  sortByDepAirportBtn.addListn((e, w) -> {
+    if (sortByDepAirportBtn.mouseIntercept(mouseX, mouseY))
+    {
+      println("sort by dep airport");
+      newFlightInfoScroll.sortColumn("DepAirport");
+    }
+  }
+  ); 
+  
+  sortByArrAirportBtn.addListn((e, w) -> {
+    if (sortByArrAirportBtn.mouseIntercept(mouseX, mouseY))
+    {
+      println("sort by arr airport");
+      newFlightInfoScroll.sortColumn("ArrAirport");
+    }
+  }
+  ); 
 
   flightPathBtn.addListn((e, w) -> {
     if (flightPathBtn.mouseIntercept(mouseX, mouseY))
@@ -256,14 +300,10 @@ void interactiveWidgetActions()
 
     if (!flightPathInputBox.allUserInputs.equals(""))
     {
-      try{
-      mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ' '))[0];
-      mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ' '))[1];
+      mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ", "))[0];
+      mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ", "))[1];
       mapOfFlightPath.getCoords();
-      }
-      catch (Exception inputFailed){
-        println("Invalid Input Entered in Flight Path");
-      }
+      flightPathInputBox.typing = true;
     }
   }
   );
@@ -283,6 +323,11 @@ void interactiveWidgetActions()
       yourFlightInfoInputBox.allUserInputs = "";
       chyronInputBox.allUserInputs = "";
       flightPathInputBox.allUserInputs = "";
+      yourFlightInfoInputBox.allUserInputs = "";
+      chyronInputBox.typing = false;
+      flightPathInputBox.typing = false;
+      yourFlightInfoInputBox.typing = false;
+      newFlightInfoInputBox.typing = false;
     }
   }
   );

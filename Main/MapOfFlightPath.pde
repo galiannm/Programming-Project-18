@@ -135,6 +135,10 @@ class MapOfFlightPath extends ImageWidget
     {
       text(distance + " miles", (x+mapWidth/3 +20), (y-mapHeight/2 + 40));
       flightPathInputBox.allUserInputs = "";
+      if (flightPathInputBox.userInput == "")
+      {
+        flightPathInputBox.typing = false;
+      }
     }
   }
 }

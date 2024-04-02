@@ -1,4 +1,4 @@
-// charts and bubble chart brought to you by Manon :)
+// charts and bubble chart brought to you by Manon 
 class Chart extends Widget
 {
   int x, y, widgetWidth, widgetHeight, gap;
