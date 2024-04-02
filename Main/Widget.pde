@@ -42,7 +42,7 @@ class Widget {
   {
     textFont(widgetFont);
     textSize(16);
-    text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
+    text(label, x+widgetWidth/4 - gap, y + widgetHeight/2 + 6);
   }
 }
 
