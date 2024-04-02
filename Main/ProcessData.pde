@@ -28,11 +28,18 @@ HashMap<String, HashMap<String, Integer>> stateDeparturesArrivals = new HashMap<
 // This loads the data from the csv into objects
 void loadData() {
   flights = new ArrayList<Flight>();
-  String[] rows = loadStrings("flights_full.csv");
-
-  for (int i = 1; i < rows.length; i++) {
-    String[] data = rows[i].split(",");
-    flights.add(new Flight(data));
+  BufferedReader reader = createReader("flights_full.csv");
+  String line = null;
+  try {
+    reader.readLine(); // Skip header line
+    while ((line = reader.readLine()) != null) {
+      String[] data = line.split(",");
+      flights.add(new Flight(data));
+    }
+    reader.close();
+  }
+  catch (IOException e) {
+    e.printStackTrace();
   }
 }
 
@@ -42,7 +49,7 @@ void loadData() {
 void collectData(String airline, String date, String state) {
   airlines.add(flights.get(0).provider);
   initialisationOfData();
-    //Collecting an arraylist of States for heatmap: - Joel
+  //Collecting an arraylist of States for heatmap: - Joel
   for (int i = 0; i<flights.size(); i++) {
     Flight flight = flights.get(i);
     if (!states.contains(flight.originState)) {
@@ -64,9 +71,9 @@ void collectData(String airline, String date, String state) {
 
   for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
-    if(!flight.cancelled && !flight.diverted){
-    stateDeparturesArrivals.get(flight.originState).put("departed",  stateDeparturesArrivals.get(flight.originState).get("departed")+1);
-    stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
+    if (!flight.cancelled && !flight.diverted) {
+      stateDeparturesArrivals.get(flight.originState).put("departed", stateDeparturesArrivals.get(flight.originState).get("departed")+1);
+      stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
     }
 
     if (int(flight.depTime) - flight.expectedDepTime > 0) {
@@ -227,13 +234,13 @@ void getFlightInfoSheetInformation(String userInput) //fligthNum, date, airport,
   String destState = information[5];
   for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
-    if (flight.flightNumber == flightNum && flight.flightDate.equalsIgnoreCase(date) && 
-        flight.originAirport.equalsIgnoreCase(airport) && flight.provider.equalsIgnoreCase(carrier) &&
-        flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destState))
+    if (flight.flightNumber == flightNum && flight.flightDate.equalsIgnoreCase(date) &&
+      flight.originAirport.equalsIgnoreCase(airport) && flight.provider.equalsIgnoreCase(carrier) &&
+      flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destState))
     {
       userFligthInfo = flight;
     }
-  } 
+  }
 }
 
 // processing information for the chyron
@@ -259,24 +266,23 @@ void getScrollPageInformation(String userInput) // startDate, endDate, origineSt
   String startDate = information[0];
   String[] decomposedUserDate = startDate.split("/");
   int userStartDay = Integer.parseInt(decomposedUserDate[1]);
-  
+
   String endDate = information[1];
   decomposedUserDate = endDate.split("/");
   int userEndDay = Integer.parseInt(decomposedUserDate[1]);
-  
+
   String origineState = information[2];
   String destinationState = information[3];
   for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
     String[] decomposedDate = flight.flightDate.split("/");
     int day = Integer.parseInt(decomposedDate[1]);
-    if ((userStartDay <= day && day <= userEndDay) 
-    && flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destinationState))
+    if ((userStartDay <= day && day <= userEndDay)
+      && flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destinationState))
     {
-      
+
       newFlightInformationData.add(flight);
     }
-
   }
   println(newFlightInformationData.size());
 }
