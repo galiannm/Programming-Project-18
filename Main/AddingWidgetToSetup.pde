@@ -61,6 +61,7 @@ void addWidgetsToSetup()
   sortByDepAirportBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 480, (int)newFlightInfoInputBox.y+20, 100, 30, "Dep Aiport", airportYellow, textFont, 8, 50/6, true);
   sortByArrAirportBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 590, (int)newFlightInfoInputBox.y+20, 100, 30, "Arr Aiport", airportYellow, textFont, 8, 50/6, true);
   newFlightInfoClear = new InteractiveWidget(900-50, 150, 100, 30, "CLEAR", airportYellow, textFont, 6, 50/2, true);
+  toggleHeatMap = new InteractiveWidget(750, 750, 200, 30, "Showing Arrivals", color(0,0,255), textFont, 6, 50/2, true);
   
   radioButtonsUserFlightInfo.add(radioBtnUserFlight1);
   radioButtonsUserFlightInfo.add(radioBtnUserFlight2);
@@ -182,6 +183,7 @@ void addWidgetsToSetup()
 
   screenHeatMap.addWidget(firstHeatMapWidget);
   screenHeatMap.addWidget(homeBtn);
+  screenHeatMap.addWidget(toggleHeatMap);
 
   currentScreenNumber = 0;
 }

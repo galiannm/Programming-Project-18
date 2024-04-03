@@ -1,4 +1,4 @@
-// Fcode done by Manon
+// Fcode done by Manon //modified by Joel (added in toggleHeatMap actions - 04/04/24 00:30)
 // create a separate tab for organizational purposes
 void interactiveWidgetActions()
 {
@@ -231,7 +231,7 @@ void interactiveWidgetActions()
     }
   }
   );
-  
+
   newFlightInfoClear.addListn((e, w) -> {
     if (newFlightInfoClear.mouseIntercept(mouseX, mouseY))
     {
@@ -251,7 +251,7 @@ void interactiveWidgetActions()
     }
   }
   );
-  
+
   sortDateBtn.addListn((e, w) -> {
     if (sortDateBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -259,7 +259,7 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("date");
     }
   }
-  ); 
+  );
   sortByCarrierBtn.addListn((e, w) -> {
     if (sortByCarrierBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -267,7 +267,7 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("carrier");
     }
   }
-  ); 
+  );
   sortByDepAirportBtn.addListn((e, w) -> {
     if (sortByDepAirportBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -275,8 +275,8 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("DepAirport");
     }
   }
-  ); 
-  
+  );
+
   sortByArrAirportBtn.addListn((e, w) -> {
     if (sortByArrAirportBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -284,7 +284,7 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("ArrAirport");
     }
   }
-  ); 
+  );
 
   flightPathBtn.addListn((e, w) -> {
     if (flightPathBtn.mouseIntercept(mouseX, mouseY))
@@ -312,6 +312,18 @@ void interactiveWidgetActions()
     if (heatMapBtn.mouseIntercept(mouseX, mouseY))
     {
       currentScreenNumber = 10;
+    }
+  }
+  );
+
+  toggleHeatMap.addListn((e, w) -> {
+    if (toggleHeatMap.mouseIntercept(mouseX, mouseY))
+    {
+      firstHeatMapWidget.toggleShowArrivals();
+      if(firstHeatMapWidget.showArrivals == false){
+        toggleHeatMap.widgetColor = color(255,0,0);
+        toggleHeatMap.label = "Showing Departures";
+      } else {toggleHeatMap.widgetColor = color(0,0,255); toggleHeatMap.label = "Showing Arrivals";}
     }
   }
   );

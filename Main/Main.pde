@@ -25,7 +25,7 @@ lineGraph myLineGraph;
 pieChart firstPieChart;
 BubbleChart bubbleChart;
 HeatMapWidget firstHeatMapWidget;
-InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear;
+InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear, toggleHeatMap;
 ImageWidget homeBtn, flightInfoCard;
 infoSheetInformation userFlightInformation;
 Widget signHolder;
@@ -96,9 +96,6 @@ void mousePressed(MouseEvent event)
 {
   synchronized(this) {
     if (!isLoading) {
-      //Temp Line
-      firstHeatMapWidget.toggleShowArrivals();
-      //Change the way we change it
       for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
         if (widget instanceof InteractiveWidget)
