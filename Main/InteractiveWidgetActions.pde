@@ -309,12 +309,16 @@ void interactiveWidgetActions()
     );
   }
 
-  for (RadioButton radioButton : radioButtonsPieChart)
+  for (RadioButton radioButton : airlineRadioButtons) //Created by Theresa James, for the airline radio buttons for the piechart screen
   {
     radioButton.addListn((e, w) -> {
       if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
       {
-        radioButton.handleClick(radioButtonsPieChart);
+        radioButton.handleClick(airlineRadioButtons);
+        selectedLabel = radioButton.getLabel();
+        airline = selectedLabel;
+        PieChartWidget.collectDataForPieChart(airline);
+        PieChartWidget.draw();
       }
     }
     );

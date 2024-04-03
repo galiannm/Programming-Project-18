@@ -168,6 +168,7 @@ void getAverageDistance()
 //flightStautus function was created by Theresa James.
 void flightStatus() //This function checks the amount of flights that are cancelled, diverted or on time
 {
+  reliabilityData.clear();
   int cancelled = 0;
   int diverted = 0;
   int flightsOnTime = 0;

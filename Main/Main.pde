@@ -7,9 +7,10 @@ int currentScreenNumber;
 ArrayList<Flight> specificAirline = new ArrayList<Flight>();
 ArrayList<RadioButton> radioButtonsUserFlightInfo = new ArrayList<>();
 ArrayList<RadioButton> radioButtonsUserFlightInfo2 = new ArrayList<>();
-ArrayList<RadioButton> radioButtonsPieChart = new ArrayList<>();
+ArrayList<RadioButton> airlineRadioButtons = new ArrayList<>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
+String selectedLabel;
 //List of the US states: Filled in process data. - Joel
 ArrayList<String> states = new ArrayList<String>();
 PShape USA;
@@ -24,6 +25,7 @@ RadioButton radioBtnUserFlight1, radioBtnUserFlight2, radioBtnUserFlight3, radio
 CheckboxExtended check;
 lineGraph myLineGraph;
 pieChart firstPieChart;
+pieChartWidget PieChartWidget;
 BubbleChart bubbleChart;
 HeatMapWidget firstHeatMapWidget;
 InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear;
@@ -36,7 +38,8 @@ AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn,
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 //RadioButton []radioButtons ;
-RadioButton radioBtnAirlineAA;
+String [] airlineNames = {"AA", "AS", "B6", "DL", "F9", "G4", "HA", "NK", "UA", "WN"};
+//ArrayList<RadioButton> airlineRadioButtons;
 
 boolean isLoading = true;
 PImage[] frames;

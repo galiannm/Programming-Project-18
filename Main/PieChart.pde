@@ -1,4 +1,4 @@
-//This class is brought to you by Theresa James :))
+//This class is brought to you by Theresa James :)) //<>//
 class pieChart
 {
   String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
@@ -12,21 +12,18 @@ class pieChart
     noStroke();
     noLoop();
   }
-
   void pie_chart()
   {
-
     float total = 0;
     float startAngle = 0;
     for (int i =0; i < data.size(); i++)
     {
       total += data.get(i);
+      //System.out.println(total);
     }
     color [] sectorColors = {#CBB9FE, #F8DECB, #FDC2EB, #B0E3EA, #FDC2EB, #F8DECB };
     for (int i = 0; i < data.size(); i++)
     {
-      //float purple = map(i, 0, data.size(), 50, 255);
-      //fill (purple * 0.8, 0, purple);
       fill(sectorColors [i % sectorColors.length]);
       float angle = map(data.get(i), 0, total, 0, TWO_PI);
       arc (width/2, height/2, PIECHART_DIAMETER, PIECHART_DIAMETER, startAngle, startAngle + angle);
@@ -61,8 +58,7 @@ class pieChart
   }
   void draw()
   {
-    //background(100);
-    pie_chart(); //<>//
+    pie_chart();
   }
 }
 
@@ -88,16 +84,29 @@ class pieChartWidget extends Widget
     textSize(30);
     text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
   }
+  void collectDataForPieChart(String airline)
+  {
+    specificAirline.clear();
+    
+    for (int i = 0; i < flights.size(); i++) {
+      Flight flight = flights.get(i);
+      if (flight.provider.contains(airline)) {
+        specificAirline.add(flight);
+      }
+    }
+    flightStatus();
+  }
+
+  void mousePressed() {
+    for (RadioButton radioButton : airlineRadioButtons) {
+      if (radioButton.mouseIntercept(mouseX, mouseY)) {
+        radioButton.handleClick(airlineRadioButtons);        
+      }
+    }
+  }
+
   void draw()
   {
-    for (RadioButton radioButton : radioButtonsPieChart) {
-        radioButton.draw();
-    }
-    //if (radioBtnAirlineAA.selected)
-    //{
-    //  println("running");
-    //}
-    //super.draw();
     drawtext();
     chart.draw();
   }
