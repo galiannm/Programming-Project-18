@@ -1,5 +1,5 @@
-// widget, interactive widget, slider, Mini screen, image widget, infoSheetInformation and AnimatedWidget brought to you by Manon 
-// the slider was then later edited by Nandana 
+// widget, interactive widget, slider, Mini screen, image widget, infoSheetInformation and AnimatedWidget brought to you by Manon
+// the slider was then later edited by Nandana
 
 class Widget {
   int x, y, widgetWidth, widgetHeight, gap;
@@ -319,7 +319,7 @@ class AnimatedWidget extends InteractiveWidget
       if (mouseIntercept(mouseX, mouseY)) {
         stroke(44); // White border if the mouse is over
       } else {
-        stroke(widgetColor); 
+        stroke(widgetColor);
       }
     } else if (!drawStroke)
     {
@@ -414,7 +414,7 @@ class Slider extends InteractiveWidget
   int currentValue;
   boolean isDragging;
   int minValue, maxValue; //Store minimum and maximum values
-  int sliderColor;        
+  int sliderColor;
 
   MouseActionListener onDrag = (e, s) ->
   {
@@ -462,7 +462,7 @@ class Slider extends InteractiveWidget
     fill(sliderColor);
     rect(x, y+thumbHeight/4, thumbWidth, thumbHeight, thumbHeight*0.5);
     drawText();
-    drawMinMaxValues(); //Displays the minimum and maximum values of the slider 
+    drawMinMaxValues(); //Displays the minimum and maximum values of the slider
   }
 
   void drawText()
@@ -472,7 +472,7 @@ class Slider extends InteractiveWidget
     text(label, barX +barWidth/2, barY - 20);
     text(currentValue, barX + 80, barY - 20);
   }
-  
+
   void drawMinMaxValues()
   {
     textAlign(LEFT, CENTER);
@@ -499,10 +499,12 @@ class Checkbox extends InteractiveWidget {
     super.draw();
     if (isChecked) {
       fill(0); // Fill with black if checked
-      rect(x , y , widgetWidth - 10, widgetHeight - 10);
+      rect(x, y, widgetWidth - 10, widgetHeight - 10);
     }
     if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !clickHandled) {
       isChecked = !isChecked;
+      clickSound.rewind();
+      clickSound.play();
       clickHandled = true; // Set the flag to indicate the click has been handled
     }
     if (!mousePressed) {
@@ -523,20 +525,20 @@ class Checkbox extends InteractiveWidget {
   }
 }
 // Added by Maria Ceanuri to control chekcboxes in reliability line graph
-class CheckboxExtended extends Checkbox{
+class CheckboxExtended extends Checkbox {
   FlightProvider provider;
   CheckboxExtended(int x, int y, int checkboxSize, String label, color widgetColor, PFont widgetFont, int gap, boolean initialState, FlightProvider provider)
-{super ( x,  y,  checkboxSize, label,  widgetColor,  widgetFont,  gap, initialState);
-this.provider = provider;
+  {
+    super ( x, y, checkboxSize, label, widgetColor, widgetFont, gap, initialState);
+    this.provider = provider;
+  }
+  void draw ()
+  {
+    super.draw();
+    provider.visible = isChecked;
+  }
 }
-void draw ()
-{
-  super.draw();
-  provider.visible = isChecked;
-
-}
-}
-// Class RadioButton added by Maria Ceanuri then modified my manon 
+// Class RadioButton added by Maria Ceanuri then modified my manon
 class RadioButton extends InteractiveWidget {
   boolean selected, draw;
   RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean draw) {
@@ -596,6 +598,8 @@ class RadioButton extends InteractiveWidget {
 
   void handleClick(ArrayList<RadioButton> radioButtons) {
     mouseIntercept();
+    clickSound.rewind();
+    clickSound.play();
     for (RadioButton radioButton : radioButtons) {
       if (radioButton != this) {
         radioButton.selected = false;
