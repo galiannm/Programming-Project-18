@@ -44,6 +44,7 @@ int frameIndex = 0;
 int frameChangeInterval = 70; // Time between frame changes in milliseconds
 long lastFrameChangeTime = 0;
 int NUMBER_OF_FRAMES = 21;
+PImage arrivalsLegend, departuresLegend;
 
 
 void settings()
@@ -76,6 +77,8 @@ void setup()
   infoSheet = loadImage("infoSheet.png");
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
+  arrivalsLegend = loadImage("arrivals.png");
+  departuresLegend = loadImage("departures.png");
 }
 
 void draw()
