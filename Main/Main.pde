@@ -1,5 +1,10 @@
+import ddf.minim.*;
+//Music
+
+
 import java.util.ArrayList;
 import java.lang.Thread;
+
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
@@ -36,6 +41,11 @@ AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn,
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 //RadioButton []radioButtons ;
+//Audio Stuff
+Minim minim;
+AudioPlayer backgroundMusic;
+AudioPlayer clickSound;
+static final int FADE = 2500;
 
 boolean isLoading = true;
 PImage[] frames;
@@ -72,6 +82,15 @@ void setup()
   }
   );
   dataLoadingThread.start();
+
+  minim = new Minim(this);
+  backgroundMusic = minim.loadFile("backgroundMusic.mp3");
+  backgroundMusic.setGain(-20);
+  backgroundMusic.play();
+  backgroundMusic.loop();
+  clickSound = minim.loadFile("mouseClick.mp3");
+  clickSound.setGain(-20);
+
   homeBtnPic = loadImage("HomeButtonImg.png");
   mapOfUSA = loadImage("USAMap.png");
   infoSheet = loadImage("infoSheet.png");
@@ -89,7 +108,7 @@ void draw()
   synchronized(this) {
     if (isLoading) {
       gifAnim();
-    } else{
+    } else {
       screens.get(currentScreenNumber).draw();
     }
   }
@@ -171,4 +190,11 @@ void gifAnim() {
     }
     lastFrameChangeTime = millis();
   }
+}
+//More music stuff
+//Terminates music when screen closed
+void stop() {
+  backgroundMusic.close();
+  minim.stop();
+  super.stop();
 }
