@@ -63,15 +63,13 @@ void addWidgetsToSetup()
   radioButtonsUserFlightInfo2.add(radioBtnUserFlight4);
 
   // Theresa's pie chart
-  PieChartWidget = new pieChartWidget(500, 25, 0, 0, "Reliability of " + airline, 0, titleFont, 10, reliabilityData);
+  PieChartWidget = new pieChartWidget(500, 25, 0, 0, "", 0, titleFont, 10, reliabilityData);
  
   airlineRadioButtons = new ArrayList<RadioButton>();
   int radioButtonX = SCREEN_WIDTH - 100;
   int radioButtonY = SCREEN_HEIGHT - 650;
 
   int radioButtonGap = 38;
-
-  int radioButtonGap = 40;
 
   for (int i = 0; i < airlineNames.length; i ++)
   {

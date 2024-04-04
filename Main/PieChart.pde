@@ -1,4 +1,4 @@
-//This class is brought to you by Theresa James :))  //<>//
+//This class is brought to you by Theresa James :)) //<>//
 class pieChartWidget extends Widget
 {
   ArrayList <Integer> data;
@@ -59,13 +59,19 @@ class pieChartWidget extends Widget
         println("Value of legendY: " + legendY);
       }
     }
+    fill(255); 
+    textAlign(CENTER, TOP); 
+    textSize(24); 
+    text("Reliability of " + airline, width / 2, 20); 
   }
+  
   void drawtext()
   {
     textFont(widgetFont);
     textSize(30);
     text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
   }
+  
   void collectDataForPieChart(String airline)
   {
     specificAirline.clear();
