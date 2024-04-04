@@ -43,9 +43,7 @@ BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 //RadioButton []radioButtons ;
 //Audio Stuff
 Minim minim;
-AudioPlayer backgroundMusic;
-AudioPlayer clickSound;
-static final int FADE = 2500;
+AudioPlayer backgroundMusic, clickSound, key1, key2, key3, key4, key5, key6, backSpaceKey, enterKey;
 
 boolean isLoading = true;
 PImage[] frames;
@@ -90,6 +88,23 @@ void setup()
   backgroundMusic.loop();
   clickSound = minim.loadFile("mouseClick.mp3");
   clickSound.setGain(-20);
+  key1 = minim.loadFile("keyClick1.mp3");
+  key2 = minim.loadFile("keyClick2.mp3");
+  key3 = minim.loadFile("keyClick3.mp3");
+  key4 = minim.loadFile("keyClick4.mp3");
+  key5 = minim.loadFile("keyClick5.mp3");
+  key6 = minim.loadFile("keyClick6.mp3");
+  enterKey = minim.loadFile("enterKey.mp3");
+  backSpaceKey = minim.loadFile("backSpaceKey.mp3");
+  key1.setGain(-20);
+  key2.setGain(-20);
+  key3.setGain(-20);
+  key4.setGain(-20);
+  key5.setGain(-20);
+  key6.setGain(-20);
+  enterKey.setGain(-20);
+  backSpaceKey.setGain(-20);
+  
 
   homeBtnPic = loadImage("HomeButtonImg.png");
   mapOfUSA = loadImage("USAMap.png");
