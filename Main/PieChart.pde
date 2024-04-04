@@ -1,17 +1,22 @@
-//This class is brought to you by Theresa James :)) //<>//
-class pieChart
+//This class is brought to you by Theresa James :))  //<>//
+class pieChartWidget extends Widget
 {
-  String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
   ArrayList <Integer> data;
-  pieChart(ArrayList<Integer> data)
+  pieChartWidget(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, ArrayList<Integer> data)
   {
+    super(x, y, 0, 0, label, 0, titleFont, 0, 0, false);
+    this.x = x;
+    this.y = y;
+    this.widgetWidth = widgetWidth;
+    this.widgetHeight = widgetHeight;
+    this.label = label;
+    this.widgetColor  = widgetColor;
+    this.widgetFont = widgetFont;
+    this.gap = gap;
     this.data = data;
   }
-  void setup()
-  {
-    noStroke();
-    noLoop();
-  }
+  String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
+
   void pie_chart()
   {
     float total = 0;
@@ -56,28 +61,6 @@ class pieChart
       }
     }
   }
-  void draw()
-  {
-    pie_chart();
-  }
-}
-
-class pieChartWidget extends Widget
-{
-  pieChart chart;
-  pieChartWidget(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, pieChart chart )
-  {
-    super(x, y, 0, 0, label, 0, titleFont, 0, 0, false);
-    this.x = x;
-    this.y = y;
-    this.widgetWidth = widgetWidth;
-    this.widgetHeight = widgetHeight;
-    this.label = label;
-    this.widgetColor  = widgetColor;
-    this.widgetFont = widgetFont;
-    this.gap = gap;
-    this.chart = chart;
-  }
   void drawtext()
   {
     textFont(widgetFont);
@@ -108,6 +91,6 @@ class pieChartWidget extends Widget
   void draw()
   {
     drawtext();
-    chart.draw();
+    pie_chart();
   }
 }

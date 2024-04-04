@@ -24,7 +24,6 @@ MapOfFlightPath mapOfFlightPath;
 RadioButton radioBtnUserFlight1, radioBtnUserFlight2, radioBtnUserFlight3, radioBtnUserFlight4;
 CheckboxExtended check;
 lineGraph myLineGraph;
-pieChart firstPieChart;
 pieChartWidget PieChartWidget;
 BubbleChart bubbleChart;
 HeatMapWidget firstHeatMapWidget;
