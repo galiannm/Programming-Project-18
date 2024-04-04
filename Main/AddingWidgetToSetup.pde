@@ -68,7 +68,10 @@ void addWidgetsToSetup()
   airlineRadioButtons = new ArrayList<RadioButton>();
   int radioButtonX = SCREEN_WIDTH - 100;
   int radioButtonY = SCREEN_HEIGHT - 650;
+
   int radioButtonGap = 38;
+
+  int radioButtonGap = 40;
 
   for (int i = 0; i < airlineNames.length; i ++)
   {

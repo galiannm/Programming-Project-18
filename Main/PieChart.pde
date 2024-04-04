@@ -24,7 +24,6 @@ class pieChartWidget extends Widget
     for (int i =0; i < data.size(); i++)
     {
       total += data.get(i);
-      //System.out.println(total);
     }
     color [] sectorColors = {#CBB9FE, #F8DECB, #FDC2EB, #B0E3EA, #FDC2EB, #F8DECB };
     for (int i = 0; i < data.size(); i++)
