@@ -75,7 +75,7 @@ class lineGraph  extends Chart {
 
   
   void draw() {
-    super.draw(); //<>//
+    super.draw(); //<>// //<>//
     textAlign (CENTER);
     drawXVariables(numValues, gapBetween);
     drawYVariables(numValuesY, gapBetweenY, scaleY);

@@ -544,7 +544,10 @@ class RadioButton extends InteractiveWidget {
     selected = false;
     this.draw = draw;
   }
-
+  String getLabel()
+  {
+    return label;
+  }
   void draw() {
     // Draw the radio button
     if (draw)

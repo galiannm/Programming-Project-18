@@ -300,13 +300,16 @@ void interactiveWidgetActions()
 
     if (!flightPathInputBox.allUserInputs.equals(""))
     {
-      mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ", "))[0];
-      mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ", "))[1];
-      mapOfFlightPath.getCoords();
-      flightPathInputBox.typing = true;
+
+      try {
+        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ' '))[0];
+        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ' '))[1];
+        mapOfFlightPath.getCoords();
+      }
+      catch (Exception inputFailed) {
+        println("Invalid Input Entered in Flight Path");
+      }
     }
-  }
-  );
 
   heatMapBtn.addListn((e, w) -> {
     if (heatMapBtn.mouseIntercept(mouseX, mouseY))
@@ -349,6 +352,21 @@ void interactiveWidgetActions()
       if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
       {
         radioButton.handleClick(radioButtonsUserFlightInfo2);
+      }
+    }
+    );
+  }
+
+  for (RadioButton radioButton : airlineRadioButtons) //Created by Theresa James, for the airline radio buttons for the piechart screen
+  {
+    radioButton.addListn((e, w) -> {
+      if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
+      {
+        radioButton.handleClick(airlineRadioButtons);
+        selectedLabel = radioButton.getLabel();
+        airline = selectedLabel;
+        PieChartWidget.collectDataForPieChart(airline);
+        PieChartWidget.draw();
       }
     }
     );

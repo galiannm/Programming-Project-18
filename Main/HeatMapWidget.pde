@@ -33,7 +33,7 @@ class HeatMapWidget extends InteractiveWidget {
       } else if (value < 100) {
         colorState = 30 + (int) (value / 100.0 * 30);
       } else if (value < 500) {
-        colorState = 60 + (int) ((value - 100) / 400.0 * 30); //<>//
+        colorState = 60 + (int) ((value - 100) / 400.0 * 30); //<>// //<>//
       } else if (value < 2500) {
         colorState = 90 + (int) ((value - 500) / 2000.0 * 30);
       } else if (value < 10000) {
