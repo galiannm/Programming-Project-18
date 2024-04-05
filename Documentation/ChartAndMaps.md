@@ -1,8 +1,9 @@
 # Documentation : `Charts` and `Maps`
 
-Authors : 
+Authors :   
 * Manon Galian
-Editors :
+
+Editors :  
 * Joel Jojan
 * Theresa James
 * Maria Ceanuri
@@ -29,6 +30,8 @@ Editors :
 > Editor(s) : N/A
 
 ### Brief Description :
+
+The `Chart` class is the parent class of all charts. It has minimal functionality, it displays a frame, title, axis and labels of the chart.
 
 ### Class Summary :
 
@@ -111,7 +114,7 @@ extends Chart
 |**widgetHeight**|`int`|height of the barChart|
 |**widgetColor**|`color`|color of the barChart|
 |**widgetFont**|`PFont`|font text for the barChart|
-|**gap**|`int`|...|
+|**gap**|`int`|TO DO|
 |**title**|`String`|title of the barChart|
 |**xLabel**|`String`|x-axis label for the barChart|
 |**yLabel**|`String`|y-axis label for the barChart|
@@ -171,6 +174,7 @@ extends Chart
 
 ### 1.c. `BubbleChart` Class
 
+The `BubbleChart` class is an extension of the `Chart` class. It allows the user to display three dimentions of data. Each point is associated with a x coordinate, y coordinate and a size.
 
 #### Contributors :
 
@@ -295,14 +299,14 @@ extends InteractiveWidget
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**x**|`int`|x coordinate of the heatMap (...)|
-|**y**|`int`|y coordinate of the heatMap (...)|
+|**x**|`int`|x coordinate of the heatMap (TO DO)|
+|**y**|`int`|y coordinate of the heatMap (TO DO)|
 |**widgetWidth**|`int`|width of the heatMap|
 |**widgetHeight**|`int`|height of the heatMap|
-|**mapImage**|`PShape`|...|
-|**stateDeparturesArrivals**|`HashMap<String, HashMap<String, Integer>>`|...|
-|**states**|`ArrayList<String>`|...|
-|**showArrivals**|`boolean`|flag that ...|
+|**mapImage**|`PShape`|TO DO|
+|**stateDeparturesArrivals**|`HashMap<String, HashMap<String, Integer>>`|TO DO|
+|**states**|`ArrayList<String>`|TO DO|
+|**showArrivals**|`boolean`|flag that TO DO|
 
 ---
 

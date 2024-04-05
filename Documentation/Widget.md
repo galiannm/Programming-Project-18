@@ -1,13 +1,23 @@
 # Documentation : `Wiget`, `Charts`, `Maps`, `Other` and its Descendants
 
+Authors : 
+* Manon Galian 
+ 
+Editors :
+* Joel Jojan
+* Maria Faro
+* Maria Ceanuri
+* Nandana Arun
+---
+
 ## Table of Contents:
 1. [`Widget` Class](#1-widget-class)
     1. [`Chyron` Class](#1a-chyron-class)
     2. [`infoSheetInformation` Class](#1b-infosheetinformation-class)
     3. [`MiniScreen` Class](#1c-miniscreen-class)
     4. [`InteractiveWidget` Class](#1d-interactivewidget-class)
-        1. [`MouseActionListener` Interface](#1d1-mouseactionlistener-class)
-        2. [`KeyActionListener` Interface](#1d2-keyactionlistener-class)
+        1. [`MouseActionListener` Interface](#1d1-mouseactionlistener-interface)
+        2. [`KeyActionListener` Interface](#1d2-keyactionlistener-interface)
         3. [`AnimatedWidget` Interface](#1d3-animatedwidget-class)
         4. [`ImageWidget` Class](#1d4-imagewidget-class)
         5. [`Slider` Class](#1d5-slider-class)
@@ -29,6 +39,8 @@
 > Editor(s) : N/A
 
 #### Brief Description :
+
+The `Widget` class is the base class for all user interface classes. 
 
 ### Class Summary :
 
@@ -76,6 +88,7 @@ boolean drawStroke)
 
 #### Brief Description :
 
+The `Chyron` class allows the user to automatically have information scroll up the screen.
 
 #### Class Summary :
 
@@ -121,6 +134,9 @@ String userInput)
 
 #### Brief Description :
 
+The `infoSheetInformation` class allows the user to display the information of a certain flight. If the flight exists in the database, the departure/arrival location (state and airport), flight number, departure/arrival time, date and distance will be printed. 
+The user is also notified in the case that the flight does not exist or is cancelled.
+
 #### Class Summary :
 
 ```java
@@ -159,6 +175,8 @@ PFont textFont)
 > Editor(s) : N/A
 
 #### Brief Description :
+
+The `MiniScreen` class provides similar functionality to that of its parent, `Widget` but also provide the possibility of a hanging title at the top.
 
 #### Class Summary :
 
@@ -204,6 +222,10 @@ PFont widgetFont)
 > Main : Manon Galian  
 > Editor(s) : N/A
 
+#### Brief Description :
+
+The `InteractiveWidget` class allows the user to interact with the widget by providing hooks for listeners of mouse and keyboard events.
+
 #### Class Summary :
 
 ```java
@@ -240,6 +262,28 @@ extends Widget
 |**curve**|`int`|curve of the egdes of the widget|
 |**drawStroke**|`boolean`|flags that determines if the widget draws a with stroke|
 
+### Important Methods:
+
+```java
+  public void addListn(MouseActionListener listn)
+```
+ The function `addListn` add a listener to the [`MouseActionListener`](#1d1-mouseactionlistener-interface)
+
+```java
+  public void actions(MouseEvent e)
+```
+The function `actions` performs all the actions of every `MouseActionListener` of the InteractiveWidget that calls it.
+
+```java
+  public void addKeyListn(KeyActionListener listn)
+```
+ The function `addKeyListn` add a listener to the [`KeyActionListener`](#1d2-keyactionlistener-interface)
+
+```java
+  public void keyActions(KeyEvent e)
+```
+The function `keyActions` performs all the actions of every `KeyActionListener` of the InteractiveWidget that calls it.
+
 ---
 
 #### 1.d.1. MouseActionListener Interface
@@ -251,7 +295,37 @@ extends Widget
 
 ##### Brief Description :
 
-##### Class Summary :
+It is a **functional interface** [^1] which allows the user to create flexible callbacks to be performed on a **mouse event** [^2].
+
+[^1]: [For more inforamtion on functional interface in java](https://www.baeldung.com/java-8-functional-interfaces)  
+[^2]: [For more information on MouseEvents in processing](https://github.com/processing/processing/blob/master/core/src/processing/event/MouseEvent.java)
+
+##### Interface Summary :
+
+```java
+interface MouseActionListener {
+  void performAction(MouseEvent e, Object s);
+} 
+```
+
+##### How to make listener :
+
+A listener can be any anonymous functions adhering to the `MouseActionListener` interface. It takes in two parameter:
+ * e (the mouse event) and 
+ * w (the interactinve widget calling the event).  
+
+```java
+  MouseActionListener myMouseListener = (e, w) ->
+  {
+    println("You can do anything from inside this function!");
+
+    println("You can filter for certain types of MouseEvents:");
+    println("Is it a PRESS?:", e.getAction() == MouseEvent.PRESS);
+
+    println("Access information of this widget");
+    println("This widget's color:", w.color);
+  };
+```
 
 ---
 
@@ -264,7 +338,36 @@ extends Widget
 
 ##### Brief Description :
 
-##### Class Summary :
+It is a **functional interface** [^1] which allows the user to create flexible callbacks to be performed on a **key event** [^2].
+
+[^1]: [For more inforamtion on functional interface in java](https://www.baeldung.com/java-8-functional-interfaces)  
+[^2]: [For more information on KeyEvents in processing](https://github.com/processing/processing/blob/master/core/src/processing/event/KeyEvent.java)
+
+##### Interface Summary :
+
+```java
+interface KeyActionListener {
+  void performKeyAction(KeyEvent e, Object s);
+}
+```
+##### How to make listener :
+
+A listener can be any anonymous functions adhering to the `KeyActionListener` interface. It takes in two parameter:
+ * e (the mouse event) and 
+ * w (the interactinve widget calling the event).  
+
+```java
+  KeyActionListener myKeyListener = (e, w) ->
+  {
+    println("You can do anything from inside this function!");
+
+    println("You can filter for certain types of MouseEvents:");
+    println("Is it a PRESS?:", e.getAction() == KeyEvent.PRESS);
+
+    println("Access information of this widget");
+    println("This widget's color:", w.color);
+  };
+```
 
 ---
 
@@ -276,6 +379,8 @@ extends Widget
 > Editor(s) : N/A
 
 ##### Brief Description :
+
+The `AnimatedWidget` Class allows the user to perform an animation on a widget.
 
 #### Class Summary :
 
@@ -325,6 +430,8 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
+The `ImageWidget` class provides the same functionality to that of its parent `InteractiveWidget`, but allows the user to use an image (instead of the default rectangle shape).
+
 #### Class Summary :
 
 ```java
@@ -364,6 +471,8 @@ extends InteractiveWidget
 > Editor(s) : Nadana Arun
 
 ##### Brief Description :
+
+The `Slider` class enables the addition of a slider control, allowing users to select a value within the specified range (defined by `minValue` and `maxValue`) by sliding an thumb.
 
 #### Class Summary :
 
@@ -417,6 +526,8 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
+TO DO
+
 #### Class Summary :
 
 ```java
@@ -446,8 +557,8 @@ extends InteractiveWidget
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|...|
-|**initialState**|`boolean`|flag that ...|
+|**gap**|`int`|TO DO|
+|**initialState**|`boolean`|flag that TO DO|
 
 ---
 
@@ -459,6 +570,8 @@ extends InteractiveWidget
 > Editor(s) : N/A
 
 ###### Brief Description :
+
+TO DO
 
 ###### Class Summary :
 
@@ -490,9 +603,9 @@ extends Checkbox
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|...|
-|**initialState**|`boolean`|flag that ...|
-|**provider**|`FlightProvider`|...|
+|**gap**|`int`|TO DO|
+|**initialState**|`boolean`|flag that TO DO|
+|**provider**|`FlightProvider`|TO DO|
 
 ---
 
@@ -504,6 +617,8 @@ extends Checkbox
 > Editor(s) : Manon Galian
 
 ##### Brief Description :
+
+TO DO
 
 #### Class Summary :
 
@@ -528,7 +643,7 @@ extends InteractiveWidget
 |**label**|`String`|label of the radioButton|
 |**widgetColor**|`color`|color of the radioButton|
 |**widgetFont**|`PFont`|font of the labels of the radioButton|
-|**gap**|`int`|...|
+|**gap**|`int`|TO DO|
 |**curve**|`int`|curve of the egdes of the radioButton|
 |**draw**|`boolean`|flag that determines if the radioButton is drawn|
 
@@ -542,6 +657,8 @@ extends InteractiveWidget
 > Editor(s) : Manon Galian
 
 ##### Brief Description :
+
+TO DO
 
 #### Class Summary :
 
@@ -582,6 +699,8 @@ extends InteractiveWidget
 > Editor(s) : N/A
 
 ##### Brief Description :
+
+The `ScrollPage` class allows the user the creation of an inforamtion page, which has to added functionality of beeing able to sort through the information. Additionally, it enables scrolling, allowing users to navigate up and down the page as needed.
 
 #### Class Summary :
 

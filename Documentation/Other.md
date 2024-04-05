@@ -1,8 +1,9 @@
 # Documentation : `Screen`, `Gradient` and `FlightClass`
 
-Authors : 
+Authors :  
 * Manon Galian
 * Joel Jojan
+   
 ---
 
 ## Table of Contents:
@@ -18,6 +19,9 @@ Authors :
 > Editor(s) : N/A
 
 ### Brief Description :
+
+The `Screen` class allows user to create various screen in a program, with each screen being responsible for rendering the widgets present whithin the screen. To manage these widgets efficiently, every widget that is created is added to the ArrayList of widgets of that screen.  
+The `Screen` class only has a single contructor parameter; `backgroundColors` which is an array of `color` type. This parameter is used to set the background color gradient of the screen.
 
 ### Class Summary :
 
@@ -38,6 +42,18 @@ extends none
 |----|----|-----------|
 |**backgroundColors**|`color[]`|background color(s) of the screen|
 
+#### Notable Instance Variable :
+
+|Name|Type|Quick Description|
+|----|----|-----------|
+|**widgets**|`ArrayList<Widget>`|an ArrayList of the widgets present in the screen|
+
+#### Adding Widgets to a Screen :
+
+```java
+ myScreen.addWidget(aWidget);
+ myScreen.addWidget(anotherWidget);
+```
 ---
 
 ## 2. `Gradient` Class
@@ -48,6 +64,8 @@ extends none
 > Editor(s) : N/A
 
 ### Brief Description :
+
+The `Gradient` class provides the funtionality of creating customisable esthetic gradients. The user may enter as many or as litle colors as needed.
 
 ### Class Summary :
 
@@ -61,8 +79,8 @@ extends none
 ```java
  Gradient(int x, 
  int y, 
- float w, 
- float h, 
+ float gradientWidth, 
+ float gradientHeight, 
  color[] colors)
 ```
 
@@ -86,6 +104,8 @@ extends none
 > Editor(s) : N/A
 
 ### Brief Description :
+
+...
 
 ### Class Summary :
 
