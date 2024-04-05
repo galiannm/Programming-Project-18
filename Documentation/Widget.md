@@ -2,7 +2,7 @@
 
 Authors : 
 * Manon Galian 
- 
+
 Editors :
 * Joel Jojan
 * Maria Faro
@@ -310,9 +310,11 @@ interface MouseActionListener {
 
 ##### How to make listener :
 
-A listener can be any anonymous functions adhering to the `MouseActionListener` interface. It takes in two parameter:
+A listener can be any **anonymous functions** [^3] adhering to the `MouseActionListener` interface. It takes in two parameter:
  * e (the mouse event) and 
  * w (the interactinve widget calling the event).  
+
+ [^3]: [For more inforamtion on anonymous functions in java](https://www.javatpoint.com/anonymous-function-in-java#:~:text=In%20Java%2C%20anonymous%20functions%2C%20also,define%20a%20class%20or%20interface.)  
 
 ```java
   MouseActionListener myMouseListener = (e, w) ->
@@ -352,9 +354,11 @@ interface KeyActionListener {
 ```
 ##### How to make listener :
 
-A listener can be any anonymous functions adhering to the `KeyActionListener` interface. It takes in two parameter:
+A listener can be any **anonymous functions** [^3] adhering to the `KeyActionListener` interface. It takes in two parameter:
  * e (the mouse event) and 
  * w (the interactinve widget calling the event).  
+
+[^3]: [For more inforamtion on anonymous functions in java](https://www.javatpoint.com/anonymous-function-in-java#:~:text=In%20Java%2C%20anonymous%20functions%2C%20also,define%20a%20class%20or%20interface.)  
 
 ```java
   KeyActionListener myKeyListener = (e, w) ->
