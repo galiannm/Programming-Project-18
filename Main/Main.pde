@@ -1,5 +1,10 @@
+import ddf.minim.*;
+//Music
+
+
 import java.util.ArrayList;
 import java.lang.Thread;
+
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
@@ -27,7 +32,7 @@ lineGraph myLineGraph;
 pieChartWidget PieChartWidget;
 BubbleChart bubbleChart;
 HeatMapWidget firstHeatMapWidget;
-InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear;
+InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear, toggleHeatMap;
 ImageWidget homeBtn, flightInfoCard;
 infoSheetInformation userFlightInformation;
 Widget signHolder;
@@ -38,6 +43,11 @@ AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn,
 BarChart firstBarChart;   // The bar chart on number of flights per carrier
 BarChart secondBarChart; // The bar chart on total distance travelled by carrier
 //RadioButton []radioButtons ;
+
+//Audio Stuff
+Minim minim;
+AudioPlayer backgroundMusic, clickSound, key1, key2, key3, key4, key5, key6, backSpaceKey, enterKey;
+
 String [] airlineNames = {"AA", "AS", "B6", "DL", "F9", "G4", "HA", "NK", "UA", "WN"};
 //ArrayList<RadioButton> airlineRadioButtons;
 
@@ -48,6 +58,7 @@ int frameIndex = 0;
 int frameChangeInterval = 70; // Time between frame changes in milliseconds
 long lastFrameChangeTime = 0;
 int NUMBER_OF_FRAMES = 21;
+PImage arrivalsLegend, departuresLegend;
 
 
 void settings()
@@ -75,11 +86,39 @@ void setup()
   }
   );
   dataLoadingThread.start();
+
+  minim = new Minim(this);
+  backgroundMusic = minim.loadFile("backgroundMusic.mp3");
+  backgroundMusic.setGain(-20);
+  backgroundMusic.play();
+  backgroundMusic.loop();
+  clickSound = minim.loadFile("mouseClick.mp3");
+  clickSound.setGain(-20);
+  key1 = minim.loadFile("keyClick1.mp3");
+  key2 = minim.loadFile("keyClick2.mp3");
+  key3 = minim.loadFile("keyClick3.mp3");
+  key4 = minim.loadFile("keyClick4.mp3");
+  key5 = minim.loadFile("keyClick5.mp3");
+  key6 = minim.loadFile("keyClick6.mp3");
+  enterKey = minim.loadFile("enterKey.mp3");
+  backSpaceKey = minim.loadFile("backSpaceKey.mp3");
+  key1.setGain(-20);
+  key2.setGain(-20);
+  key3.setGain(-20);
+  key4.setGain(-20);
+  key5.setGain(-20);
+  key6.setGain(-20);
+  enterKey.setGain(-20);
+  backSpaceKey.setGain(-20);
+  
+
   homeBtnPic = loadImage("HomeButtonImg.png");
   mapOfUSA = loadImage("USAMap.png");
   infoSheet = loadImage("infoSheet.png");
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
+  arrivalsLegend = loadImage("arrivals.png");
+  departuresLegend = loadImage("departures.png");
 }
 
 void draw()
@@ -90,7 +129,7 @@ void draw()
   synchronized(this) {
     if (isLoading) {
       gifAnim();
-    } else if (!isLoading) {
+    } else {
       screens.get(currentScreenNumber).draw();
     }
   }
@@ -100,9 +139,6 @@ void mousePressed(MouseEvent event)
 {
   synchronized(this) {
     if (!isLoading) {
-      //Temp Line
-      firstHeatMapWidget.toggleShowArrivals();
-      //Change the way we change it
       for (Widget widget : screens.get(currentScreenNumber).widgets)
       {
         if (widget instanceof InteractiveWidget)
@@ -175,4 +211,12 @@ void gifAnim() {
     }
     lastFrameChangeTime = millis();
   }
+}
+
+//More music stuff
+//Terminates music when screen closed
+void stop() {
+  backgroundMusic.close();
+  minim.stop();
+  super.stop();
 }

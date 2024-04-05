@@ -42,9 +42,8 @@ void loadData() {
 void collectData(String airline, String date, String state) {
   airlines.add(flights.get(0).provider);
   initialisationOfData();
-    //Collecting an arraylist of States for heatmap: - Joel
-  for (int i = 0; i<flights.size(); i++) {
-    Flight flight = flights.get(i);
+  //Collecting an arraylist of States for heatmap: - Joel
+  for (Flight flight : flights) {
     if (!states.contains(flight.originState)) {
       states.add(flight.originState);
     }
@@ -62,11 +61,10 @@ void collectData(String airline, String date, String state) {
     }
   }
 
-  for (int i = 0; i < flights.size(); i++) {
-    Flight flight = flights.get(i);
-    if(!flight.cancelled && !flight.diverted){
-    stateDeparturesArrivals.get(flight.originState).put("departed",  stateDeparturesArrivals.get(flight.originState).get("departed")+1);
-    stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
+  for (Flight flight : flights) {
+    if (!flight.cancelled && !flight.diverted) {
+      stateDeparturesArrivals.get(flight.originState).put("departed", stateDeparturesArrivals.get(flight.originState).get("departed")+1);
+      stateDeparturesArrivals.get(flight.destState).put("arrived", stateDeparturesArrivals.get(flight.destState).get("arrived")+1);
     }
 
     if (int(flight.depTime) - flight.expectedDepTime > 0) {
@@ -111,7 +109,7 @@ void collectData(String airline, String date, String state) {
     }
 
     //collect data for flight path Map
-    flightPathData(flight, i);
+    flightPathData(flight);
   }
   data = new FlightData(flights);
 }
@@ -191,15 +189,15 @@ void flightStatus() //This function checks the amount of flights that are cancel
 }
 
 // processing data for the flight path map
-void flightPathData(Flight flight, int i)
+void flightPathData(Flight flight)
 {
   origineDestState = "";
-  if (flights.get(i).originState.compareTo(flights.get(i).destState) < 0)
+  if (flight.originState.compareTo(flight.destState) < 0)
   {
-    origineDestState = flights.get(i).originState + flights.get(i).destState;
+    origineDestState = flight.originState + flight.destState;
   } else
   {
-    origineDestState = flights.get(i).destState + flights.get(i).originState;
+    origineDestState = flight.destState + flight.originState;
   }
   if (!distBetweenStates.get(0).contains(origineDestState))
   {
@@ -228,13 +226,13 @@ void getFlightInfoSheetInformation(String userInput) //fligthNum, date, airport,
   String destState = information[5];
   for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
-    if (flight.flightNumber == flightNum && flight.flightDate.equalsIgnoreCase(date) && 
-        flight.originAirport.equalsIgnoreCase(airport) && flight.provider.equalsIgnoreCase(carrier) &&
-        flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destState))
+    if (flight.flightNumber == flightNum && flight.flightDate.equalsIgnoreCase(date) &&
+      flight.originAirport.equalsIgnoreCase(airport) && flight.provider.equalsIgnoreCase(carrier) &&
+      flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destState))
     {
       userFligthInfo = flight;
     }
-  } 
+  }
 }
 
 // processing information for the chyron
@@ -260,24 +258,23 @@ void getScrollPageInformation(String userInput) // startDate, endDate, origineSt
   String startDate = information[0];
   String[] decomposedUserDate = startDate.split("/");
   int userStartDay = Integer.parseInt(decomposedUserDate[1]);
-  
+
   String endDate = information[1];
   decomposedUserDate = endDate.split("/");
   int userEndDay = Integer.parseInt(decomposedUserDate[1]);
-  
+
   String origineState = information[2];
   String destinationState = information[3];
   for (int i = 0; i < flights.size(); i++) {
     Flight flight = flights.get(i);
     String[] decomposedDate = flight.flightDate.split("/");
     int day = Integer.parseInt(decomposedDate[1]);
-    if ((userStartDay <= day && day <= userEndDay) 
-    && flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destinationState))
+    if ((userStartDay <= day && day <= userEndDay)
+      && flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destinationState))
     {
-      
+
       newFlightInformationData.add(flight);
     }
-
   }
   println(newFlightInformationData.size());
 }
