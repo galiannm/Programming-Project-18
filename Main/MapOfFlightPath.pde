@@ -88,14 +88,10 @@ class MapOfFlightPath extends ImageWidget
     {
       speed = -speed;
     }
-    println(x2Coord + " " + y2Coord + " " + xAnim + " " + yAnim);
     if (xAnim != x2Coord && yAnim != y2Coord)
     {
-      println("SPEED", speed, xAnim);
       xAnim += speed;
-      println("AFTER", xAnim);
       yAnim = (int)((m * xAnim + c));
-      println(xAnim, " " , yAnim);
     } else
     {
       printDistance = true;

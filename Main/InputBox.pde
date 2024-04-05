@@ -28,7 +28,6 @@ class InputBox extends InteractiveWidget {
     fill(darkGray);
     textAlign(CENTER, CENTER);
     text(userInput, x + w/2, y + h/2); // Display user input within the box
-    println(keyPressed);
     if (!typing)
     {
       textSize(11);
