@@ -231,7 +231,7 @@ void interactiveWidgetActions()
     }
   }
   );
-  
+
   newFlightInfoClear.addListn((e, w) -> {
     if (newFlightInfoClear.mouseIntercept(mouseX, mouseY))
     {
@@ -251,7 +251,7 @@ void interactiveWidgetActions()
     }
   }
   );
-  
+
   sortDateBtn.addListn((e, w) -> {
     if (sortDateBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -259,7 +259,7 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("date");
     }
   }
-  ); 
+  );
   sortByCarrierBtn.addListn((e, w) -> {
     if (sortByCarrierBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -267,7 +267,7 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("carrier");
     }
   }
-  ); 
+  );
   sortByDepAirportBtn.addListn((e, w) -> {
     if (sortByDepAirportBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -275,8 +275,8 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("DepAirport");
     }
   }
-  ); 
-  
+  );
+
   sortByArrAirportBtn.addListn((e, w) -> {
     if (sortByArrAirportBtn.mouseIntercept(mouseX, mouseY))
     {
@@ -284,7 +284,7 @@ void interactiveWidgetActions()
       newFlightInfoScroll.sortColumn("ArrAirport");
     }
   }
-  ); 
+  );
 
   flightPathBtn.addListn((e, w) -> {
     if (flightPathBtn.mouseIntercept(mouseX, mouseY))
@@ -310,6 +310,8 @@ void interactiveWidgetActions()
         println("Invalid Input Entered in Flight Path");
       }
     }
+  }
+  );
 
   heatMapBtn.addListn((e, w) -> {
     if (heatMapBtn.mouseIntercept(mouseX, mouseY))
@@ -356,7 +358,6 @@ void interactiveWidgetActions()
     }
     );
   }
-
   for (RadioButton radioButton : airlineRadioButtons) //Created by Theresa James, for the airline radio buttons for the piechart screen
   {
     radioButton.addListn((e, w) -> {
