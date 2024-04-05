@@ -71,9 +71,21 @@ void addWidgetsToSetup()
   radioButtonsUserFlightInfo2.add(radioBtnUserFlight4);
 
   // Theresa's pie chart
-  firstPieChart = new pieChart(reliabilityData);
-  //firstPieChart.pie_chart();
-  pieChartWidget PieChartWidget = new pieChartWidget(500, 25, 0, 0, "Reliability of " + airline, 0, titleFont, 0, firstPieChart);
+  PieChartWidget = new pieChartWidget(500, 25, 0, 0, "", 0, titleFont, 10, reliabilityData);
+ 
+  airlineRadioButtons = new ArrayList<RadioButton>();
+  int radioButtonX = SCREEN_WIDTH - 100;
+  int radioButtonY = SCREEN_HEIGHT - 650;
+
+  int radioButtonGap = 38;
+
+  for (int i = 0; i < airlineNames.length; i ++)
+  {
+    RadioButton radioButton = new RadioButton(radioButtonX, radioButtonY + i * radioButtonGap, 30, airlines.get(i), silverBlue, textFont, 35, 560/2, true);
+    airlineRadioButtons.add(radioButton);
+    screenPieChartReliability.addWidget(radioButton);
+    PieChartWidget.mousePressed();
+  }
 
   // Nandana's bar charts
   firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
@@ -106,6 +118,7 @@ void addWidgetsToSetup()
   yourFlightInfoBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+5, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Your Flight", airportYellow, 10, slidingBtn4.speed, true);
   newFlightInfoBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+40, slidingBtn4.amountOfPxToTravel*2, 20, 20, "New Flight", airportYellow, 10, slidingBtn4.speed, true);
   flightPathBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+75, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Flight Path Map", airportYellow, 10, slidingBtn4.speed, true);
+
   heatMapBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+110, slidingBtn4.amountOfPxToTravel*2, 20, 20, "flights heat map", airportYellow, 10, slidingBtn4.speed, true);
   
   mainScreen.addWidget(mainScreenMiniScreen);
@@ -174,11 +187,12 @@ void addWidgetsToSetup()
   screenNewFlightInfo.addWidget(sortByArrAirportBtn);
   screenNewFlightInfo.addWidget(newFlightInfoClear);
   screenNewFlightInfo.addWidget(homeBtn);
+
   screenNewFlightInfo.addWidget(newFlightInfoInputBox);
   screenNewFlightInfo.addWidget(newflightInfoMiniScreen);
   screenNewFlightInfo.addWidget(newFlightInfoScroll);
   screenNewFlightInfo.addWidget(homeBtn);
-  
+
   screenMapFligthPath.addWidget(flightPathInputBox);
   screenMapFligthPath.addWidget(mapOfFlightPath);
   screenMapFligthPath.addWidget(homeBtn);
