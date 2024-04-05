@@ -10,6 +10,9 @@ int totalNumOfFlights = specificAirline.size();
 int[][] reliabilityBubbleChart = new int[3][10];
 ArrayList<String> airlines = new ArrayList<String>();
 ArrayList<Flight> flightsOfTheDay = new ArrayList<Flight>();
+ArrayList<Flight> newFlightInformationData = new ArrayList<Flight>();
+Table newFlightInformationTable = new Table();
+
 ArrayList<ArrayList<Object>> distBetweenStates = new ArrayList<ArrayList<Object>>();
 String[] airlinesArray = airlines.toArray(new String[0]); // Convert ArrayList to array
 
@@ -132,32 +135,6 @@ void initialisationOfData()
   distBetweenStates.get(3).add(0);
 }
 
-// processing data for the flight path map
-void flightPathData(Flight flight, int i)
-{
-  origineDestState = "";
-  if (flights.get(i).originState.compareTo(flights.get(i).destState) < 0)
-  {
-    origineDestState = flights.get(i).originState + flights.get(i).destState;
-  } else
-  {
-    origineDestState = flights.get(i).destState + flights.get(i).originState;
-  }
-  if (!distBetweenStates.get(0).contains(origineDestState))
-  {
-    distBetweenStates.get(0).add(origineDestState);
-    distBetweenStates.get(1).add(1); // Initialize flight count
-    distBetweenStates.get(2).add(flight.distance);
-    distBetweenStates.get(3).add(0);
-  } else
-  {
-    distBetweenStates.get(1).set(distBetweenStates.get(0).indexOf(origineDestState),
-      (int)(distBetweenStates.get(1).get(distBetweenStates.get(0).indexOf(origineDestState)))+1);
-    distBetweenStates.get(2).set(distBetweenStates.get(0).indexOf(origineDestState),
-      (int)(distBetweenStates.get(2).get(distBetweenStates.get(0).indexOf(origineDestState)))+flight.distance);
-  }
-}
-
 void getAverageDistance()
 {
   for (int i = 0; i < distBetweenStates.get(2).size(); i++)
@@ -213,8 +190,34 @@ void flightStatus() //This function checks the amount of flights that are cancel
   reliabilityData.add(cancelled);
 }
 
+// processing data for the flight path map
+void flightPathData(Flight flight, int i)
+{
+  origineDestState = "";
+  if (flights.get(i).originState.compareTo(flights.get(i).destState) < 0)
+  {
+    origineDestState = flights.get(i).originState + flights.get(i).destState;
+  } else
+  {
+    origineDestState = flights.get(i).destState + flights.get(i).originState;
+  }
+  if (!distBetweenStates.get(0).contains(origineDestState))
+  {
+    distBetweenStates.get(0).add(origineDestState);
+    distBetweenStates.get(1).add(1); // Initialize flight count
+    distBetweenStates.get(2).add(flight.distance);
+    distBetweenStates.get(3).add(0);
+  } else
+  {
+    distBetweenStates.get(1).set(distBetweenStates.get(0).indexOf(origineDestState),
+      (int)(distBetweenStates.get(1).get(distBetweenStates.get(0).indexOf(origineDestState)))+1);
+    distBetweenStates.get(2).set(distBetweenStates.get(0).indexOf(origineDestState),
+      (int)(distBetweenStates.get(2).get(distBetweenStates.get(0).indexOf(origineDestState)))+flight.distance);
+  }
+}
+
 // processing data for the user's flight informational sheet
-void getFlightInfoSheetInformation(String userInput) //1101, date, airport, carrier, state, deststate
+void getFlightInfoSheetInformation(String userInput) //fligthNum, date, airport, carrier, state, deststate
 {
   String[] information = userInput.split(", ");
     int flightNum = Integer.parseInt(information[0]);
@@ -248,4 +251,33 @@ void getFlightOTDInformation(String userInput) // date, airport
       flightsOfTheDay.add(flight);
     }
   }
+}
+
+// prcessing data for the scroll page
+void getScrollPageInformation(String userInput) // startDate, endDate, origineState, destinationState
+{
+  String[] information = userInput.split(", ");
+  String startDate = information[0];
+  String[] decomposedUserDate = startDate.split("/");
+  int userStartDay = Integer.parseInt(decomposedUserDate[1]);
+  
+  String endDate = information[1];
+  decomposedUserDate = endDate.split("/");
+  int userEndDay = Integer.parseInt(decomposedUserDate[1]);
+  
+  String origineState = information[2];
+  String destinationState = information[3];
+  for (int i = 0; i < flights.size(); i++) {
+    Flight flight = flights.get(i);
+    String[] decomposedDate = flight.flightDate.split("/");
+    int day = Integer.parseInt(decomposedDate[1]);
+    if ((userStartDay <= day && day <= userEndDay) 
+    && flight.originState.equalsIgnoreCase(origineState) && flight.destState.equalsIgnoreCase(destinationState))
+    {
+      
+      newFlightInformationData.add(flight);
+    }
+
+  }
+  println(newFlightInformationData.size());
 }

@@ -18,7 +18,7 @@ Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChar
   screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo, screenMapFligthPath, screenHeatMap;
 MiniScreen chyronMiniScreen, mainScreenMiniScreen, yourFlightInfoMiniScreen, newflightInfoMiniScreen;
 Chyron chyronFOTD;
-InputBox inputBox, yourFlightInfoInputBox, newFlightInfoInputBox, chyronInputBox, flightPathInputBox;
+InputBox yourFlightInfoInputBox, newFlightInfoInputBox, chyronInputBox, flightPathInputBox;
 FlightData data;
 MapOfFlightPath mapOfFlightPath;
 RadioButton radioBtnUserFlight1, radioBtnUserFlight2, radioBtnUserFlight3, radioBtnUserFlight4;
@@ -27,10 +27,11 @@ lineGraph myLineGraph;
 pieChartWidget PieChartWidget;
 BubbleChart bubbleChart;
 HeatMapWidget firstHeatMapWidget;
-InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear;
+InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear;
 ImageWidget homeBtn, flightInfoCard;
 infoSheetInformation userFlightInformation;
 Widget signHolder;
+ScrollPage newFlightInfoScroll;
 AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn, pieChartReliabilityBtn, lineGrapheReliabilityBtn,
   disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn, flightPathBtn, heatMapBtn;
 
@@ -56,11 +57,11 @@ void settings()
 
 void setup()
 {
-  USA = loadShape("USA.svg");
   gifSetup();
   //Threads to load data while displaying a gif - Joel
   Thread dataLoadingThread = new Thread(new Runnable() {
     public void run() {
+      USA = loadShape("USA.svg");
       loadData(); // Load CSV data
       collectData(airline, "1/1/2022", "NY"); // Process data
       getAverageDistance();
@@ -141,6 +142,19 @@ void mouseDragged(MouseEvent event)
   }
 }
 
+void mouseWheel(MouseEvent event) {
+  synchronized(this) {
+    if (!isLoading) {
+      for (Widget widget : screens.get(currentScreenNumber).widgets)
+      {
+        if (widget instanceof ScrollPage)
+        {
+          ((ScrollPage) widget).actions(event);
+        }
+      }
+    }
+  }
+}
 
 //Loading Screen Code - Joel
 void gifSetup() {
@@ -161,7 +175,4 @@ void gifAnim() {
     }
     lastFrameChangeTime = millis();
   }
-}
-void keyPressed() {
-  inputBox.keyPressed();
 }

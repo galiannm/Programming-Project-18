@@ -25,12 +25,11 @@ void addWidgetsToSetup()
   screens.add(screenMapFligthPath);
   screens.add(screenHeatMap); // index 10
 
-  // input boxes
-  //inputBox = new InputBox(width/2 - 150, height/2 - 25, 300, 65, 95);
-  yourFlightInfoInputBox = new InputBox(50, 130, 250, 50, 95);
-  chyronInputBox = new InputBox(50, 130, 250, 50, 95);
-  flightPathInputBox = new InputBox(50, 130, 250, 50, 95);
-  newFlightInfoInputBox = new InputBox(50, 130, 250, 50, 95);
+  // input boxes    
+  yourFlightInfoInputBox = new InputBox(50, 130, 300, 50, 95, "Enter: FligthNo, Date, Airport, Carrier, DepState, ArrState");
+  chyronInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: Date, Airport");
+  flightPathInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: DepState, ArrState");
+  newFlightInfoInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: DtartDate, EndDate, DepState, ArrState");
 
   //Maria Ceanuri's line graph
   myLineGraph = new lineGraph(SCREEN_WIDTH/2, 500, 850, 500, "Graph", "Lateness by airline", "days", "lateness", titleFont, data, color(240));
@@ -38,7 +37,7 @@ void addWidgetsToSetup()
   chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
   chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600,
     beige, textFont, 20, chyronMiniScreen, chyronInputBox.allUserInputs); //"1/3/2022 12:00:00 AM"
-  chyronClear = new InteractiveWidget(330, 150, 100, 30, "CLEAR", airportYellow, textFont, 6, 50/2, true);
+  chyronClear = new InteractiveWidget(330, 150, 100, 30, "CLEAR", airportYellow, textFont, 0, 50/2, true);
 
   bubbleChart = new BubbleChart(SCREEN_WIDTH/2, 500, 850, 500, "Bubble Chart",
     color(240), textFont, 0, "Bubble Chart : Overall Reliability Of Carriers", reliabilityBubbleChart[0],
@@ -56,7 +55,13 @@ void addWidgetsToSetup()
   radioBtnUserFlight4 = new RadioButton(180, 705, 30, "No (back to home screen)", silverBlue, textFont, 35, 560/2, false);
 
   newflightInfoMiniScreen = new MiniScreen(50, 200, 900, 600, "Search For Flights", 25, 50, darkGray, titleFont);
-
+  newFlightInfoScroll = new ScrollPage(newflightInfoMiniScreen.x+20, newflightInfoMiniScreen.y-10, 900, 600, darkGray, 20, newflightInfoMiniScreen);
+  sortDateBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 260, (int)newFlightInfoInputBox.y+20, 100, 30, "Date", airportYellow, textFont, -6, 50/6, true);
+  sortByCarrierBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 370, (int)newFlightInfoInputBox.y+20, 100, 30, "Carrier", airportYellow, textFont, -3, 50/6, true);
+  sortByDepAirportBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 480, (int)newFlightInfoInputBox.y+20, 100, 30, "Dep Aiport", airportYellow, textFont, 8, 50/6, true);
+  sortByArrAirportBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 590, (int)newFlightInfoInputBox.y+20, 100, 30, "Arr Aiport", airportYellow, textFont, 8, 50/6, true);
+  newFlightInfoClear = new InteractiveWidget(900-50, 150, 100, 30, "CLEAR", airportYellow, textFont, 6, 50/2, true);
+  
   radioButtonsUserFlightInfo.add(radioBtnUserFlight1);
   radioButtonsUserFlightInfo.add(radioBtnUserFlight2);
   radioButtonsUserFlightInfo2.add(radioBtnUserFlight3);
@@ -92,10 +97,10 @@ void addWidgetsToSetup()
 
   mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Main Screen", 25, 50, silverBlue, titleFont);
   signHolder = new Widget(SCREEN_WIDTH/2, mainScreenMiniScreen.y + 20, 15, mainScreenMiniScreen.widgetHeight - 12, "", darkBlueGray, textFont, 8, (mainScreenMiniScreen.widgetHeight -20)/2, false);
-  mainBtn1 = new InteractiveWidget(SCREEN_WIDTH/2, 150, 220, 140, "Reliability Of Airlines", lightBlue, textFont, 8, 220/12, true);
-  mainBtn2 = new InteractiveWidget(SCREEN_WIDTH/2-208, 300, 220, 140, "Data Per Airlines", lightBlue2, textFont, 8, 220/12, true);
-  mainBtn3 = new InteractiveWidget(SCREEN_WIDTH/2, 450, 220, 140, "Flights Of The Day", blueGray2, textFont, 8, 220/12, true);
-  mainBtn4 = new InteractiveWidget(SCREEN_WIDTH/2-208, 600, 220, 140, "Flight Information", blueGray, textFont, 8, 220/12, true);
+  mainBtn1 = new InteractiveWidget(SCREEN_WIDTH/2, 150, 220, 140, "Reliability Of Airlines", lightBlue, textFont, 6, 220/12, true);
+  mainBtn2 = new InteractiveWidget(SCREEN_WIDTH/2-208, 300, 220, 140, "Data Per Airlines", lightBlue2, textFont, 6, 220/12, true);
+  mainBtn3 = new InteractiveWidget(SCREEN_WIDTH/2, 450, 220, 140, "Flights Of The Day", blueGray2, textFont, 6, 220/12, true);
+  mainBtn4 = new InteractiveWidget(SCREEN_WIDTH/2-208, 600, 220, 140, "Flight Information", blueGray, textFont, 6, 220/12, true);
 
   homeBtn = new ImageWidget(940, 790, 70, 70, homeBtnPic, true);
   slidingBtn1 = new AnimatedWidget(mainBtn1.x, mainBtn1.y, 190, mainBtn1.widgetWidth, mainBtn1.widgetHeight, "", mainBtn4.widgetColor, mainBtn1.curve, 2, false);
@@ -110,8 +115,9 @@ void addWidgetsToSetup()
   yourFlightInfoBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+5, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Your Flight", airportYellow, 10, slidingBtn4.speed, true);
   newFlightInfoBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+40, slidingBtn4.amountOfPxToTravel*2, 20, 20, "New Flight", airportYellow, 10, slidingBtn4.speed, true);
   flightPathBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+75, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Flight Path Map", airportYellow, 10, slidingBtn4.speed, true);
-  heatMapBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+110, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Flights Heat Map", airportYellow, 10, slidingBtn4.speed, true);
 
+  heatMapBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+110, slidingBtn4.amountOfPxToTravel*2, 20, 20, "flights heat map", airportYellow, 10, slidingBtn4.speed, true);
+  
   mainScreen.addWidget(mainScreenMiniScreen);
   mainScreen.addWidget(slidingBtn1);
   mainScreen.addWidget(slidingBtn2);
@@ -171,9 +177,17 @@ void addWidgetsToSetup()
   screenYourFlightInfo.addWidget(radioBtnUserFlight3);
   screenYourFlightInfo.addWidget(radioBtnUserFlight4);
   screenYourFlightInfo.addWidget(homeBtn);
+  
+  screenNewFlightInfo.addWidget(sortDateBtn);
+  screenNewFlightInfo.addWidget(sortByCarrierBtn);
+  screenNewFlightInfo.addWidget(sortByDepAirportBtn);
+  screenNewFlightInfo.addWidget(sortByArrAirportBtn);
+  screenNewFlightInfo.addWidget(newFlightInfoClear);
+  screenNewFlightInfo.addWidget(homeBtn);
 
   screenNewFlightInfo.addWidget(newFlightInfoInputBox);
   screenNewFlightInfo.addWidget(newflightInfoMiniScreen);
+  screenNewFlightInfo.addWidget(newFlightInfoScroll);
   screenNewFlightInfo.addWidget(homeBtn);
 
   screenMapFligthPath.addWidget(flightPathInputBox);

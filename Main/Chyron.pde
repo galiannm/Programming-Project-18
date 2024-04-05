@@ -50,14 +50,14 @@ class Chyron extends Widget
   void draw()
   {
     miniScreen.draw();
-    fill(255, 0, 0);
+    //fill(255, 0, 0);
     for (int i = max(speed/gap - 1, 0); i<min(flightsOfTheDay.size(), speed); i++) //removing /gap+36 makes a cool animation
     {
       Flight flight = flightsOfTheDay.get(i);
       if ((y+i*gap - speed) > chyronHeight+30)
       {
-        textFont(widgetFont);
-        textSize(20);
+        //textFont(widgetFont);
+        //textSize(20);
         textFont(widgetFont);
         textSize(16);
         if (flight.cancelled) // if cancelled
