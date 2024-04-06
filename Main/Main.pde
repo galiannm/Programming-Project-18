@@ -34,6 +34,7 @@ BubbleChart bubbleChart;
 HeatMapWidget firstHeatMapWidget;
 InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear, toggleHeatMap;
 ImageWidget homeBtn, flightInfoCard;
+ImageWidget HeatmapLegendArrivals, HeatmapLegendDepartures;
 infoSheetInformation userFlightInformation;
 Widget signHolder;
 ScrollPage newFlightInfoScroll;
@@ -60,8 +61,8 @@ long lastFrameChangeTime = 0;
 int NUMBER_OF_FRAMES = 21;
 PImage arrivalsLegend, departuresLegend;
 
-Slider slider1; // slider corresponding to the first bar chart 
-Slider slider2; // slider corresponding to the second bar chart 
+Slider slider1; // slider corresponding to the first bar chart
+Slider slider2; // slider corresponding to the second bar chart
 
 void settings()
 {
@@ -112,7 +113,7 @@ void setup()
   key6.setGain(-20);
   enterKey.setGain(-20);
   backSpaceKey.setGain(-20);
-  
+
 
   homeBtnPic = loadImage("HomeButtonImg.png");
   mapOfUSA = loadImage("USAMap.png");
@@ -131,15 +132,14 @@ void draw()
   synchronized(this) {
     if (isLoading) {
       gifAnim();
-    }
-    else 
+    } else
     {
       screens.get(currentScreenNumber).draw();
-      if(slider1.isDragging()) 
+      if (slider1.isDragging())
       {
-          updateBarChart(firstBarChart);
+        updateBarChart(firstBarChart);
       }
-      if(slider2.isDragging())
+      if (slider2.isDragging())
       {
         updateBarChart(secondBarChart);
       }

@@ -1,4 +1,4 @@
-//HEATMAP - brought to you by Joel //<>//
+//HEATMAP - brought to you by Joel //<>// //<>//
 class HeatMapWidget extends InteractiveWidget {
   PShape mapImage;
   HashMap<String, HashMap<String, Integer>> stateDeparturesArrivals;
@@ -149,5 +149,16 @@ class HeatMapWidget extends InteractiveWidget {
 
   void toggleShowArrivals() {
     showArrivals = !showArrivals;
+    checkDrawLegendHeatMap();
+  }
+}
+
+void checkDrawLegendHeatMap() {
+  if (firstHeatMapWidget.showArrivals) {
+    HeatmapLegendArrivals.draw = true;
+    HeatmapLegendDepartures.draw = false;
+  } else {
+    HeatmapLegendArrivals.draw = false;
+    HeatmapLegendDepartures.draw = true;
   }
 }

@@ -25,7 +25,7 @@ void addWidgetsToSetup()
   screens.add(screenMapFligthPath);
   screens.add(screenHeatMap); // index 10
 
-  // input boxes    
+  // input boxes
   yourFlightInfoInputBox = new InputBox(50, 130, 300, 50, 95, "Enter: FligthNo, Date, Airport, Carrier, DepState, ArrState");
   chyronInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: Date, Airport");
   flightPathInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: DepState, ArrState");
@@ -61,10 +61,11 @@ void addWidgetsToSetup()
   sortByDepAirportBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 480, (int)newFlightInfoInputBox.y+20, 100, 30, "Dep Aiport", airportYellow, textFont, 8, 50/6, true);
   sortByArrAirportBtn = new InteractiveWidget(newflightInfoMiniScreen.x + 590, (int)newFlightInfoInputBox.y+20, 100, 30, "Arr Aiport", airportYellow, textFont, 8, 50/6, true);
   newFlightInfoClear = new InteractiveWidget(900-50, 150, 100, 30, "CLEAR", airportYellow, textFont, 6, 50/2, true);
-  
-  toggleHeatMap = new InteractiveWidget(750, 750, 200, 30, "Showing Arrivals", color(0,0,255), textFont, 6, 50/2, true);
-  ImageWidget HeatmapLegend = new ImageWidget(750, 500, 50, 50, arrivalsLegend, true);
-  
+
+  toggleHeatMap = new InteractiveWidget(750, 750, 200, 30, "Showing Arrivals", color(0, 0, 255), textFont, 6, 50/2, true);
+  HeatmapLegendArrivals = new ImageWidget(750, 500, 200, 200, arrivalsLegend, true);
+  HeatmapLegendDepartures = new ImageWidget(750, 500, 200, 200, departuresLegend, false);
+
   radioButtonsUserFlightInfo.add(radioBtnUserFlight1);
   radioButtonsUserFlightInfo.add(radioBtnUserFlight2);
   radioButtonsUserFlightInfo2.add(radioBtnUserFlight3);
@@ -72,7 +73,7 @@ void addWidgetsToSetup()
 
   // Theresa's pie chart
   PieChartWidget = new pieChartWidget(500, 25, 0, 0, "", 0, titleFont, 10, reliabilityData);
- 
+
   airlineRadioButtons = new ArrayList<RadioButton>();
   int radioButtonX = SCREEN_WIDTH - 100;
   int radioButtonY = SCREEN_HEIGHT - 650;
@@ -96,7 +97,7 @@ void addWidgetsToSetup()
     color(240), textFont, 0, "Bar Chart : Total Distance Travelled Per Carrier", "Carriers",
     "Distance (in kilometers)", totalDistancePerCarrier[0], airlines);
 
-  firstHeatMapWidget = new HeatMapWidget(0, 0, width, height, USA, stateDeparturesArrivals, states, true);
+  firstHeatMapWidget = new HeatMapWidget(0, 20, width, height, USA, stateDeparturesArrivals, states, true);
 
   mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Main Screen", 25, 50, silverBlue, titleFont);
   signHolder = new Widget(SCREEN_WIDTH/2, mainScreenMiniScreen.y + 20, 15, mainScreenMiniScreen.widgetHeight - 12, "", darkBlueGray, textFont, 8, (mainScreenMiniScreen.widgetHeight -20)/2, false);
@@ -120,7 +121,7 @@ void addWidgetsToSetup()
   flightPathBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+75, slidingBtn4.amountOfPxToTravel*2, 20, 20, "Flight Path Map", airportYellow, 10, slidingBtn4.speed, true);
 
   heatMapBtn = new AnimatedWidget(SCREEN_WIDTH/2-10, mainBtn4.y+110, slidingBtn4.amountOfPxToTravel*2, 20, 20, "flights heat map", airportYellow, 10, slidingBtn4.speed, true);
-  
+
   mainScreen.addWidget(mainScreenMiniScreen);
   mainScreen.addWidget(slidingBtn1);
   mainScreen.addWidget(slidingBtn2);
@@ -159,10 +160,10 @@ void addWidgetsToSetup()
   screenNumFlightsPerAirline.addWidget(homeBtn);
 
   screenDisPerAirline.addWidget(secondBarChart);
-  slider2 = new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5); 
+  slider2 = new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5);
   screenDisPerAirline.addWidget(slider2);
   screenDisPerAirline.addWidget(homeBtn);
-  
+
   screenLineGrapheReliability.addWidget(homeBtn);
   screenLineGrapheReliability.addWidget(myLineGraph);
   int i=0;
@@ -182,7 +183,7 @@ void addWidgetsToSetup()
   screenYourFlightInfo.addWidget(radioBtnUserFlight3);
   screenYourFlightInfo.addWidget(radioBtnUserFlight4);
   screenYourFlightInfo.addWidget(homeBtn);
-  
+
   screenNewFlightInfo.addWidget(sortDateBtn);
   screenNewFlightInfo.addWidget(sortByCarrierBtn);
   screenNewFlightInfo.addWidget(sortByDepAirportBtn);
@@ -202,7 +203,9 @@ void addWidgetsToSetup()
   screenHeatMap.addWidget(firstHeatMapWidget);
   screenHeatMap.addWidget(homeBtn);
   screenHeatMap.addWidget(toggleHeatMap);
-  screenHeatMap.addWidget(HeatmapLegend);
+  screenHeatMap.addWidget(HeatmapLegendArrivals);
+  screenHeatMap.addWidget(HeatmapLegendDepartures);
+
 
   currentScreenNumber = 0;
 }
