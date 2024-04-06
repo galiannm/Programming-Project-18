@@ -60,6 +60,8 @@ long lastFrameChangeTime = 0;
 int NUMBER_OF_FRAMES = 21;
 PImage arrivalsLegend, departuresLegend;
 
+Slider slider1; // slider corresponding to the first bar chart 
+Slider slider2; // slider corresponding to the second bar chart 
 
 void settings()
 {
@@ -129,8 +131,18 @@ void draw()
   synchronized(this) {
     if (isLoading) {
       gifAnim();
-    } else {
+    }
+    else 
+    {
       screens.get(currentScreenNumber).draw();
+      if(slider1.isDragging()) 
+      {
+          updateBarChart(firstBarChart);
+      }
+      if(slider2.isDragging())
+      {
+        updateBarChart(secondBarChart);
+      }
     }
   }
 }

@@ -18,6 +18,9 @@ String[] airlinesArray = airlines.toArray(new String[0]); // Convert ArrayList t
 
 int[][] totalDistancePerCarrier = new int[10][10];
 int[][] numFlightsPerCarrier = new int[10][10];
+int[][] numFlightsPerDate = new int[32][10]; // for the slider 
+int[][] totalDistancePerDate = new int[32][10]; // for the slider
+
 Flight userFligthInfo;
 String origineDestState = "";
 int count = 0;
@@ -106,6 +109,18 @@ void collectData(String airline, String date, String state) {
     {
       numFlightsPerCarrier[0][carrierIndex]++; // Increment the number of flights for the carrier
       totalDistancePerCarrier[0][carrierIndex] += flight.distance;// Add the distance of the flight to the total distance for the carrier
+    }
+    
+    // data for slider1
+    if (flight.flightDayAsInt >= 1 && flight.flightDayAsInt <= 31 && carrierIndex >= 0 && carrierIndex < 10) 
+    { 
+        numFlightsPerDate[flight.flightDayAsInt][carrierIndex]++;
+    }
+    
+    // data for slider2
+    if (flight.flightDayAsInt >= 1 && flight.flightDayAsInt <= 31 && carrierIndex >= 0 && carrierIndex < 10) 
+    {
+        totalDistancePerDate[flight.flightDayAsInt][carrierIndex] += flight.distance;
     }
 
     //collect data for flight path Map
