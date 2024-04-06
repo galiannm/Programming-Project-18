@@ -110,8 +110,8 @@ extends none
 ### Class Summary :
 
 ```java
-class Gradient
-extends none
+class Flight{
+String flightDate; _#A string in the form "mm/dd/yyyy"_
 ```
 
 #### Constructor Parameters :
