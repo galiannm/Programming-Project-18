@@ -129,7 +129,7 @@ class Flight {
   String destCity;              // destCity = "New York"
   String destState;             // destState = "NY"
   String destWAC;               // destWAC = "2"
-  int expectedDepTime;          //expectedDepTime = 545  
+  int expectedDepTime;          // expectedDepTime = 545  
   String depTime;               // depTime = "545";
   int expectedArrTime;          // expectedArrTime = 645
   String arrTime;               // arrTime = "700"
@@ -143,6 +143,6 @@ class Flight {
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**data**|`String[]`|An ```java ArrayList ```|
+|**data**|`String[]`|An ``` ArrayList ``` of data which should be in the format above.|
 
 ---
