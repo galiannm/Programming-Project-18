@@ -114,7 +114,7 @@ class Flight{
 String flightDate; 
 ```
 
-#### Constructor Parameters :
+#### Class Attributes :
 
 ```java
 class Flight {
@@ -137,12 +137,17 @@ class Flight {
   boolean diverted;             // diverted == 1 = true; diverted == 0 = false;
   int distance;                 // distance = int("123")         
 }
+
+ Flight(String[] data) {
+   //Code
+ }
 ```
 
-#### Constructor Parameters Explanation:
+#### Class Variables Explanation:
 
 |Name|Type|Quick Description|
 |----|----|-----------|
 |**data**|`String[]`|An ``` ArrayList ``` of data which should be in the format above.|
+|**flightDate**|`String`| A string of the date of the flight |
 
 ---
