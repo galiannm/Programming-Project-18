@@ -348,9 +348,10 @@ void interactiveWidgetActions()
     {
 
       try {
-        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ','))[0];
-        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ','))[1];
+        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ", "))[0];
+        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ", "))[1];
         mapOfFlightPath.getCoords();
+        flightPathInputBox.typing = true;
       }
       catch (Exception inputFailed) {
         println("Invalid Input Entered in Flight Path");
