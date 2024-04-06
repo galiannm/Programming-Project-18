@@ -105,7 +105,7 @@ extends none
 
 ### Brief Description :
 
-...
+`Flight Class` is how we store and access our data throughout our program. It works by turning the rows in the _flights_full.csv_ and turning them into `flight objects`.
 
 ### Class Summary :
 
