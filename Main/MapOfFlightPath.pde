@@ -1,4 +1,5 @@
-// MapOfFlightPath code - Manon
+// code - Manon
+// 
 class MapOfFlightPath extends ImageWidget
 {
   int x, y, mapWidth, mapHeight;

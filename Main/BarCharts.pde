@@ -10,9 +10,9 @@ class BarChart extends Chart {
   int minData;
   float animationSpeed = 0.5;
 
-  BarChart(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor,
+  BarChart(int x, int y, int widgetWidth, int widgetHeight, color widgetColor,
     PFont widgetFont, int gap, String title, String xLabel, String yLabel, int[] data, ArrayList<String> labels) {
-    super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, title, xLabel, yLabel);
+    super(x, y, widgetWidth, widgetHeight, widgetColor, widgetFont, title, xLabel, yLabel);
     this.data = float(data);
     this.labels = labels;
     this.maxData = findMax(data);

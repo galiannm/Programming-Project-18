@@ -1,4 +1,9 @@
-//scrollPage code - Manon
+//code - Manon
+// The `ScrollPage` class allows the user the creation of an inforamtion page, 
+// which has to added functionality of beeing able to sort through the information. 
+// Additionally, it enables scrolling, allowing users to navigate up and down the page 
+// as needed.
+
 class ScrollPage extends InteractiveWidget
 {
 
