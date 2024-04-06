@@ -99,7 +99,7 @@ void addWidgetsToSetup()
 
   firstHeatMapWidget = new HeatMapWidget(0, 20, width, height, USA, stateDeparturesArrivals, states, true);
 
-  mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Main Screen", 25, 50, silverBlue, titleFont);
+  mainScreenMiniScreen = new MiniScreen(50, 100, 900, 700, "Flight Information Home Page", 25, 50, silverBlue, titleFont);
   signHolder = new Widget(SCREEN_WIDTH/2, mainScreenMiniScreen.y + 20, 15, mainScreenMiniScreen.widgetHeight - 12, "", darkBlueGray, textFont, 8, (mainScreenMiniScreen.widgetHeight -20)/2, false);
   mainBtn1 = new InteractiveWidget(SCREEN_WIDTH/2, 150, 220, 140, "Reliability Of Airlines", lightBlue, textFont, 6, 220/12, true);
   mainBtn2 = new InteractiveWidget(SCREEN_WIDTH/2-208, 300, 220, 140, "Data Per Airlines", lightBlue2, textFont, 6, 220/12, true);

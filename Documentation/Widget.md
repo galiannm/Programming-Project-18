@@ -84,7 +84,7 @@ boolean drawStroke)
 #### Contributors :
 
 > Main : Manon Galian  
-> Editor(s) : N/A
+> Editor(s) : Joel Jojan  
 
 #### Brief Description :
 
