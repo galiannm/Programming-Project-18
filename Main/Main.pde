@@ -1,7 +1,6 @@
 import ddf.minim.*;
 //Music
 
-
 import java.util.ArrayList;
 import java.lang.Thread;
 

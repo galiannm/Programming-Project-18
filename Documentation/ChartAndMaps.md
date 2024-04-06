@@ -174,14 +174,14 @@ extends Chart
 
 ### 1.c. `BubbleChart` Class
 
-The `BubbleChart` class is an extension of the `Chart` class. It allows the user to display three dimentions of data. Each point is associated with a x coordinate, y coordinate and a size.
-
 #### Contributors :
 
 > Main : Manon Galian  
 > Editor(s) : N/A
 
 #### Brief Description :
+
+The `BubbleChart` class is an extension of the `Chart` class. It allows the user to display three dimentions of data. Each point is associated with a x coordinate, y coordinate and a size.
 
 ##### Class Summary :
 
@@ -319,6 +319,8 @@ extends InteractiveWidget
 > Editor(s) : N/A
 
 ### Brief Description :
+
+The `MapOfFlightPath` class allows the user to display the path of their flight by entering their origin state and arrival state. This shown by an airplane animation connectiong the two states.
 
 ### Class Summary :
 

@@ -101,11 +101,11 @@ extends none
 ### Contributors :
 
 > Main : Joel Jojan    
-> Editor(s) : N/A
+> Editor(s) : Maria Ceanuri
 
 ### Brief Description :
 
-...
+TO DO
 
 ### Class Summary :
 
@@ -124,6 +124,6 @@ extends none
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**data**|`String[]`|...|
+|**data**|`String[]`|TO DO|
 
 ---
