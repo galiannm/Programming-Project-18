@@ -9,8 +9,8 @@ class lineGraph  extends Chart {
   String xCoordinates, yCoordinates;
   FlightData data;
 
-  lineGraph(int x, int y, int widgetWidth, int widgetHeight, String label, String title, String xCoordinates, String yCoordinates, PFont widgetFont, FlightData data, color widgetColor ) {//ArrayList<GroupedFlight> gflights) {
-    super( x, y, widgetWidth, widgetHeight, label, 0, widgetFont, 0, title, "days", "lateness (minutes)");
+  lineGraph(int x, int y, int widgetWidth, int widgetHeight, String title, String xCoordinates, String yCoordinates, PFont widgetFont, FlightData data, color widgetColor ) {//ArrayList<GroupedFlight> gflights) {
+    super( x, y, widgetWidth, widgetHeight, 0, widgetFont, title, "days", "lateness (minutes)");
     this.xCoordinates=xCoordinates; 
     this.yCoordinates= yCoordinates ; 
     this.data=data;

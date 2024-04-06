@@ -4,9 +4,7 @@ class InputBox extends InteractiveWidget {
   float x, y, w, h;
   int curve;
   boolean typing;
-  ArrayList<KeyActionListener> keyEventListn;
   InputBox(float x, float y, float w, float h, int curve, String textFormat) {
-    //(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean drawStroke)
     super((int)x, (int)y, (int)w, (int)h, "", silverBlue, textFont, 0, curve, true);
     this.x = x;
     this.y = y;
@@ -17,7 +15,6 @@ class InputBox extends InteractiveWidget {
     allUserInputs = "";
     userInput = "";
     typing = false;
-    keyEventListn = new ArrayList<KeyActionListener>();
   }
 
   void draw() {
@@ -85,19 +82,6 @@ class InputBox extends InteractiveWidget {
       }
       userInput += key;
       typing = true;
-    }
-  }
-
-  public void addKeyListn(KeyActionListener listn)
-  {
-    keyEventListn.add(listn);
-  }
-
-  public void keyActions(KeyEvent e)
-  {
-    for (KeyActionListener listn : keyEventListn)
-    {
-      listn.performKeyAction(e, this);
     }
   }
 

@@ -32,15 +32,15 @@ void addWidgetsToSetup()
   newFlightInfoInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: DtartDate, EndDate, DepState, ArrState");
 
   //Maria Ceanuri's line graph
-  myLineGraph = new lineGraph(SCREEN_WIDTH/2, 500, 850, 500, "Graph", "Lateness by airline", "days", "lateness", titleFont, data, color(240));
+  myLineGraph = new lineGraph(SCREEN_WIDTH/2, 500, 850, 500, "Lateness by airline", "days", "lateness", titleFont, data, color(240));
 
   chyronMiniScreen = new MiniScreen(50, 200, 900, 600, "Flights Of The Day", 25, 50, darkGray, titleFont);
   chyronFOTD = new Chyron(chyronMiniScreen.x+20, chyronMiniScreen.y-10, 900, 600,
     beige, textFont, 20, chyronMiniScreen, chyronInputBox.allUserInputs); //"1/3/2022 12:00:00 AM"
   chyronClear = new InteractiveWidget(330, 150, 100, 30, "CLEAR", airportYellow, textFont, 0, 50/2, true);
 
-  bubbleChart = new BubbleChart(SCREEN_WIDTH/2, 500, 850, 500, "Bubble Chart",
-    color(240), textFont, 0, "Bubble Chart : Overall Reliability Of Carriers", reliabilityBubbleChart[0],
+  bubbleChart = new BubbleChart(SCREEN_WIDTH/2, 500, 850, 500,
+    color(240), textFont, "Bubble Chart : Overall Reliability Of Carriers", reliabilityBubbleChart[0],
     reliabilityBubbleChart[2], reliabilityBubbleChart[1], airlines, colorOfCarriers, 1, "Number of Cancelled Flights",
     "Number Of Delayed Flights", "diverted flights");
 
@@ -89,11 +89,11 @@ void addWidgetsToSetup()
   }
 
   // Nandana's bar charts
-  firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
+  firstBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500,
     color(240), textFont, 0, "Bar Chart : Number Of Flights Per Carrier", "Carriers",
     "Number of Flights", numFlightsPerCarrier[0], airlines);
 
-  secondBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500, "Bar Chart",
+  secondBarChart = new BarChart(SCREEN_WIDTH/2, 500, 850, 500,
     color(240), textFont, 0, "Bar Chart : Total Distance Travelled Per Carrier", "Carriers",
     "Distance (in kilometers)", totalDistancePerCarrier[0], airlines);
 
