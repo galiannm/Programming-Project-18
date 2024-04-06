@@ -154,13 +154,15 @@ void addWidgetsToSetup()
   screenPieChartReliability.addWidget(PieChartWidget);
 
   screenNumFlightsPerAirline.addWidget(firstBarChart);
-  screenNumFlightsPerAirline.addWidget(new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5));
+  slider1 = new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5);
+  screenNumFlightsPerAirline.addWidget(slider1);
   screenNumFlightsPerAirline.addWidget(homeBtn);
 
   screenDisPerAirline.addWidget(secondBarChart);
+  slider2 = new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5); 
+  screenDisPerAirline.addWidget(slider2);
   screenDisPerAirline.addWidget(homeBtn);
-  screenDisPerAirline.addWidget(new Slider(SCREEN_WIDTH/3, 150, 20, 20, 310, 10, "Days", 1, 31, color(0), textFont, 5));
-
+  
   screenLineGrapheReliability.addWidget(homeBtn);
   screenLineGrapheReliability.addWidget(myLineGraph);
   int i=0;
