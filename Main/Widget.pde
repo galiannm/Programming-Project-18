@@ -412,9 +412,11 @@ class Slider extends InteractiveWidget
   int barWidth, barHeight, thumbWidth, thumbHeight;
   int barX, barY;
   int currentValue;
+  float currentValueFloat;
   boolean isDragging;
   int minValue, maxValue; //Store minimum and maximum values
   int sliderColor;
+   
 
   MouseActionListener onDrag = (e, s) ->
   {
@@ -446,6 +448,7 @@ class Slider extends InteractiveWidget
     this.barWidth = barWidth;
     this.barHeight = barHeight;
     currentValue = 0;
+    currentValueFloat = 0.0;
     isDragging = false;
     this.addListn(onDrag);
     this.minValue = minValue;
@@ -481,6 +484,26 @@ class Slider extends InteractiveWidget
     text(minValue, barX, barY + barHeight + gap*3);  // Displays the minimum value below the left most point in the slider bar
     textAlign(RIGHT, CENTER);
     text(maxValue, barX + barWidth, barY + barHeight + gap*3);  // Displays the maximum value below the right most point in the slider bar
+  }
+  
+  void update() 
+  {
+    if (mousePressed && mouseX >= x && mouseX <= x + barWidth && mouseY >= y && mouseY <= y + barHeight) {
+      currentValueFloat = constrain((mouseX - x) / barWidth, 0, 1);
+      isDragging = true;
+    } else {
+      isDragging = false;
+    }
+  }
+  
+  float getValue() 
+  {
+    return currentValue;
+  }
+  
+  boolean isDragging() 
+  {
+    return isDragging;
   }
 }
 

@@ -2,18 +2,25 @@
 import java.util.ArrayList;
 
 class BarChart extends Chart {
-  int data [];
+  float data [];
+  float[] targetData;       // data to update to when the slider value changes
+  float[] currentData;      // data displayed by the bar chart currently
   ArrayList<String> labels; // Change String[] to ArrayList<String>
   int maxData;
   int minData;
+  float animationSpeed = 0.5;
 
   BarChart(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor,
     PFont widgetFont, int gap, String title, String xLabel, String yLabel, int[] data, ArrayList<String> labels) {
     super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, title, xLabel, yLabel);
-    this.data = data;
+    this.data = float(data);
     this.labels = labels;
     this.maxData = findMax(data);
     this.minData = findMin(data);
+    this.targetData = new float[data.length];
+    this.currentData = new float[data.length];
+    arrayCopy(this.data, targetData);
+    arrayCopy(this.data, currentData);
   }
 
    int findMax(int[] arr) 
@@ -29,10 +36,13 @@ class BarChart extends Chart {
       return max;
    }
    
-   int findMin(int[] arr) {
+   int findMin(int[] arr) 
+   {
     int min = Integer.MAX_VALUE;
-    for (int value : arr) {
-        if (value < min) {
+    for (int value : arr) 
+    {
+        if (value < min) 
+        {
             min = value;
         }
     }
@@ -58,14 +68,30 @@ class BarChart extends Chart {
       fill(255);
       textAlign(CENTER, BOTTOM);
       text(labels.get(i), xPos, y + widgetHeight / 2 + 20); 
+
     }
-  }
+  }   
    
   
   int roundUp(int num, int nearest) {
     return nearest * ceil((float)num / nearest);
   }
   
+ 
+
+
+ void updateData(float[] newData){
+   arrayCopy(currentData, data);
+   arrayCopy(newData, targetData);
+   updateAnimation();
+ }
+ 
+ void updateAnimation(){
+  for (int i = 0; i < currentData.length; i++) {
+      currentData[i] += (targetData[i] - currentData[i]) * animationSpeed;
+    }
+ }
+      
  void displayYScale() {
     fill(255);
     textSize(15);
@@ -91,4 +117,34 @@ class BarChart extends Chart {
     displayYScale();
   }
   
+
+  void updateData(int[] newData, ArrayList<String> newLabels) 
+  {
+    data = float(newData);
+    labels = newLabels;
+    maxData = findMax(int(data));
+    minData = findMin(int(data));
+  }
+  
+}
+
+void updateBarChart(BarChart chartToUpdate) 
+{
+  Slider sliderToUpdate = (chartToUpdate == firstBarChart) ? slider1 : slider2;
+  int currentValueInt = int(sliderToUpdate.getValue());
+  float[] accumulatedData = new float[chartToUpdate.currentData.length];
+  int[][] dataToUpdate = (chartToUpdate == firstBarChart) ? numFlightsPerDate : totalDistancePerDate;
+  
+  // Accumulate data from day one to the current day
+  for (int i = 1; i <= currentValueInt; i++) 
+  {
+    int[] dataForDay = dataToUpdate[i];
+    for (int j = 0; j < dataForDay.length; j++) 
+    {
+      accumulatedData[j] += dataForDay[j];
+    }
+  }
+  
+  // Update the bar chart with accumulated data
+  chartToUpdate.updateData(accumulatedData);
 }

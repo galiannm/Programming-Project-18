@@ -30,6 +30,7 @@ class Flight {
   boolean cancelled;
   boolean diverted;
   int distance;
+  int flightDayAsInt;
   FlightStatus status;
   int timeDelayed;
   public String day;
@@ -84,6 +85,14 @@ class Flight {
     //Getting rid of 00:00 at the end of date.
     int indexOfSpace = flightDate.indexOf(" ");
     flightDate = flightDate.substring(0, indexOfSpace);
+    
+    
+    String[] flightDay = flightDate.split(" ");
+    String[] flightDatePart = flightDay[0].split("/"); // Splitting the date part
+
+    String flightDayString = flightDatePart[1];
+    flightDayAsInt = Integer.parseInt(flightDayString);
+    
   }
   // I (Maria Ceanuri) added this classes and functions to process the data for the reliability line graph
   String getDay() {
