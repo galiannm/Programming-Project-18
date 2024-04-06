@@ -348,8 +348,8 @@ void interactiveWidgetActions()
     {
 
       try {
-        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ' '))[0];
-        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ' '))[1];
+        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ','))[0];
+        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ','))[1];
         mapOfFlightPath.getCoords();
       }
       catch (Exception inputFailed) {
