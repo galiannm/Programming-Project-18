@@ -101,7 +101,7 @@ extends none
 ### Contributors :
 
 > Main : Joel Jojan    
-> Editor(s) : N/A
+> Editor(s) : Maria Ceanuri
 
 ### Brief Description :
 
