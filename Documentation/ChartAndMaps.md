@@ -132,7 +132,7 @@ extends Chart
 > Editor(s) : N/A
 
 #### Brief Description :
-
+The lineGraph class is an extension of the Chart class. It allows the user to display information that changes continuously over time (two dimentions of data). Each point is associated with a x coordinate and y coordinate. 
 ##### Class Summary :
 
 ```java
