@@ -622,7 +622,7 @@ extends Checkbox
 
 ##### Brief Description :
 
-TO DO
+The `RadioButton` class facilitates the incorporation of radio buttons, which represent a collection of choices, with only one option selectable by the user at a given moment.
 
 #### Class Summary :
 
@@ -647,7 +647,7 @@ extends InteractiveWidget
 |**label**|`String`|label of the radioButton|
 |**widgetColor**|`color`|color of the radioButton|
 |**widgetFont**|`PFont`|font of the labels of the radioButton|
-|**gap**|`int`|TO DO|
+|**gap**|`int`|gap between the radio buttons|
 |**curve**|`int`|curve of the egdes of the radioButton|
 |**draw**|`boolean`|flag that determines if the radioButton is drawn|
 
