@@ -608,6 +608,7 @@ class CheckboxExtended extends Checkbox {
   }
 }
 // Code - Maria Ceanuri, edited by Manon
+//The RadioButton class facilitates the incorporation of radio buttons, which represent a collection of choices, with only one option selectable by the user at a given moment.
 class RadioButton extends InteractiveWidget {
   boolean selected, draw;
   RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean draw) {
