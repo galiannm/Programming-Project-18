@@ -530,7 +530,7 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
-TO DO
+The `Checkbox` class is used to generate the interactable checkboxes throughout the program.
 
 #### Class Summary :
 
@@ -561,8 +561,8 @@ extends InteractiveWidget
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|TO DO|
-|**initialState**|`boolean`|flag that TO DO|
+|**gap**|`int`|Alignment Correction|
+|**initialState**|`boolean`|flag that indicates whether the box is checked/unchecked|
 
 ---
 
@@ -575,7 +575,7 @@ extends InteractiveWidget
 
 ###### Brief Description :
 
-TO DO
+`CheckboxExtended` is a custom development by **Maria Ceanuri** to integrate checkbox more fluently into the linegraph page
 
 ###### Class Summary :
 
@@ -607,9 +607,9 @@ extends Checkbox
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|TO DO|
-|**initialState**|`boolean`|flag that TO DO|
-|**provider**|`FlightProvider`|TO DO|
+|**gap**|`int`|Alignment Correction|
+|**initialState**|`boolean`|flag that indicates whether the box is checked/unchecked|
+|**provider**|`FlightProvider`|Used in the lineGraph to display the provider|
 
 ---
 
