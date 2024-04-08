@@ -94,7 +94,8 @@ class Flight {
     flightDayAsInt = Integer.parseInt(flightDayString);
     
   }
-  // I (Maria Ceanuri) added this classes and functions to process the data for the reliability line graph
+  // Code - Maria Ceanuri
+  // Added this classes and functions to process the data for the reliability line graph.
   String getDay() {
     // 01/03/2022 00:00
     // 1/3/2022 12:00:00 AM
@@ -243,7 +244,7 @@ class FlightData {
         providerList.put(flight.provider, currentProvider);
       }
       currentProvider.add(flight);
-    } // for
+    } 
   } 
-  //loadData
+ 
 }
