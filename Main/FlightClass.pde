@@ -1,10 +1,9 @@
-// This class was brought to you by Joel Jojan :D
-// Modified by Maria Ceanuri by modifying class flight by adding function get day and propteries and adding classes: groupedfligth, flightday, flightprovider and flightdata
+// Code- Joel Jojan 
+// Edited - Maria Ceanuri 
 import java.util.ArrayList;
 import java.util.regex.*;
 import java.text.*;
 import java.util.*;
-// Cambialo debajo de la definicion de Flights
 public enum FlightStatus
 {
   ONTIME, CANCELLED, DIVERTED, DELAYED
@@ -97,8 +96,6 @@ class Flight {
   // Code - Maria Ceanuri
   // Added this classes and functions to process the data for the reliability line graph.
   String getDay() {
-    // 01/03/2022 00:00
-    // 1/3/2022 12:00:00 AM
     String temp="00";
     Pattern pattern = Pattern.compile("/(\\d{1,2})/"); // American format ==> month/day/year
     Matcher matcher = pattern.matcher(flightDate);
@@ -204,7 +201,7 @@ class FlightProvider {
       break;
     case ONTIME:
       break;
-    } // switch
+    } 
   }
 }
 
