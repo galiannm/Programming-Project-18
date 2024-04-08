@@ -1,4 +1,6 @@
-// Class lineGraph was brought to you by Maria Ceanuri :)
+// Code - Maria Ceanuri
+//The lineGraph class is an extension of the Chart class. It allows the user to display information that changes continuously over time (two dimentions of data). 
+//Each point is associated with a x coordinate and y coordinate.
 class lineGraph  extends Chart {
  
   int numValues = 31; // Number of values to display on the x-axis
