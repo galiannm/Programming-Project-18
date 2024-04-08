@@ -150,4 +150,4 @@ class Flight {
 |**data**|`String[]`|An ``` ArrayList ``` of data which should be in the format above.|
 |**flightDate**|`String`| A string of the date of the flight |
 
----
+

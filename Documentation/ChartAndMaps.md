@@ -273,7 +273,8 @@ extends Widget
 > Main : Joel Jojan    
 > Editor(s) : N/A
 
-### Brief Description :
+### Brief Description :  
+`HeatmapWidget` is used to generate a heatMap of an SVG of the US. It displays each State in a color according to the number arrivals/departures of said State.
 
 ### Class Summary :
 
@@ -299,14 +300,14 @@ extends InteractiveWidget
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**x**|`int`|x coordinate of the heatMap (TO DO)|
-|**y**|`int`|y coordinate of the heatMap (TO DO)|
+|**x**|`int`|x coordinate of the heatMap |
+|**y**|`int`|y coordinate of the heatMap |
 |**widgetWidth**|`int`|width of the heatMap|
 |**widgetHeight**|`int`|height of the heatMap|
-|**mapImage**|`PShape`|TO DO|
-|**stateDeparturesArrivals**|`HashMap<String, HashMap<String, Integer>>`|TO DO|
-|**states**|`ArrayList<String>`|TO DO|
-|**showArrivals**|`boolean`|flag that TO DO|
+|**mapImage**|`PShape`|Image of Map to be used (.SVG)|
+|**stateDeparturesArrivals**|`HashMap<String, HashMap<String, Integer>>`|Hashmap which is used to correlate State: {Departures: x Arrivals: y}|
+|**states**|`ArrayList<String>`|An arraylist of the US states|
+|**showArrivals**|`boolean`|flag that is toggled to change whether we show arrivals or departures|
 
 ---
 
