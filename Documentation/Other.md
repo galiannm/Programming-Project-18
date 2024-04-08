@@ -101,29 +101,53 @@ extends none
 ### Contributors :
 
 > Main : Joel Jojan    
-> Editor(s) : N/A
+> Editor(s) : Maria Ceanuri
 
 ### Brief Description :
 
-...
+`Flight Class` is how we store and access our data throughout our program. It works by turning the rows in the _flights_full.csv_ and turning them into `flight objects`.
 
 ### Class Summary :
 
 ```java
-class Gradient
-extends none
+class Flight{
+String flightDate; 
 ```
 
-#### Constructor Parameters :
+#### Class Attributes :
 
 ```java
- Flight(String[] data)
+class Flight {
+  String flightDate;            // flightDate = "01/21/20 00:00" of "1/4/2022 12:00:00 AM"
+  String provider;              // provider = "AA"
+  int flightNumber;             // flightNumber = int("1")
+  String originAirport;         // originAirport = "JFK"
+  String originCity;            // originCity = "Dallas"
+  String originState;           // originState = "TX"
+  String originWAC;             // OriginWAC = "2"
+  String destAirport;           // destAirport = "jFk"
+  String destCity;              // destCity = "New York"
+  String destState;             // destState = "NY"
+  String destWAC;               // destWAC = "2"
+  int expectedDepTime;          // expectedDepTime = 545  
+  String depTime;               // depTime = "545";
+  int expectedArrTime;          // expectedArrTime = 645
+  String arrTime;               // arrTime = "700"
+  boolean cancelled;            // cancelled == 1 = true; cancelled == 0 = false;
+  boolean diverted;             // diverted == 1 = true; diverted == 0 = false;
+  int distance;                 // distance = int("123")         
+}
+
+ Flight(String[] data) {
+   //Code
+ }
 ```
 
-#### Constructor Parameters Explanation:
+#### Class Variables Explanation:
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**data**|`String[]`|A list of all the rows in the CSV file|
+|**data**|`String[]`|An ``` ArrayList ``` of data which should be in the format above.|
+|**flightDate**|`String`| A string of the date of the flight |
 
----
+
