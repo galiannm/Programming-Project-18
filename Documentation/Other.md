@@ -124,6 +124,6 @@ extends none
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**data**|`String[]`|...|
+|**data**|`String[]`|A list of all the rows in the CSV file|
 
 ---
