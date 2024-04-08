@@ -273,7 +273,8 @@ extends Widget
 > Main : Joel Jojan    
 > Editor(s) : N/A
 
-### Brief Description :
+### Brief Description :  
+`HeatmapWidget` is used to generate a heatMap of an SVG of the US. It displays each State in a color according to the number arrivals/departures of said State.
 
 ### Class Summary :
 
