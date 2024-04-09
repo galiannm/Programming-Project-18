@@ -1,4 +1,5 @@
-//HEATMAP - brought to you by Joel //<>// //<>//
+// HeatMap Code - Joel //<>//
+//The heatmap class is used to generate an interactive heatmap to display arrivals and departures per state.
 class HeatMapWidget extends InteractiveWidget {
   PShape mapImage;
   HashMap<String, HashMap<String, Integer>> stateDeparturesArrivals;
