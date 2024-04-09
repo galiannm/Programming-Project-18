@@ -1,4 +1,4 @@
-//This class was written by Theresa James.  //<>//
+//This class was written by Theresa James. //<>//
 //pieChart class is an extension of Widget class. It displays information like flights on time, delayed flights, diverted and cancelled flights in pieChart for each airline.
 class pieChartWidget extends Widget
 {
@@ -60,23 +60,23 @@ class pieChartWidget extends Widget
         println("Value of legendY: " + legendY);
       }
     }
-    fill(255); 
-    textAlign(CENTER, TOP); 
-    textSize(24); 
-    text("Reliability of " + airline, width / 2, 20); 
+    fill(255);
+    textAlign(CENTER, TOP);
+    textSize(24);
+    text("Reliability of " + airline, width / 2, 20);
   }
-  
+
   void drawtext()
   {
     textFont(widgetFont);
     textSize(30);
     text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
   }
-  
+
   void collectDataForPieChart(String airline)
   {
     specificAirline.clear();
-    
+
     for (int i = 0; i < flights.size(); i++) {
       Flight flight = flights.get(i);
       if (flight.provider.contains(airline)) {
@@ -89,7 +89,7 @@ class pieChartWidget extends Widget
   void mousePressed() {
     for (RadioButton radioButton : airlineRadioButtons) {
       if (radioButton.mouseIntercept(mouseX, mouseY)) {
-        radioButton.handleClick(airlineRadioButtons);        
+        radioButton.handleClick(airlineRadioButtons);
       }
     }
   }
