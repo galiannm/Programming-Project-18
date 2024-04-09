@@ -662,7 +662,7 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
-TO DO
+The InputBox class allows the user to type into the input field, and when the enter key is pressed, their input is stored and displayed in the console along with all the previous inputs.
 
 #### Class Summary :
 
