@@ -243,7 +243,7 @@ extends Chart
 > Editor(s) : N/A
 
 ### Brief Description :
-
+'pieChart' class is an extension of 'Widget' class. It displays information like flights on time, delayed flights, diverted and cancelled flights in pieChart for each airline. 
 ### Class Summary :
 
 ```java
