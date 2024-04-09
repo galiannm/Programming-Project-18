@@ -527,9 +527,9 @@ class Slider extends InteractiveWidget
     textAlign(LEFT, CENTER);
     fill(labelColor);
     textSize(16);
-    text(minValue, barX, barY + barHeight + gap*3);  // Displays the minimum value below the left most point in the slider bar
+    text(minValue, barX, barY + barHeight + gap*3);  
     textAlign(RIGHT, CENTER);
-    text(maxValue, barX + barWidth, barY + barHeight + gap*3);  // Displays the maximum value below the right most point in the slider bar
+    text(maxValue, barX + barWidth, barY + barHeight + gap*3);  
   }
 
   void update()
