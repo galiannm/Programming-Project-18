@@ -8,6 +8,7 @@ Editors :
 * Maria Faro
 * Maria Ceanuri
 * Nandana Arun
+* Theresa James
 ---
 
 ## Table of Contents:
