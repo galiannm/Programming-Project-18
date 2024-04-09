@@ -1,3 +1,6 @@
+
+import gifAnimation.*;
+
 import ddf.minim.*;
 //Music
 
@@ -52,12 +55,8 @@ String [] airlineNames = {"AA", "AS", "B6", "DL", "F9", "G4", "HA", "NK", "UA", 
 //ArrayList<RadioButton> airlineRadioButtons;
 
 boolean isLoading = true;
-PImage[] frames;
+Gif loadingGif;
 PImage mapOfUSA, infoSheet;
-int frameIndex = 0;
-int frameChangeInterval = 70; // Time between frame changes in milliseconds
-long lastFrameChangeTime = 0;
-int NUMBER_OF_FRAMES = 21;
 PImage arrivalsLegend, departuresLegend;
 
 Slider slider1; // slider corresponding to the first bar chart
@@ -70,7 +69,8 @@ void settings()
 
 void setup()
 {
-  gifSetup();
+  loadingGif = new Gif(this, "loading.gif");
+  loadingGif.play();
   //Threads to load data while displaying a gif - Joel
   Thread dataLoadingThread = new Thread(new Runnable() {
     public void run() {
@@ -130,7 +130,8 @@ void draw()
   imageMode(CORNER);
   synchronized(this) {
     if (isLoading) {
-      gifAnim();
+      image(loadingGif, 0, 0);
+      
     } else
     {
       screens.get(currentScreenNumber).draw();
@@ -203,28 +204,8 @@ void mouseWheel(MouseEvent event) {
   }
 }
 
-//Loading Screen Code - Joel
-void gifSetup() {
-  frames = new PImage[NUMBER_OF_FRAMES+1];
-  for (int i = 1; i <= NUMBER_OF_FRAMES; i++) {
-    frames[i-1] = loadImage("frame_" + i + ".gif");
-  }
-  frames[NUMBER_OF_FRAMES] = frames[0];
-}
 
-void gifAnim() {
-  image(frames[frameIndex], 0, 0, width, height);
-  if (millis() - lastFrameChangeTime > frameChangeInterval) {
-    frameIndex = (frameIndex + 1) % frames.length;
-    if (frameIndex == frames.length - 1) {
-      // If it's the last frame, reset frameIndex to 0
-      frameIndex = 2;
-    }
-    lastFrameChangeTime = millis();
-  }
-}
-
-//More music stuff
+//More music stuff - Joel
 //Terminates music when screen closed
 void stop() {
   backgroundMusic.close();
