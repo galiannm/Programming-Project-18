@@ -266,7 +266,7 @@ extends Widget
 
 ---
 
-## 2. `HeatMapWidget` Class
+## 3. `HeatMapWidget` Class
 
 
 ### Contributors :
