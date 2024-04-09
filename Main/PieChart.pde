@@ -1,4 +1,5 @@
-//This class is brought to you by Theresa James :)) //<>//
+//This class was written by Theresa James.  //<>//
+//pieChart class is an extension of Widget class. It displays information like flights on time, delayed flights, diverted and cancelled flights in pieChart for each airline.
 class pieChartWidget extends Widget
 {
   ArrayList <Integer> data;

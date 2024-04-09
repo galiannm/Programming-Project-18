@@ -1,6 +1,5 @@
-
+//For more information on each class, please refer to the documentation on our github. 
 import gifAnimation.*;
-
 import ddf.minim.*;
 //Music
 
