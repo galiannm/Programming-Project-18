@@ -576,7 +576,7 @@ extends InteractiveWidget
 
 ###### Brief Description :
 
-The `CheckboxExtended` TO DO...
+The `CheckboxExtended` creates 10 checkboxes for the lineGraph with the names of the carriers.
 
 ###### Class Summary :
 
@@ -608,9 +608,9 @@ extends Checkbox
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|TO DO|
-|**initialState**|`boolean`|flag that TO DO|
-|**provider**|`FlightProvider`|TO DO|
+|**gap**|`int`|gap between check boxes|
+|**initialState**|`boolean`|flag that tells us the if the button is pressed at the beginning |
+|**provider**|`FlightProvider`|it's the airline|
 
 ---
 
