@@ -1,6 +1,7 @@
 // code - Manon
 // The `Chart` class is the parent class of all charts. It has minimal functionality, 
 // it displays a frame, title, axis and labels of the chart.
+
 class Chart extends Widget
 {
   int x, y, widgetWidth, widgetHeight;
@@ -29,8 +30,8 @@ class Chart extends Widget
   void drawFrame()
   {
     noStroke();
-    strokeWeight(2);
-    fill(widgetColor); //<>// //<>//
+    strokeWeight(2); //<>//
+    fill(widgetColor); //<>// //<>// //<>//
     rect(x, y, widgetWidth, widgetHeight); //<>// //<>//
   }
 

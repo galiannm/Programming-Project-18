@@ -571,12 +571,12 @@ extends InteractiveWidget
 
 ###### Contributors :
 
-> Main : Joel Jojan   
+> Main : Maria Ceanuri
 > Editor(s) : N/A
 
 ###### Brief Description :
 
-TO DO
+The `CheckboxExtended` TO DO...
 
 ###### Class Summary :
 
@@ -663,7 +663,7 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
-The InputBox class allows the user to type into the input field, and when the enter key is pressed, their input is stored and displayed in the console along with all the previous inputs.
+The `InputBox` class allows the user to type into the input field, and when the enter key is pressed, their input is stored and displayed in the console along with all the previous inputs.
 
 #### Class Summary :
 

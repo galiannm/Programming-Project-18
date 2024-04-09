@@ -1,4 +1,4 @@
-// For organizational purposes I (manon) made a new tab where we will declare all the screens and widgets
+//Decalaring widgets and screens in a separate tab for organizational purposes
 void addWidgetsToSetup()
 {
   mainScreen = new Screen(backgroundColors);

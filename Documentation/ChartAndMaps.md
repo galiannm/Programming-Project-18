@@ -16,13 +16,12 @@ Editors :
     2. [`lineGraph` Class](#1b-linegraph-class)
     3. [`BubbleChart` Class](#1c-bubblechart-class)
 2. [`pieChart` Class](#2-piechart-class)
-3. [`HeatMapWidget` Class]()#3-heatmapwidget-class
+3. [`HeatMapWidget` Class](#3-heatmapwidget-class)
 4. [`MapOfFlightPath` Class](#4-mapofflightpath-class)
 
 ---
 
 ## 1. `Chart` Class
-
 
 ### Contributors :
 
@@ -62,8 +61,8 @@ extends Widget
 |**y**|`int`|y coordinate of the chart (center)|
 |**widgetWidth**|`int`|width of the chart|
 |**widgetHeight**|`int`|height of the chart|
-|**widgetColor**|`color`|height of the chart|
-|**widgetFont**|`PFont`|height of the chart|
+|**widgetColor**|`color`|color of the chart|
+|**widgetFont**|`PFont`|font of the chart|
 |**title**|`String`|title of the chart|
 |**xLabel**|`String`|label for the x-axis of the chart|
 |**yLabel**|`String`|label for the y-axis of the chart|
@@ -71,7 +70,6 @@ extends Widget
 ---
 
 ### 1.a. `BarChart` Class
-
 
 #### Contributors :
 
@@ -115,7 +113,7 @@ extends Chart
 |**widgetHeight**|`int`|height of the barChart|
 |**widgetColor**|`color`|color of the barChart|
 |**widgetFont**|`PFont`|font text for the barChart|
-|**gap**|`int`|TO DO|
+|**gap**|`int`|alignment correction|
 |**title**|`String`|title of the barChart|
 |**xLabel**|`String`|x-axis label for the barChart|
 |**yLabel**|`String`|y-axis label for the barChart|
@@ -126,7 +124,6 @@ extends Chart
 
 ### 1.b. `lineGraph` Class
 
-
 #### Contributors :
 
 > Main : Maria Ceanuri  
@@ -134,7 +131,7 @@ extends Chart
 
 #### Brief Description :
 
-The lineGraph class is an extension of the Chart class. It allows the user to display information that changes continuously over time (two dimentions of data). Each point is associated with a x coordinate and y coordinate.
+The `lineGraph` class is an extension of the `Chart` class. It allows the user to display information that changes continuously over time (two dimentions of data). Each point is associated with a x coordinate and y coordinate.
 
 ##### Class Summary :
 
@@ -222,8 +219,8 @@ extends Chart
 |**y**|`int`|y coordinate of the bubbleChart (center)|
 |**widgetWidth**|`int`|width of the bubbleChart|
 |**widgetHeight**|`int`|height of the bubbleChart|
-|**widgetColor**|`color`|height of the bubbleChart|
-|**widgetFont**|`PFont`|height of the bubbleChart|
+|**widgetColor**|`color`|color of the bubbleChart|
+|**widgetFont**|`PFont`|font of the bubbleChart|
 |**title**|`String`|title of the bubbleChart|
 |**dataX**|`int[]`|x-axis values for the bubbleChart|
 |**dataY**|`int[]`|y-axis values for the bubbleChart|
@@ -231,14 +228,13 @@ extends Chart
 |**dataLabel**|`ArrayList<String>`|label of each point in the bubbleChart|
 |**dataColor**|`color[]`|color of each point in the bubbleChart|
 |**scale**|`float`|scale adjustment value|
-|**xLabel**|`String`|label for the x-axis of the chart|
-|**yLabel**|`String`|label for the y-axis of the chart|
-|**legendLabel**|`String`|label for the y-axis of the chart|
+|**xLabel**|`String`|label for the x-axis of the bubbleChart|
+|**yLabel**|`String`|label for the y-axis of the bubbleChart|
+|**legendLabel**|`String`|label for the y-axis of the bubbleChart|
 
 ---
 
 ## 2. `pieChart` Class
-
 
 ### Contributors :
 
@@ -246,7 +242,9 @@ extends Chart
 > Editor(s) : N/A
 
 ### Brief Description :
+
 `pieChart` class is an extension of `Widget` class. It displays information like flights on time, delayed flights, diverted and cancelled flights in pieChart for each airline.
+
 ### Class Summary :
 
 ```java
@@ -264,11 +262,18 @@ extends Widget
 
 |Name|Type|Quick Description|
 |----|----|-----------|
-|**data**|`ArrayList<Integer>`|the vales of the data|
-
+|**x**|`int`|x coordinate of the pieChart (center)|
+|**y**|`int`|y coordinate of the pieChart (center)|
+|**widgetWidth**|`int`|width of the pieChart|
+|**widgetHeight**|`int`|height of the pieChart|
+|**label**|`String`|label of the pieChart|
+|**widgetColor**|`color`|color of the pieChart|
+|**widgetFont**|`PFont`|font of the pieChart|
+|**gap**|`int`|alignment correction|
+|**data**|`ArrayList<Integer>`|data used in the pieChart|
 ---
 
-## 2. `HeatMapWidget` Class
+## 3. `HeatMapWidget` Class
 
 
 ### Contributors :
@@ -313,7 +318,7 @@ extends InteractiveWidget
 
 ---
 
-## 2. `MapOfFlightPath` Class
+## 4. `MapOfFlightPath` Class
 
 
 ### Contributors :

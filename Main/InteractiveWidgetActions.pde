@@ -1,4 +1,4 @@
-// Fcode done by Manon //modified by Joel (added in toggleHeatMap actions - 04/04/24 00:30)
+// Code done by Manon //modified by Joel (added in toggleHeatMap actions - 04/04/24 00:30)
 // create a separate tab for organizational purposes
 void interactiveWidgetActions()
 {
