@@ -79,6 +79,7 @@ extends Widget
 > Editor(s) : N/A
 
 #### Brief Description :
+The `BarChart` class is an extension of the `Chart` class. It allows the user to display the relationship of a categorical data and a numerical data with different colour bars representing each category. 
 
 ##### Class Summary :
 
