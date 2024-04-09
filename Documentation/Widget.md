@@ -472,7 +472,7 @@ extends InteractiveWidget
 ##### Contributors :
 
 > Main : Manon Galian  
-> Editor(s) : Nadana Arun
+> Editor(s) : Nandana Arun
 
 ##### Brief Description :
 
