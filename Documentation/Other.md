@@ -145,9 +145,26 @@ class Flight {
 
 #### Class Variables Explanation:
 
-|Name|Type|Quick Description|
-|----|----|-----------|
-|**data**|`String[]`|An ``` ArrayList ``` of data which should be in the format above.|
+|Name|Type|Quick Description|Format|
+|----|----|-----------|-----|
+|**data**|`String[]`|A ``` List ``` of data which should be in the format above.|
 |**flightDate**|`String`| A string of the date of the flight |
+|**provider**|`String`| A string of the provider of the flight |
+|**flightNumber**|`int`| A int of the flight number of the flight |
+|**originAirport**|`String`| A string of the origin airport of the flight |
+|**originCity**|`String`| A string of the origin city of the flight |
+|**originWAC**|`String`| A string of the origin WAC of the flight |
+|**destAirport**|`String`| A string of the destination airport of the flight |
+|**destCity**|`String`| A string of the destination city of the flight |
+|**destState**|`String`| A string of the destination state of the flight |
+|**destWAC**|`String`| A string of the destiniation WAC of the flight |
+|**expectedDepTime**|`int`| An int of the expected departure time of the flight |
+|**depTime**|`String`| A string of the actual departure time of the flight |
+|**expectedArrTime**|`int`| An int of the expected arrival time of the flight |
+|**arrTime**|`String`| A string of the actual arrival time of the flight |
+|**cancelled**|`boolean`| A booelean value indicating if the flight is cancelled |
+|**diverted**|`boolean`| A booelean value indicating if the flight is diverted |
+|**distance**|`int`| An int of the distance travelled by the flight |
+
 
 
