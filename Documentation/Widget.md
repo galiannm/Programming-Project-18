@@ -618,7 +618,7 @@ extends Checkbox
 ##### Contributors :
 
 > Main : Maria Ceanuri     
-> Editor(s) : Manon Galian
+> Editor(s) : Manon Galian, Theresa James
 
 ##### Brief Description :
 
