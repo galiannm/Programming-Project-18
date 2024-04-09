@@ -8,6 +8,7 @@ Editors :
 * Maria Faro
 * Maria Ceanuri
 * Nandana Arun
+* Theresa James
 ---
 
 ## Table of Contents:
@@ -618,7 +619,7 @@ extends Checkbox
 ##### Contributors :
 
 > Main : Maria Ceanuri     
-> Editor(s) : Manon Galian
+> Editor(s) : Manon Galian, Theresa James
 
 ##### Brief Description :
 
