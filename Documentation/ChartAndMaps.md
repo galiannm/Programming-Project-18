@@ -16,7 +16,7 @@ Editors :
     2. [`lineGraph` Class](#1b-linegraph-class)
     3. [`BubbleChart` Class](#1c-bubblechart-class)
 2. [`pieChart` Class](#2-piechart-class)
-3. [`HeatMapWidget` Class]()#3-heatmapwidget-class
+3. [`HeatMapWidget` Class](#3-heatmapwidget-class)
 4. [`MapOfFlightPath` Class](#4-mapofflightpath-class)
 
 ---
