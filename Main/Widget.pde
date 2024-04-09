@@ -1,6 +1,3 @@
-// widget, interactive widget, slider, Mini screen, image widget, infoSheetInformation and AnimatedWidget brought to you by Manon
-// the slider was then later edited by Nandana
-
 // Code - Manon
 // The `Widget` class is the base class for all user interface classes. 
 class Widget {

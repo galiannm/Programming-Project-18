@@ -1,4 +1,5 @@
 //For more information on each class, please refer to the documentation on our github. 
+
 import gifAnimation.*;
 import ddf.minim.*;
 //Music
@@ -17,6 +18,7 @@ ArrayList<RadioButton> airlineRadioButtons = new ArrayList<>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
 String selectedLabel;
+
 //List of the US states: Filled in process data. - Joel
 ArrayList<String> states = new ArrayList<String>();
 PShape USA;

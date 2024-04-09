@@ -1,6 +1,6 @@
 // This file was originally brought to you by Manon, but later edited by Joel :D
-
 // Below are the variable for which data will be collected
+
 int numberDelayed = 0;
 int numberDiverted = 0;
 int numberCancelled = 0;
