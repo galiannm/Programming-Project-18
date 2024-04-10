@@ -1,4 +1,6 @@
-// chyron brought to you by Manon :)
+// code - Manon edited by Joel
+// The `Chyron` class allows the user to automatically have information scroll up the screen.
+
 class Chyron extends Widget
 {
   int chyronWidth, chyronHeight;

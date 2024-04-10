@@ -1,4 +1,8 @@
-// MapOfFlightPath code - Manon
+// code - Manon
+// The `MapOfFlightPath` class allows the user to display the path of their flight by 
+// entering their origin state and arrival state. This shown by an airplane animation 
+// connectiong the two states.
+
 class MapOfFlightPath extends ImageWidget
 {
   int x, y, mapWidth, mapHeight;
@@ -88,14 +92,10 @@ class MapOfFlightPath extends ImageWidget
     {
       speed = -speed;
     }
-    println(x2Coord + " " + y2Coord + " " + xAnim + " " + yAnim);
     if (xAnim != x2Coord && yAnim != y2Coord)
     {
-      println("SPEED", speed, xAnim);
       xAnim += speed;
-      println("AFTER", xAnim);
       yAnim = (int)((m * xAnim + c));
-      println(xAnim, " " , yAnim);
     } else
     {
       printDistance = true;

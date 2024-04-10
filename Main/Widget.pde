@@ -1,6 +1,5 @@
-// widget, interactive widget, slider, Mini screen, image widget, infoSheetInformation and AnimatedWidget brought to you by Manon 
-// the slider was then later edited by Nandana 
-
+// Code - Manon
+// The `Widget` class is the base class for all user interface classes. 
 class Widget {
   int x, y, widgetWidth, widgetHeight, gap;
   String label;
@@ -45,6 +44,12 @@ class Widget {
     text(label, x+widgetWidth/4 - gap, y + widgetHeight/2 + 6);
   }
 }
+
+// code - Manon
+// The `infoSheetInformation` class allows the user to display the information of a 
+// certain flight. If the flight exists in the database, the departure/arrival location 
+// (state and airport), flight number, departure/arrival time, date and distance will be 
+// printed. The user is also notified in the case that the flight does not exist or is cancelled.
 
 class infoSheetInformation extends Widget
 {
@@ -104,23 +109,30 @@ class infoSheetInformation extends Widget
       text(distance, xImg + 688, yImg + 180);
       text(flightNo, xImg + 130, yImg + 230);
 
+      int crsDepHour = departureTime/100;
+      int crsDepMin = departureTime%100;
+      int crsArrHour = arrivalTime/100;
+      int crsArrMin = arrivalTime%100;
+      String standardDepTime =  String.format("%d:%02d", crsDepHour, crsDepMin);
+      String standardArrTime =  String.format("%d:%02d", crsArrHour, crsArrMin);
+
       if (delayedDep)
       {
         fill(orange);
-        text(departureTime, xImg + 450, yImg + 230);
+        text(standardDepTime, xImg + 450, yImg + 230);
       } else
       {
         fill(textColor);
-        text(departureTime, xImg + 450, yImg + 230);
+        text(standardDepTime, xImg + 450, yImg + 230);
       }
       if (delayedArr)
       {
         fill(orange);
-        text(arrivalTime, xImg + 725, yImg + 230);
+        text(standardArrTime, xImg + 725, yImg + 230);
       } else
       {
         fill(textColor);
-        text(arrivalTime, xImg + 725, yImg + 230);
+        text(standardArrTime, xImg + 725, yImg + 230);
       }
     } else if (flightExists && userFligthInfo.cancelled)
     {
@@ -200,6 +212,10 @@ class infoSheetInformation extends Widget
   }
 }
 
+// code - Manon
+// The `MiniScreen` class provides similar functionality to that of its parent, 
+// `Widget` but also provide the possibility of a hanging title at the top.
+
 class MiniScreen extends Widget
 {
   int textSize;
@@ -231,13 +247,18 @@ class MiniScreen extends Widget
   }
 }
 
+// code - Manon
+// The `InteractiveWidget` class allows the user to interact with the widget by providing 
+// hooks for listeners of mouse and keyboard events.
 class InteractiveWidget extends Widget
 {
   ArrayList<MouseActionListener> eventListn;
+  ArrayList<KeyActionListener> keyEventListn;
   InteractiveWidget(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean drawStroke)
   {
     super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, curve, drawStroke);
     eventListn = new ArrayList<>();
+    keyEventListn = new ArrayList<KeyActionListener>();
   }
 
   boolean mouseIntercept(int mX, int mY)
@@ -267,8 +288,23 @@ class InteractiveWidget extends Widget
       listn.performAction(e, this);
     }
   }
+
+  public void addKeyListn(KeyActionListener listn)
+  {
+    keyEventListn.add(listn);
+  }
+
+  public void keyActions(KeyEvent e)
+  {
+    for (KeyActionListener listn : keyEventListn)
+    {
+      listn.performKeyAction(e, this);
+    }
+  }
 }
 
+// code - Manon
+// The `AnimatedWidget` Class allows the user to perform an animation on a widget.
 class AnimatedWidget extends InteractiveWidget
 {
   int x, startx, y, amountOfPxToTravel, widgetWidth, widgetHeight, curve, pxTraveled, countMouseClick;
@@ -319,7 +355,7 @@ class AnimatedWidget extends InteractiveWidget
       if (mouseIntercept(mouseX, mouseY)) {
         stroke(44); // White border if the mouse is over
       } else {
-        stroke(widgetColor); 
+        stroke(widgetColor);
       }
     } else if (!drawStroke)
     {
@@ -379,6 +415,10 @@ class AnimatedWidget extends InteractiveWidget
   }
 }
 
+// code - Manon
+// The `ImageWidget` class provides the same functionality to that of its parent 
+// `InteractiveWidget`, but allows the user to use an image (instead of the default 
+// rectangle shape).
 class ImageWidget extends InteractiveWidget
 {
   int x, y, widgetWidth, widgetHeight;
@@ -405,16 +445,21 @@ class ImageWidget extends InteractiveWidget
   }
 }
 
-
+// code - Manon edited by Nadana
+// The `Slider` class enables the addition of a slider control, allowing users to select 
+// a value within the specified range (defined by `minValue` and `maxValue`) by sliding 
+// an thumb.
 class Slider extends InteractiveWidget
 {
   int lowerInterval, upperInterval;
   int barWidth, barHeight, thumbWidth, thumbHeight;
   int barX, barY;
   int currentValue;
+  float currentValueFloat;
   boolean isDragging;
   int minValue, maxValue; //Store minimum and maximum values
-  int sliderColor;        
+  int sliderColor;
+
 
   MouseActionListener onDrag = (e, s) ->
   {
@@ -446,6 +491,7 @@ class Slider extends InteractiveWidget
     this.barWidth = barWidth;
     this.barHeight = barHeight;
     currentValue = 0;
+    currentValueFloat = 0.0;
     isDragging = false;
     this.addListn(onDrag);
     this.minValue = minValue;
@@ -462,7 +508,7 @@ class Slider extends InteractiveWidget
     fill(sliderColor);
     rect(x, y+thumbHeight/4, thumbWidth, thumbHeight, thumbHeight*0.5);
     drawText();
-    drawMinMaxValues(); //Displays the minimum and maximum values of the slider 
+    drawMinMaxValues(); //Displays the minimum and maximum values of the slider
   }
 
   void drawText()
@@ -472,15 +518,35 @@ class Slider extends InteractiveWidget
     text(label, barX +barWidth/2, barY - 20);
     text(currentValue, barX + 80, barY - 20);
   }
-  
+
   void drawMinMaxValues()
   {
     textAlign(LEFT, CENTER);
     fill(labelColor);
     textSize(16);
-    text(minValue, barX, barY + barHeight + gap*3);  // Displays the minimum value below the left most point in the slider bar
+    text(minValue, barX, barY + barHeight + gap*3);  
     textAlign(RIGHT, CENTER);
-    text(maxValue, barX + barWidth, barY + barHeight + gap*3);  // Displays the maximum value below the right most point in the slider bar
+    text(maxValue, barX + barWidth, barY + barHeight + gap*3);  
+  }
+
+  void update()
+  {
+    if (mousePressed && mouseX >= x && mouseX <= x + barWidth && mouseY >= y && mouseY <= y + barHeight) {
+      currentValueFloat = constrain((mouseX - x) / barWidth, 0, 1);
+      isDragging = true;
+    } else {
+      isDragging = false;
+    }
+  }
+
+  float getValue()
+  {
+    return currentValue;
+  }
+
+  boolean isDragging()
+  {
+    return isDragging;
   }
 }
 
@@ -499,10 +565,12 @@ class Checkbox extends InteractiveWidget {
     super.draw();
     if (isChecked) {
       fill(0); // Fill with black if checked
-      rect(x , y , widgetWidth - 10, widgetHeight - 10);
+      rect(x, y, widgetWidth - 10, widgetHeight - 10);
     }
     if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !clickHandled) {
       isChecked = !isChecked;
+      clickSound.rewind();
+      clickSound.play();
       clickHandled = true; // Set the flag to indicate the click has been handled
     }
     if (!mousePressed) {
@@ -523,20 +591,21 @@ class Checkbox extends InteractiveWidget {
   }
 }
 // Added by Maria Ceanuri to control chekcboxes in reliability line graph
-class CheckboxExtended extends Checkbox{
+class CheckboxExtended extends Checkbox {
   FlightProvider provider;
   CheckboxExtended(int x, int y, int checkboxSize, String label, color widgetColor, PFont widgetFont, int gap, boolean initialState, FlightProvider provider)
-{super ( x,  y,  checkboxSize, label,  widgetColor,  widgetFont,  gap, initialState);
-this.provider = provider;
+  {
+    super ( x, y, checkboxSize, label, widgetColor, widgetFont, gap, initialState);
+    this.provider = provider;
+  }
+  void draw ()
+  {
+    super.draw();
+    provider.visible = isChecked;
+  }
 }
-void draw ()
-{
-  super.draw();
-  provider.visible = isChecked;
-
-}
-}
-// Class RadioButton added by Maria Ceanuri then modified my manon 
+// Code - Maria Ceanuri, edited by Manon
+//The RadioButton class facilitates the incorporation of radio buttons, which represent a collection of choices, with only one option selectable by the user at a given moment.
 class RadioButton extends InteractiveWidget {
   boolean selected, draw;
   RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean draw) {
@@ -544,12 +613,19 @@ class RadioButton extends InteractiveWidget {
     selected = false;
     this.draw = draw;
   }
-
+  String getLabel()
+  {
+    return label;
+  }
   void draw() {
     // Draw the radio button
     if (draw)
     {
-      super.draw();
+      textAlign(LEFT);
+      rectMode(CORNER);
+      imageMode(CORNER);
+      textFont(widgetFont);
+      textSize(16);
       noStroke();
       fill(255);
       rect(x, y, widgetWidth, widgetWidth, curve);
@@ -564,19 +640,6 @@ class RadioButton extends InteractiveWidget {
       fill(widgetColor);
       textAlign(LEFT, CENTER);
       text(label, x + gap, y + gap/2);
-    }
-  }
-
-  public void addListn(MouseActionListener listn)
-  {
-    eventListn.add(listn);
-  }
-
-  public void actions(MouseEvent e)
-  {
-    for (MouseActionListener listn : eventListn)
-    {
-      listn.performAction(e, this);
     }
   }
 
@@ -596,6 +659,8 @@ class RadioButton extends InteractiveWidget {
 
   void handleClick(ArrayList<RadioButton> radioButtons) {
     mouseIntercept();
+    clickSound.rewind();
+    clickSound.play();
     for (RadioButton radioButton : radioButtons) {
       if (radioButton != this) {
         radioButton.selected = false;

@@ -1,18 +1,19 @@
-// charts and bubble chart brought to you by Manon 
+// code - Manon
+// The `Chart` class is the parent class of all charts. It has minimal functionality, 
+// it displays a frame, title, axis and labels of the chart.
+
 class Chart extends Widget
 {
-  int x, y, widgetWidth, widgetHeight, gap;
-  String label, title, xLabel, yLabel;
+  int x, y, widgetWidth, widgetHeight;
+  String title, xLabel, yLabel;
   color widgetColor;
-  Chart(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, String title, String xLabel, String yLabel)
+  Chart(int x, int y, int widgetWidth, int widgetHeight, color widgetColor, PFont widgetFont, String title, String xLabel, String yLabel)
   {
-    super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, 0, true);
+    super(x, y, widgetWidth, widgetHeight, "", widgetColor, widgetFont, 0, 0, true);
     this.x = x;
     this.y = y;
     this.widgetWidth = widgetWidth;
     this.widgetHeight = widgetHeight;
-    this.gap = gap;
-    this.label = label;
     this.title = title;
     this.xLabel = xLabel;
     this.yLabel = yLabel;
@@ -29,9 +30,9 @@ class Chart extends Widget
   void drawFrame()
   {
     noStroke();
-    strokeWeight(2);
-    fill(widgetColor); //<>//
-    rect(x, y, widgetWidth, widgetHeight); //<>//
+    strokeWeight(2); //<>//
+    fill(widgetColor); //<>// //<>// //<>//
+    rect(x, y, widgetWidth, widgetHeight); //<>// //<>//
   }
 
   void drawTitle()
@@ -74,7 +75,10 @@ class Chart extends Widget
   }
 }
 
-
+// code - Manon
+// The `BubbleChart` class is an extension of the `Chart` class. It allows the user to 
+// display three dimentions of data. Each point is associated with a x coordinate, 
+// y coordinate and a size.
 class BubbleChart extends Chart
 {
   int[] dataX, dataY, dataSize;
@@ -84,11 +88,11 @@ class BubbleChart extends Chart
   int minX, maxX, minY, maxY, intervalX, intervalY;
   float scale;
   String xLabel, yLabel, legendLabel;
-  BubbleChart(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor,
-    PFont widgetFont, int gap, String title, int[] dataX, int[] dataY, int[] dataSize, ArrayList<String> dataLabel,
+  BubbleChart(int x, int y, int widgetWidth, int widgetHeight, color widgetColor,
+    PFont widgetFont, String title, int[] dataX, int[] dataY, int[] dataSize, ArrayList<String> dataLabel,
     color[] dataColor, float scale, String xLabel, String yLabel, String legendLabel)
   {
-    super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, title, xLabel, yLabel);
+    super(x, y, widgetWidth, widgetHeight, widgetColor, widgetFont, title, xLabel, yLabel);
     this.dataX = dataX;
     this.dataY = dataY;
     this.dataSize = dataSize;

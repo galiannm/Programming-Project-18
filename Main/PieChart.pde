@@ -1,21 +1,26 @@
-//This class is brought to you by Theresa James :))
-class pieChart
+//This class was written by Theresa James. //<>// //<>//
+//pieChart class is an extension of Widget class. It displays information like flights on time, delayed flights, diverted and cancelled flights in pieChart for each airline.
+
+class pieChartWidget extends Widget
 {
-  String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
   ArrayList <Integer> data;
-  pieChart(ArrayList<Integer> data)
+  pieChartWidget(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, ArrayList<Integer> data)
   {
+    super(x, y, 0, 0, label, 0, titleFont, 0, 0, false);
+    this.x = x;
+    this.y = y;
+    this.widgetWidth = widgetWidth;
+    this.widgetHeight = widgetHeight;
+    this.label = label;
+    this.widgetColor  = widgetColor;
+    this.widgetFont = widgetFont;
+    this.gap = gap;
     this.data = data;
   }
-  void setup()
-  {
-    noStroke();
-    noLoop();
-  }
+  String [] labels = {"Flights On Time", "Delayed Flights", " Diverted", " Cancelled"};
 
   void pie_chart()
   {
-
     float total = 0;
     float startAngle = 0;
     for (int i =0; i < data.size(); i++)
@@ -25,8 +30,6 @@ class pieChart
     color [] sectorColors = {#CBB9FE, #F8DECB, #FDC2EB, #B0E3EA, #FDC2EB, #F8DECB };
     for (int i = 0; i < data.size(); i++)
     {
-      //float purple = map(i, 0, data.size(), 50, 255);
-      //fill (purple * 0.8, 0, purple);
       fill(sectorColors [i % sectorColors.length]);
       float angle = map(data.get(i), 0, total, 0, TWO_PI);
       arc (width/2, height/2, PIECHART_DIAMETER, PIECHART_DIAMETER, startAngle, startAngle + angle);
@@ -36,14 +39,16 @@ class pieChart
     float legendX = SCREEN_WIDTH - 850;
     float legendY = 100;
     float boxSize = 20;
-    for (int i =0; i < data.size(); i++)
+    for (int i =0; i < 4; i++)
     {
       fill(sectorColors [i % sectorColors.length]);
       rect(legendX, legendY+i*25, boxSize, boxSize);
       fill(0);
       textAlign(LEFT, CENTER);
       try {
+        textSize(16);
         text(labels[i], legendX + boxSize + 5, legendY + i * 25 + boxSize/2);
+        textSize(30);
       }
       catch (NullPointerException e) {
         // Handle the NullPointerException here
@@ -56,33 +61,43 @@ class pieChart
         println("Value of legendY: " + legendY);
       }
     }
+    fill(255);
+    textAlign(CENTER, TOP);
+    textSize(24);
+    text("Reliability of " + airline, width / 2, 20);
   }
-  void draw()
-  {
-    //background(100);
-    pie_chart(); //<>//
-  }
-}
 
-class pieChartWidget extends Widget
-{
-  pieChart chart;
-  pieChartWidget(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, pieChart chart)
+  void drawtext()
   {
-    super(x, y, 0, 0, label, 0, titleFont, 0, 0, false);
-    this.x = x;
-    this.y = y;
-    this.widgetWidth = widgetWidth;
-    this.widgetHeight = widgetHeight;
-    this.label = label;
-    this.widgetColor  = widgetColor;
-    this.widgetFont = widgetFont;
-    this.gap = gap;
-    this.chart = chart;
+    textFont(widgetFont);
+    textSize(30);
+    text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
   }
+
+  void collectDataForPieChart(String airline)
+  {
+    specificAirline.clear();
+
+    for (int i = 0; i < flights.size(); i++) {
+      Flight flight = flights.get(i);
+      if (flight.provider.contains(airline)) {
+        specificAirline.add(flight);
+      }
+    }
+    flightStatus();
+  }
+
+  void mousePressed() {
+    for (RadioButton radioButton : airlineRadioButtons) {
+      if (radioButton.mouseIntercept(mouseX, mouseY)) {
+        radioButton.handleClick(airlineRadioButtons);
+      }
+    }
+  }
+
   void draw()
   {
-    super.draw();
-    chart.draw();
+    drawtext();
+    pie_chart();
   }
 }

@@ -4,9 +4,7 @@ class InputBox extends InteractiveWidget {
   float x, y, w, h;
   int curve;
   boolean typing;
-  ArrayList<KeyActionListener> keyEventListn;
   InputBox(float x, float y, float w, float h, int curve, String textFormat) {
-    //(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean drawStroke)
     super((int)x, (int)y, (int)w, (int)h, "", silverBlue, textFont, 0, curve, true);
     this.x = x;
     this.y = y;
@@ -17,7 +15,6 @@ class InputBox extends InteractiveWidget {
     allUserInputs = "";
     userInput = "";
     typing = false;
-    keyEventListn = new ArrayList<KeyActionListener>();
   }
 
   void draw() {
@@ -28,7 +25,6 @@ class InputBox extends InteractiveWidget {
     fill(darkGray);
     textAlign(CENTER, CENTER);
     text(userInput, x + w/2, y + h/2); // Display user input within the box
-    println(keyPressed);
     if (!typing)
     {
       textSize(11);
@@ -43,30 +39,49 @@ class InputBox extends InteractiveWidget {
   void keyPressed() {
     // When key is pressed, save the current user input
     if (key == ENTER) {
+      enterKey.rewind();
+      enterKey.play();
       saveUserInput();
       userInput = ""; // Clear the user input after saving
     }
     // When Backspace key is pressed remove last character from the user input
     else if (key == BACKSPACE && userInput.length() > 0) {
+      backSpaceKey.rewind();
+      backSpaceKey.play();
       userInput = userInput.substring(0, userInput.length() - 1);
     }
     // If any other key is pressed, append it to the current user input
     else if (key != TAB && key != CODED) {
+      float randomKey = random(0, 6);
+      switch(int(randomKey)) {
+      case 0:
+        key1.rewind();
+        key1.play();
+        break;
+      case 1:
+        key2.rewind();
+        key2.play();
+        break;
+      case 2:
+        key3.rewind();
+        key3.play();
+        break;
+      case 3:
+        key4.rewind();
+        key4.play();
+        break;
+      case 4:
+        key5.rewind();
+        key5.play();
+        break;
+      case 5:
+        key6.rewind();
+        key6.play();
+      default:
+        break;
+      }
       userInput += key;
       typing = true;
-    }
-  }
-
-  public void addKeyListn(KeyActionListener listn)
-  {
-    keyEventListn.add(listn);
-  }
-
-  public void keyActions(KeyEvent e)
-  {
-    for (KeyActionListener listn : keyEventListn)
-    {
-      listn.performKeyAction(e, this);
     }
   }
 

@@ -85,7 +85,7 @@ boolean drawStroke)
 #### Contributors :
 
 > Main : Manon Galian  
-> Editor(s) : N/A
+> Editor(s) : Joel Jojan  
 
 #### Brief Description :
 
@@ -571,12 +571,12 @@ extends InteractiveWidget
 
 ###### Contributors :
 
-> Main : Joel Jojan   
+> Main : Maria Ceanuri
 > Editor(s) : N/A
 
 ###### Brief Description :
 
-`CheckboxExtended` is a custom development by **Maria Ceanuri** to integrate checkbox more fluently into the linegraph page
+`CheckboxExtended` is a custom development by **Maria Ceanuri** to integrate checkbox more fluently into the linegraph page. It creates 10 checkboxes for the lineGraph with the names of the carriers.
 
 ###### Class Summary :
 
@@ -608,9 +608,9 @@ extends Checkbox
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|Alignment Correction|
-|**initialState**|`boolean`|flag that indicates whether the box is checked/unchecked|
-|**provider**|`FlightProvider`|Used in the lineGraph to display the provider|
+|**gap**|`int`|gap between check boxes|
+|**initialState**|`boolean`|flag that tells us the if the button is pressed at the beginning |
+|**provider**|`FlightProvider`|it's the airline|
 
 ---
 
@@ -663,7 +663,7 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
-TO DO
+The `InputBox` class allows the user to type into the input field, and when the enter key is pressed, their input is stored and displayed in the console along with all the previous inputs.
 
 #### Class Summary :
 

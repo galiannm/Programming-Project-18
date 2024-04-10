@@ -1,4 +1,4 @@
-// Fcode done by Manon
+// Code done by Manon //modified by Joel (added in toggleHeatMap actions - 04/04/24 00:30)
 // create a separate tab for organizational purposes
 void interactiveWidgetActions()
 {
@@ -6,6 +6,8 @@ void interactiveWidgetActions()
   mainBtn1.addListn((e, w) -> {
     if (mainBtn1.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       slidingBtn1.countMouseClick += 1;
       slidingBtn1.toggleDrag();
 
@@ -24,6 +26,8 @@ void interactiveWidgetActions()
   bubbleChartReliabilityBtn.addListn((e, w) -> {
     if (bubbleChartReliabilityBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       currentScreenNumber = 2;
     }
   }
@@ -32,6 +36,8 @@ void interactiveWidgetActions()
   pieChartReliabilityBtn.addListn((e, w) -> {
     if (pieChartReliabilityBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("pie chart screen");
       currentScreenNumber = 3;
     }
@@ -41,6 +47,8 @@ void interactiveWidgetActions()
   lineGrapheReliabilityBtn.addListn((e, w) -> {
     if (lineGrapheReliabilityBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("line graph screen");
       currentScreenNumber = 4;
     }
@@ -50,6 +58,8 @@ void interactiveWidgetActions()
   mainBtn2.addListn((e, w) -> {
     if (mainBtn2.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       slidingBtn2.countMouseClick += 1;
       slidingBtn2.toggleDrag();
 
@@ -65,6 +75,8 @@ void interactiveWidgetActions()
   disPerAirlineBtn.addListn((e, w) -> {
     if (disPerAirlineBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("distance per airline screen");
       currentScreenNumber = 5;
     }
@@ -74,6 +86,8 @@ void interactiveWidgetActions()
   numFlightsPerAirlineBtn.addListn((e, w) -> {
     if (numFlightsPerAirlineBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("number of flights per airline screen");
       currentScreenNumber = 6;
     }
@@ -83,6 +97,8 @@ void interactiveWidgetActions()
   mainBtn3.addListn((e, w) -> {
     if (mainBtn3.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       currentScreenNumber = 1;
     }
   }
@@ -103,6 +119,8 @@ void interactiveWidgetActions()
   chyronClear.addListn((e, w) -> {
     if (chyronClear.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       chyronInputBox.allUserInputs = "";
       chyronInputBox.typing = false;
       flightsOfTheDay = new ArrayList<Flight>();
@@ -113,6 +131,9 @@ void interactiveWidgetActions()
   mainBtn4.addListn((e, w) -> {
     if (mainBtn4.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
+
       slidingBtn4.countMouseClick += 1;
       slidingBtn4.toggleDrag();
 
@@ -134,6 +155,8 @@ void interactiveWidgetActions()
   yourFlightInfoBtn.addListn((e, w) -> {
     if (yourFlightInfoBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("your light information screen");
       currentScreenNumber = 7;
       for (RadioButton radioButton : radioButtonsUserFlightInfo)
@@ -177,6 +200,8 @@ void interactiveWidgetActions()
   radioBtnUserFlight1.addListn((e, w) -> {
     if (radioBtnUserFlight1.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("clear input");
       yourFlightInfoInputBox.allUserInputs = "";
       flightInfoCard.draw = false;
@@ -199,6 +224,8 @@ void interactiveWidgetActions()
   radioBtnUserFlight2.addListn((e, w) -> {
     if (radioBtnUserFlight2.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("back to home");
       currentScreenNumber = 0;
     }
@@ -208,6 +235,8 @@ void interactiveWidgetActions()
   radioBtnUserFlight3.addListn((e, w) -> {
     if (radioBtnUserFlight3.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("new flight information screen");
       currentScreenNumber = 8;
     }
@@ -217,6 +246,8 @@ void interactiveWidgetActions()
   radioBtnUserFlight4.addListn((e, w) -> {
     if (radioBtnUserFlight4.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("back to home");
       currentScreenNumber = 0;
     }
@@ -226,15 +257,19 @@ void interactiveWidgetActions()
   newFlightInfoBtn.addListn((e, w) -> {
     if (newFlightInfoBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("new flight information screen");
       currentScreenNumber = 8;
     }
   }
   );
-  
+
   newFlightInfoClear.addListn((e, w) -> {
     if (newFlightInfoClear.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       newFlightInfoInputBox.allUserInputs = "";
       newFlightInfoInputBox.typing = false;
       newFlightInformationData = new ArrayList<Flight>();
@@ -247,48 +282,59 @@ void interactiveWidgetActions()
 
     if (!newFlightInfoInputBox.allUserInputs.equals(""))
     {
+
       getScrollPageInformation(newFlightInfoInputBox.allUserInputs);
     }
   }
   );
-  
+
   sortDateBtn.addListn((e, w) -> {
     if (sortDateBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("sort by date");
       newFlightInfoScroll.sortColumn("date");
     }
   }
-  ); 
+  );
   sortByCarrierBtn.addListn((e, w) -> {
     if (sortByCarrierBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("sort by carrier");
       newFlightInfoScroll.sortColumn("carrier");
     }
   }
-  ); 
+  );
   sortByDepAirportBtn.addListn((e, w) -> {
     if (sortByDepAirportBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("sort by dep airport");
       newFlightInfoScroll.sortColumn("DepAirport");
     }
   }
-  ); 
-  
+  );
+
   sortByArrAirportBtn.addListn((e, w) -> {
     if (sortByArrAirportBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("sort by arr airport");
       newFlightInfoScroll.sortColumn("ArrAirport");
     }
   }
-  ); 
+  );
 
   flightPathBtn.addListn((e, w) -> {
     if (flightPathBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       println("Flight path screen");
       currentScreenNumber = 9;
     }
@@ -300,10 +346,16 @@ void interactiveWidgetActions()
 
     if (!flightPathInputBox.allUserInputs.equals(""))
     {
-      mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ", "))[0];
-      mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ", "))[1];
-      mapOfFlightPath.getCoords();
-      flightPathInputBox.typing = true;
+
+      try {
+        mapOfFlightPath.stateOr = (split(flightPathInputBox.allUserInputs, ", "))[0];
+        mapOfFlightPath.stateDest = (split(flightPathInputBox.allUserInputs, ", "))[1];
+        mapOfFlightPath.getCoords();
+        flightPathInputBox.typing = true;
+      }
+      catch (Exception inputFailed) {
+        println("Invalid Input Entered in Flight Path");
+      }
     }
   }
   );
@@ -311,7 +363,26 @@ void interactiveWidgetActions()
   heatMapBtn.addListn((e, w) -> {
     if (heatMapBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       currentScreenNumber = 10;
+    }
+  }
+  );
+
+  toggleHeatMap.addListn((e, w) -> {
+    if (toggleHeatMap.mouseIntercept(mouseX, mouseY))
+    {
+      clickSound.rewind();
+      clickSound.play();
+      firstHeatMapWidget.toggleShowArrivals();
+      if (firstHeatMapWidget.showArrivals == false) {
+        toggleHeatMap.widgetColor = color(255, 0, 0);
+        toggleHeatMap.label = "Showing Departures";
+      } else {
+        toggleHeatMap.widgetColor = color(0, 0, 255);
+        toggleHeatMap.label = "Showing Arrivals";
+      }
     }
   }
   );
@@ -319,6 +390,8 @@ void interactiveWidgetActions()
   homeBtn.addListn((e, w) -> {
     if (homeBtn.mouseIntercept(mouseX, mouseY))
     {
+      clickSound.rewind();
+      clickSound.play();
       currentScreenNumber = 0;
       yourFlightInfoInputBox.allUserInputs = "";
       chyronInputBox.allUserInputs = "";
@@ -335,6 +408,8 @@ void interactiveWidgetActions()
   for (RadioButton radioButton : radioButtonsUserFlightInfo)
   {
     radioButton.addListn((e, w) -> {
+      clickSound.rewind();
+      clickSound.play();
       if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
       {
         radioButton.handleClick(radioButtonsUserFlightInfo);
@@ -346,9 +421,25 @@ void interactiveWidgetActions()
   for (RadioButton radioButton : radioButtonsUserFlightInfo2)
   {
     radioButton.addListn((e, w) -> {
+      clickSound.rewind();
+      clickSound.play();
       if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
       {
         radioButton.handleClick(radioButtonsUserFlightInfo2);
+      }
+    }
+    );
+  }
+  for (RadioButton radioButton : airlineRadioButtons) //Created by Theresa James, for the airline radio buttons for the piechart screen
+  {
+    radioButton.addListn((e, w) -> {
+      if (radioButton.mouseIntercept(mouseX, mouseY) && mousePressed)
+      {
+        radioButton.handleClick(airlineRadioButtons);
+        selectedLabel = radioButton.getLabel();
+        airline = selectedLabel;
+        PieChartWidget.collectDataForPieChart(airline);
+        PieChartWidget.draw();
       }
     }
     );

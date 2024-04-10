@@ -1,4 +1,7 @@
-// Class lineGraph was brought to you by Maria Ceanuri :)
+// Code - Maria Ceanuri
+//The lineGraph class is an extension of the Chart class. It allows the user to display information that changes continuously over time (two dimentions of data). 
+//Each point is associated with a x coordinate and y coordinate.
+
 class lineGraph  extends Chart {
  
   int numValues = 31; // Number of values to display on the x-axis
@@ -9,8 +12,8 @@ class lineGraph  extends Chart {
   String xCoordinates, yCoordinates;
   FlightData data;
 
-  lineGraph(int x, int y, int widgetWidth, int widgetHeight, String label, String title, String xCoordinates, String yCoordinates, PFont widgetFont, FlightData data, color widgetColor ) {//ArrayList<GroupedFlight> gflights) {
-    super( x, y, widgetWidth, widgetHeight, label, 0, widgetFont, 0, title, "days", "lateness (minutes)");
+  lineGraph(int x, int y, int widgetWidth, int widgetHeight, String title, String xCoordinates, String yCoordinates, PFont widgetFont, FlightData data, color widgetColor ) {//ArrayList<GroupedFlight> gflights) {
+    super( x, y, widgetWidth, widgetHeight, 0, widgetFont, title, "days", "lateness (minutes)");
     this.xCoordinates=xCoordinates; 
     this.yCoordinates= yCoordinates ; 
     this.data=data;
@@ -74,8 +77,8 @@ class lineGraph  extends Chart {
 
 
   
-  void draw() {
-    super.draw(); //<>//
+  void draw() { //<>//
+    super.draw(); //<>// //<>//
     textAlign (CENTER);
     drawXVariables(numValues, gapBetween);
     drawYVariables(numValuesY, gapBetweenY, scaleY);

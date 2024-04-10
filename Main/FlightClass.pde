@@ -1,10 +1,9 @@
-// This class was brought to you by Joel Jojan :D
-// Modified by Maria Ceanuri by modifying class flight by adding function get day and propteries and adding classes: groupedfligth, flightday, flightprovider and flightdata
+// Code- Joel Jojan 
+// Edited - Maria Ceanuri 
 import java.util.ArrayList;
 import java.util.regex.*;
 import java.text.*;
 import java.util.*;
-// Cambialo debajo de la definicion de Flights
 public enum FlightStatus
 {
   ONTIME, CANCELLED, DIVERTED, DELAYED
@@ -30,6 +29,7 @@ class Flight {
   boolean cancelled;
   boolean diverted;
   int distance;
+  int flightDayAsInt;
   FlightStatus status;
   int timeDelayed;
   public String day;
@@ -84,11 +84,18 @@ class Flight {
     //Getting rid of 00:00 at the end of date.
     int indexOfSpace = flightDate.indexOf(" ");
     flightDate = flightDate.substring(0, indexOfSpace);
+    
+    
+    String[] flightDay = flightDate.split(" ");
+    String[] flightDatePart = flightDay[0].split("/"); // Splitting the date part
+
+    String flightDayString = flightDatePart[1];
+    flightDayAsInt = Integer.parseInt(flightDayString);
+    
   }
-  // I (Maria Ceanuri) added this classes and functions to process the data for the reliability line graph
+  // Code - Maria Ceanuri
+  // Added this classes and functions to process the data for the reliability line graph.
   String getDay() {
-    // 01/03/2022 00:00
-    // 1/3/2022 12:00:00 AM
     String temp="00";
     Pattern pattern = Pattern.compile("/(\\d{1,2})/"); // American format ==> month/day/year
     Matcher matcher = pattern.matcher(flightDate);
@@ -194,7 +201,7 @@ class FlightProvider {
       break;
     case ONTIME:
       break;
-    } // switch
+    } 
   }
 }
 
@@ -234,7 +241,7 @@ class FlightData {
         providerList.put(flight.provider, currentProvider);
       }
       currentProvider.add(flight);
-    } // for
+    } 
   } 
-  //loadData
+ 
 }
