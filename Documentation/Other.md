@@ -10,6 +10,8 @@ Authors :
 1. [`Screen` Class](#1-screen-class)
 2. [`Gradient` Class](#2-gradient-class)
 3. [`FlightClass` Class](#3-flightclass-class)
+4. [`Music and Sounds`](#4-Music-and-Sounds)
+5. [`Loading Threads`](#5-Loading-Threads)
 
 ## 1. `Screen` Class
 
@@ -166,6 +168,97 @@ class Flight {
 |**cancelled**|`boolean`| A booelean value indicating if the flight is cancelled | true/false |
 |**diverted**|`boolean`| A booelean value indicating if the flight is diverted | true/false |
 |**distance**|`int`| An int of the distance travelled by the flight | 123 |
+
+
+## 5. `Loading Threads`
+
+### Contributors :
+
+> Main : Joel Jojan
+> Editor(s) : N/A
+
+### Brief Description :
+
+When loading our data from the CSV into our [Flight](#3-flightclass-class) objects it prohibits processing from drawing anything leaving the screen blank until its finished loading. To create a less frustrating experience we implemented a loading screen using the `GifAnim` library. For the duration of the loading process a gif of an aeroplane created by Manon will play. When finished it will go to the main program and act as normal. This feature was implemented using Threads in processing.
+
+#### Code:
+
+```java
+import ddf.minim.*;
+Minim minim;
+AudioPlayer backgroundMusic, clickSound, key1, key2, key3, key4, key5, key6, backSpaceKey, enterKey;
+
+minim = new Minim(this);
+backgroundMusic = minim.loadFile("backgroundMusic.mp3");
+backgroundMusic.setGain(-20);
+backgroundMusic.play();
+backgroundMusic.loop();
+clickSound = minim.loadFile("mouseClick.mp3");
+clickSound.setGain(-20);
+key1 = minim.loadFile("keyClick1.mp3");
+key2 = minim.loadFile("keyClick2.mp3");
+key3 = minim.loadFile("keyClick3.mp3");
+key4 = minim.loadFile("keyClick4.mp3");
+key5 = minim.loadFile("keyClick5.mp3");
+key6 = minim.loadFile("keyClick6.mp3");
+enterKey = minim.loadFile("enterKey.mp3");
+backSpaceKey = minim.loadFile("backSpaceKey.mp3");
+key1.setGain(-20);
+key2.setGain(-20);
+key3.setGain(-20);
+key4.setGain(-20);
+key5.setGain(-20);
+key6.setGain(-20);
+enterKey.setGain(-20);
+backSpaceKey.setGain(-20);
+```
+
+### Brief Description :
+
+Using the pre-built `Minim` library, background music as well as sound effects were implemented. Click noises for the typing, mousePress, and interactions as well as a soothing melody in the background. Sourced most of the effects from [Pixabay](pixabay.com). The music was sourced from Spotify and is from [Undertale](undertale.com).
+
+#### Code:
+
+```java
+import gifAnimation.*;
+boolean isLoading = true;
+Gif loadingGif;
+
+void setup()
+{
+  loadingGif = new Gif(this, "loading.gif");
+  loadingGif.play();
+  //Threads to load data while displaying a gif - Joel
+  Thread dataLoadingThread = new Thread(new Runnable() {
+    public void run() {
+      USA = loadShape("USA.svg");
+      loadData(); // Load CSV data
+      collectData(airline, "1/1/2022", "NY"); // Process data
+      getAverageDistance();
+      flightStatus();
+      currentScreenNumber = 0;
+
+      addWidgetsToSetup();
+      interactiveWidgetActions();
+      isLoading = false; // Set loading flag to false once data loading is complete
+    }
+  }
+  );
+  dataLoadingThread.start()
+}
+
+void draw()
+{
+  synchronized(this) {
+    if (isLoading) {
+      image(loadingGif, 0, 0);
+    } else
+    {
+      //draw Main screen
+    }
+  }
+}
+```
 
 
 
