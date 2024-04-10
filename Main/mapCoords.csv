@@ -1,0 +1,54 @@
+US_States,US_StatesAbr,coords_x,coords_y
+Alabama,AL,674,615
+Alaska ,AK,140,300
+Arizona,AZ,310,585
+Arkansas,AR,590,590
+California,CA,200,530
+Colorado,CO,400,530
+Connecticut,CT,845,465
+Delaware,DE,820,507
+Florida,FL,770,672
+Georgia,GA,730,615
+Guam,GU,277,700
+Hawaii,HI,130,610
+Idaho,ID,295,445
+Illinois,IL,633,516
+Indiana,IN,671,513
+Iowa,IA,566,490
+Kansas,KS,500,540
+Kentucky,KY,694,545
+Louisiana,LA,593,646
+Maine,ME,874,405
+Maryland,MD,804,510
+Massachusetts,MA,858,451
+Michigan,MI,683,468
+Minnesota,MN,555,430
+Mississippi,MS,632,617
+Missouri,MO,580,540
+Montana,MT,360,410
+Nebraska,NE,480,500
+Nevada,NV,250,500
+New Hampshire,NH,851,432
+New Jersey,NJ,830,490
+New Mexico,NM,385,590
+New York,NY,810,450
+North Carolina,NC,762,592
+North Dakota,ND,480,455
+Ohio,OH,715,505
+Oklahoma,OK,510,585
+Oregon,OR,220,435
+Pennsylvania,PA,777,484
+Puerto Rico,PR,850,750
+Rhode Island,RI,863,463
+South Carolina,SC,762,592
+South Dakota,SD,480,455
+Tennessee,TN,680,570
+Texas,TX,500,640
+Utah,UT,320,510
+Vermont,VT,834,430
+Virginia,VA,790,530
+US Virgin Islands,VI,640,763
+Washington,WA,240,395
+West Virginia,WV,748,524
+Wisconsin,WI,620,450
+Wyoming,WY,380,470

@@ -1,21 +1,68 @@
+//For more information on each class, please refer to the documentation on our github. 
+
+import gifAnimation.*;
+import ddf.minim.*;
+//Music
+
 import java.util.ArrayList;
+import java.lang.Thread;
+
 ArrayList<Flight> flights;
 PFont titleFont, textFont;
 ArrayList<Screen> screens = new ArrayList<>();
 int currentScreenNumber;
 ArrayList<Flight> specificAirline = new ArrayList<Flight>();
+ArrayList<RadioButton> radioButtonsUserFlightInfo = new ArrayList<>();
+ArrayList<RadioButton> radioButtonsUserFlightInfo2 = new ArrayList<>();
+ArrayList<RadioButton> airlineRadioButtons = new ArrayList<>();
 ArrayList <Integer> reliabilityData = new ArrayList <Integer>(); // The data used by the pie chart
 String airline = "AA";
-Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability, screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo;
-MiniScreen chyronMiniScreen, mainScreenMiniScreen;
+String selectedLabel;
+
+//List of the US states: Filled in process data. - Joel
+ArrayList<String> states = new ArrayList<String>();
+PShape USA;
+Screen mainScreen, screenFlightsOTD, screenReliabilityBubbleChart, screenPieChartReliability, screenLineGrapheReliability,
+  screenDisPerAirline, screenNumFlightsPerAirline, screenYourFlightInfo, screenNewFlightInfo, screenMapFligthPath, screenHeatMap;
+MiniScreen chyronMiniScreen, mainScreenMiniScreen, yourFlightInfoMiniScreen, newflightInfoMiniScreen;
 Chyron chyronFOTD;
-pieChart firstPieChart;
+InputBox yourFlightInfoInputBox, newFlightInfoInputBox, chyronInputBox, flightPathInputBox;
+FlightData data;
+MapOfFlightPath mapOfFlightPath;
+RadioButton radioBtnUserFlight1, radioBtnUserFlight2, radioBtnUserFlight3, radioBtnUserFlight4;
+CheckboxExtended check;
+lineGraph myLineGraph;
+pieChartWidget PieChartWidget;
 BubbleChart bubbleChart;
-InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4;
-ImageWidget homeBtn;
+HeatMapWidget firstHeatMapWidget;
+InteractiveWidget mainBtn1, mainBtn2, mainBtn3, mainBtn4, chyronClear, sortByCarrierBtn, sortByDepAirportBtn, sortByArrAirportBtn, sortDateBtn, newFlightInfoClear, toggleHeatMap;
+ImageWidget homeBtn, flightInfoCard;
+ImageWidget HeatmapLegendArrivals, HeatmapLegendDepartures;
+infoSheetInformation userFlightInformation;
 Widget signHolder;
+ScrollPage newFlightInfoScroll;
 AnimatedWidget slidingBtn1, slidingBtn2, slidingBtn4, bubbleChartReliabilityBtn, pieChartReliabilityBtn, lineGrapheReliabilityBtn,
-  disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn;
+  disPerAirlineBtn, numFlightsPerAirlineBtn, yourFlightInfoBtn, newFlightInfoBtn, flightPathBtn, heatMapBtn;
+
+BarChart firstBarChart;   // The bar chart on number of flights per carrier
+BarChart secondBarChart; // The bar chart on total distance travelled by carrier
+//RadioButton []radioButtons ;
+
+//Audio Stuff
+Minim minim;
+AudioPlayer backgroundMusic, clickSound, key1, key2, key3, key4, key5, key6, backSpaceKey, enterKey;
+
+String [] airlineNames = {"AA", "AS", "B6", "DL", "F9", "G4", "HA", "NK", "UA", "WN"};
+//ArrayList<RadioButton> airlineRadioButtons;
+
+boolean isLoading = true;
+Gif loadingGif;
+PImage mapOfUSA, infoSheet;
+PImage arrivalsLegend, departuresLegend;
+
+Slider slider1; // slider corresponding to the first bar chart
+Slider slider2; // slider corresponding to the second bar chart
+
 void settings()
 {
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -23,45 +70,146 @@ void settings()
 
 void setup()
 {
-  loadData();    // loads the CSV data into the objects
-  collectData(airline, "1/1/2022", "NY"); // loads a bunch of variables for you to use for graphs
-  homeBtnPic = loadImage("HomeButtonImg.png");
+  loadingGif = new Gif(this, "loading.gif");
+  loadingGif.play();
+  //Threads to load data while displaying a gif - Joel
+  Thread dataLoadingThread = new Thread(new Runnable() {
+    public void run() {
+      USA = loadShape("USA.svg");
+      loadData(); // Load CSV data
+      collectData(airline, "1/1/2022", "NY"); // Process data
+      getAverageDistance();
+      flightStatus();
+      currentScreenNumber = 0;
 
+      addWidgetsToSetup();
+      interactiveWidgetActions();
+      isLoading = false; // Set loading flag to false once data loading is complete
+    }
+  }
+  );
+  dataLoadingThread.start();
+
+  minim = new Minim(this);
+  backgroundMusic = minim.loadFile("backgroundMusic.mp3");
+  backgroundMusic.setGain(-20);
+  backgroundMusic.play();
+  backgroundMusic.loop();
+  clickSound = minim.loadFile("mouseClick.mp3");
+  clickSound.setGain(-20);
+  key1 = minim.loadFile("keyClick1.mp3");
+  key2 = minim.loadFile("keyClick2.mp3");
+  key3 = minim.loadFile("keyClick3.mp3");
+  key4 = minim.loadFile("keyClick4.mp3");
+  key5 = minim.loadFile("keyClick5.mp3");
+  key6 = minim.loadFile("keyClick6.mp3");
+  enterKey = minim.loadFile("enterKey.mp3");
+  backSpaceKey = minim.loadFile("backSpaceKey.mp3");
+  key1.setGain(-20);
+  key2.setGain(-20);
+  key3.setGain(-20);
+  key4.setGain(-20);
+  key5.setGain(-20);
+  key6.setGain(-20);
+  enterKey.setGain(-20);
+  backSpaceKey.setGain(-20);
+
+
+  homeBtnPic = loadImage("HomeButtonImg.png");
+  mapOfUSA = loadImage("USAMap.png");
+  infoSheet = loadImage("infoSheet.png");
   titleFont = loadFont("AvenirNext-Bold-45.vlw");
   textFont = loadFont("AlTarikh-45.vlw");
-
-  flightStatus();
-  currentScreenNumber = 0;
-  
-  addWidgetsToSetup();
-  interactiveWidgetActions();
+  arrivalsLegend = loadImage("arrivals.png");
+  departuresLegend = loadImage("departures.png");
 }
 
 void draw()
 {
   textAlign(LEFT);
   rectMode(CORNER);
-  screens.get(currentScreenNumber).draw();
+  imageMode(CORNER);
+  synchronized(this) {
+    if (isLoading) {
+      image(loadingGif, 0, 0);
+      
+    } else
+    {
+      screens.get(currentScreenNumber).draw();
+      if (slider1.isDragging())
+      {
+        updateBarChart(firstBarChart);
+      }
+      if (slider2.isDragging())
+      {
+        updateBarChart(secondBarChart);
+      }
+    }
+  }
 }
 
 void mousePressed(MouseEvent event)
 {
-  for (Widget widget : screens.get(currentScreenNumber).widgets)
-  {
-    if (widget instanceof InteractiveWidget)
+  synchronized(this) {
+    if (!isLoading) {
+      for (Widget widget : screens.get(currentScreenNumber).widgets)
+      {
+        if (widget instanceof InteractiveWidget)
+        {
+          ((InteractiveWidget) widget).actions(event);
+        }
+      }
+    }
+  }
+}
+
+void keyPressed(KeyEvent event)
+{
+  if (!isLoading) {
+    for (Widget widget : screens.get(currentScreenNumber).widgets)
     {
-      ((InteractiveWidget) widget).actions(event);
+      if (widget instanceof InputBox)
+      {
+        ((InputBox) widget).keyActions(event);
+      }
     }
   }
 }
 
 void mouseDragged(MouseEvent event)
 {
-  for (Widget widget : screens.get(currentScreenNumber).widgets)
-  {
-    if (widget instanceof Slider)
-    {
-      ((Slider) widget).actions(event);
+  synchronized(this) {
+    if (!isLoading) {
+      for (Widget widget : screens.get(currentScreenNumber).widgets)
+      {
+        if (widget instanceof Slider)
+        {
+          ((Slider) widget).actions(event);
+        }
+      }
     }
   }
+}
+
+void mouseWheel(MouseEvent event) {
+  synchronized(this) {
+    if (!isLoading) {
+      for (Widget widget : screens.get(currentScreenNumber).widgets)
+      {
+        if (widget instanceof ScrollPage)
+        {
+          ((ScrollPage) widget).actions(event);
+        }
+      }
+    }
+  }
+}
+
+
+//More music stuff - Joel
+//Terminates music when screen closed
+void stop() {
+  backgroundMusic.close();
+  minim.stop();
+  super.stop();
 }

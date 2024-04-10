@@ -1,4 +1,5 @@
-// widget, interactive widget, slider, Mini screen, image widget and AnimatedWidget brought to you by Manon 
+// Code - Manon
+// The `Widget` class is the base class for all user interface classes. 
 class Widget {
   int x, y, widgetWidth, widgetHeight, gap;
   String label;
@@ -20,10 +21,12 @@ class Widget {
     this.labelColor = color(darkGray);
     this.curve = curve;
     this.drawStroke = drawStroke;
-    //isMouseOver = false;
   }
 
   void draw() {
+    textAlign(LEFT);
+    rectMode(CORNER);
+    imageMode(CORNER);
     if (!drawStroke)
     {
       noStroke();
@@ -38,9 +41,180 @@ class Widget {
   {
     textFont(widgetFont);
     textSize(16);
-    text(label, x+widgetWidth/4, y+widgetHeight/2+gap);
+    text(label, x+widgetWidth/4 - gap, y + widgetHeight/2 + 6);
   }
 }
+
+// code - Manon
+// The `infoSheetInformation` class allows the user to display the information of a 
+// certain flight. If the flight exists in the database, the departure/arrival location 
+// (state and airport), flight number, departure/arrival time, date and distance will be 
+// printed. The user is also notified in the case that the flight does not exist or is cancelled.
+
+class infoSheetInformation extends Widget
+{
+  int xImg, yImg, wImg, hImg;
+  color textColor;
+  PFont textFont;
+  String to, from, date, airportOrigine, airportArr;
+  int departureTime, arrivalTime, distance, flightNo;
+  boolean delayedDep, delayedArr, flightExists, draw, canShowFlightInfo, lookAgain;
+  infoSheetInformation(int xImg, int yImg, int wImg, int hImg, color textColor, PFont textFont)
+  {
+    super(xImg, yImg, wImg, hImg, "", textColor, textFont, 0, 0, false);
+    this.xImg = xImg;
+    this.yImg = yImg;
+    this.wImg = wImg;
+    this.hImg = hImg;
+    this.textColor = textColor;
+    this.textFont = textFont;
+    draw = false;
+    canShowFlightInfo = false;
+    lookAgain = false;
+  }
+
+  void draw()
+  {
+    if (draw)
+    {
+      settingLabels();
+      settingUserInput();
+    }
+  }
+
+  void settingLabels()
+  {
+    fill(textColor);
+    textSize(20);
+    text("FROM: ", xImg + 10, yImg + 130);
+    text("TO: ", xImg + 10, yImg + 180);
+    text("FLIGHT No: ", xImg + 10, yImg + 230);
+    text("DATE:", xImg + 570, yImg + 130);
+    text("DISTANCE:", xImg + 570, yImg + 180);
+    text("DEPARTURE TIME:", xImg + 260, yImg + 230);
+    text("ARRIVAL TIME:", xImg + 570, yImg + 230);
+  }
+
+  void settingUserInput()
+  {
+    if (flightExists && !userFligthInfo.cancelled)
+    {
+      fill(textColor);
+      textSize(20);
+      text(airportOrigine, xImg + 85, yImg + 130);
+      text(to, xImg + 135, yImg + 130);
+      text(airportArr, xImg + 55, yImg + 180);
+      text(from, xImg + 105, yImg + 180);
+      text(date, xImg + 640, yImg + 130);
+      text(distance, xImg + 688, yImg + 180);
+      text(flightNo, xImg + 130, yImg + 230);
+
+      int crsDepHour = departureTime/100;
+      int crsDepMin = departureTime%100;
+      int crsArrHour = arrivalTime/100;
+      int crsArrMin = arrivalTime%100;
+      String standardDepTime =  String.format("%d:%02d", crsDepHour, crsDepMin);
+      String standardArrTime =  String.format("%d:%02d", crsArrHour, crsArrMin);
+
+      if (delayedDep)
+      {
+        fill(orange);
+        text(standardDepTime, xImg + 450, yImg + 230);
+      } else
+      {
+        fill(textColor);
+        text(standardDepTime, xImg + 450, yImg + 230);
+      }
+      if (delayedArr)
+      {
+        fill(orange);
+        text(standardArrTime, xImg + 725, yImg + 230);
+      } else
+      {
+        fill(textColor);
+        text(standardArrTime, xImg + 725, yImg + 230);
+      }
+    } else if (flightExists && userFligthInfo.cancelled)
+    {
+      fill(red);
+      textSize(35);
+      pushMatrix();
+      translate(300, 300);
+      rotate(PI / 6);
+      text("Flight Cancelled", 0, 0);
+      popMatrix();
+
+      textSize(30);
+      fill(silverBlue);
+      text("Would you like to find other flights ?", xImg, (hImg + 290) - yImg);
+    } else if (!flightExists)
+    {
+      textSize(30);
+      pushMatrix();
+      translate(300, 300);
+      rotate(PI / 6);
+      text("This flight does not exist", 0, 0);
+      popMatrix();
+
+      textSize(30);
+      fill(silverBlue);
+      text("Would you like to find other flights ?", xImg, (hImg + 290) - yImg);
+    }
+    textSize(30);
+    fill(silverBlue);
+    text("Would like the information for another flight ?", xImg, (hImg + 180) - yImg);
+  }
+
+  void getData()
+  {
+    if (userFligthInfo != null)
+    {
+      flightExists = true;
+      canShowFlightInfo = true;
+      to = userFligthInfo.originCity;
+      from = userFligthInfo.destCity;
+      date = userFligthInfo.flightDate;
+      airportOrigine = userFligthInfo.originAirport;
+      airportArr = userFligthInfo.destAirport;
+      distance = userFligthInfo.distance;
+      flightNo = userFligthInfo.flightNumber;
+      departureTime = userFligthInfo.expectedDepTime;
+      arrivalTime = userFligthInfo.expectedArrTime;
+
+      if (userFligthInfo.cancelled)
+      {
+        canShowFlightInfo = false;
+      }
+
+      if (!userFligthInfo.cancelled)
+      {
+        if (userFligthInfo.expectedDepTime - Integer.parseInt(userFligthInfo.depTime) > 15)
+        {
+          delayedDep = true;
+        } else
+        {
+          delayedDep = false;
+        }
+
+        if (userFligthInfo.expectedArrTime - Integer.parseInt(userFligthInfo.arrTime) > 15)
+        {
+          delayedArr = true;
+        } else
+        {
+          delayedArr = false;
+        }
+      }
+    } else
+    {
+      flightExists = false;
+      canShowFlightInfo = false;
+    }
+  }
+}
+
+// code - Manon
+// The `MiniScreen` class provides similar functionality to that of its parent, 
+// `Widget` but also provide the possibility of a hanging title at the top.
 
 class MiniScreen extends Widget
 {
@@ -58,6 +232,9 @@ class MiniScreen extends Widget
   }
 
   void draw() {
+    textAlign(LEFT);
+    rectMode(CORNER);
+    imageMode(CORNER);
     noStroke();
     super.draw();
   }
@@ -70,13 +247,18 @@ class MiniScreen extends Widget
   }
 }
 
+// code - Manon
+// The `InteractiveWidget` class allows the user to interact with the widget by providing 
+// hooks for listeners of mouse and keyboard events.
 class InteractiveWidget extends Widget
 {
   ArrayList<MouseActionListener> eventListn;
+  ArrayList<KeyActionListener> keyEventListn;
   InteractiveWidget(int x, int y, int widgetWidth, int widgetHeight, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean drawStroke)
   {
     super(x, y, widgetWidth, widgetHeight, label, widgetColor, widgetFont, gap, curve, drawStroke);
     eventListn = new ArrayList<>();
+    keyEventListn = new ArrayList<KeyActionListener>();
   }
 
   boolean mouseIntercept(int mX, int mY)
@@ -106,8 +288,23 @@ class InteractiveWidget extends Widget
       listn.performAction(e, this);
     }
   }
+
+  public void addKeyListn(KeyActionListener listn)
+  {
+    keyEventListn.add(listn);
+  }
+
+  public void keyActions(KeyEvent e)
+  {
+    for (KeyActionListener listn : keyEventListn)
+    {
+      listn.performKeyAction(e, this);
+    }
+  }
 }
 
+// code - Manon
+// The `AnimatedWidget` Class allows the user to perform an animation on a widget.
 class AnimatedWidget extends InteractiveWidget
 {
   int x, startx, y, amountOfPxToTravel, widgetWidth, widgetHeight, curve, pxTraveled, countMouseClick;
@@ -158,7 +355,7 @@ class AnimatedWidget extends InteractiveWidget
       if (mouseIntercept(mouseX, mouseY)) {
         stroke(44); // White border if the mouse is over
       } else {
-        stroke(widgetColor); 
+        stroke(widgetColor);
       }
     } else if (!drawStroke)
     {
@@ -181,7 +378,6 @@ class AnimatedWidget extends InteractiveWidget
       if (x+30 < startx-120)
       {
         textAlign(LEFT);
-        //fill(darkBlueGray);
         fill(airportYellow);
         textSize(15);
         text(label, x+30, y+widgetWidth);
@@ -219,11 +415,16 @@ class AnimatedWidget extends InteractiveWidget
   }
 }
 
+// code - Manon
+// The `ImageWidget` class provides the same functionality to that of its parent 
+// `InteractiveWidget`, but allows the user to use an image (instead of the default 
+// rectangle shape).
 class ImageWidget extends InteractiveWidget
 {
   int x, y, widgetWidth, widgetHeight;
   PImage widgetImg;
-  ImageWidget(int x, int y, int widgetWidth, int widgetHeight, PImage widgetImg)
+  boolean draw;
+  ImageWidget(int x, int y, int widgetWidth, int widgetHeight, PImage widgetImg, boolean draw)
   {
     super(x, y, widgetWidth, widgetHeight, "", color(0), textFont, 0, 0, false);
     this.x = x;
@@ -231,22 +432,34 @@ class ImageWidget extends InteractiveWidget
     this.widgetWidth = widgetWidth;
     this.widgetHeight = widgetHeight;
     this.widgetImg = widgetImg;
+    this.draw = draw;
   }
 
   void draw()
   {
-    image(widgetImg, x, y, widgetWidth, widgetHeight);
+    if (draw)
+    {
+      imageMode(CORNER);
+      image(widgetImg, x, y, widgetWidth, widgetHeight);
+    }
   }
 }
 
-
+// code - Manon edited by Nadana
+// The `Slider` class enables the addition of a slider control, allowing users to select 
+// a value within the specified range (defined by `minValue` and `maxValue`) by sliding 
+// an thumb.
 class Slider extends InteractiveWidget
 {
   int lowerInterval, upperInterval;
   int barWidth, barHeight, thumbWidth, thumbHeight;
   int barX, barY;
   int currentValue;
+  float currentValueFloat;
   boolean isDragging;
+  int minValue, maxValue; //Store minimum and maximum values
+  int sliderColor;
+
 
   MouseActionListener onDrag = (e, s) ->
   {
@@ -254,20 +467,20 @@ class Slider extends InteractiveWidget
 
     if (slider.mouseIntercept(mouseX, mouseY))
     {
-      isDragging = true;
+      slider.isDragging = true;
     }
     if (isDragging)
     {
       slider.x = constrain(mouseX-slider.thumbWidth/2, slider.barX, slider.barX + slider.barWidth - slider.thumbWidth);
-      slider.currentValue = (int) map(slider.x, slider.barX, slider.barX + slider.barWidth - slider.thumbWidth, 0, 100);
+      slider.currentValue = (int) map(slider.x, slider.barX, slider.barX + slider.barWidth - slider.thumbWidth, slider.minValue, slider.maxValue);
     }
     if (e.getAction() == MouseEvent.RELEASE)
     {
-      isDragging = false;
+      slider.isDragging = false;
     }
   };
 
-  Slider(int barX, int barY, int thumbWidth, int thumbHeight, int barWidth, int barHeight, String label,
+  Slider(int barX, int barY, int thumbWidth, int thumbHeight, int barWidth, int barHeight, String label, int minValue, int maxValue,
     color sliderColor, PFont widgetFont, int gap)
   {
     super(barX, barY - thumbHeight / 2, thumbWidth, thumbHeight, label, sliderColor, widgetFont, gap, 0, false);
@@ -278,26 +491,62 @@ class Slider extends InteractiveWidget
     this.barWidth = barWidth;
     this.barHeight = barHeight;
     currentValue = 0;
+    currentValueFloat = 0.0;
     isDragging = false;
     this.addListn(onDrag);
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+    this.sliderColor = sliderColor;
   }
 
   void draw()
   {
+    rectMode(CORNER);
     noStroke();
     fill(100);
     rect(barX, barY, barWidth, barHeight, barHeight*0.4);
-    fill(150);
+    fill(sliderColor);
     rect(x, y+thumbHeight/4, thumbWidth, thumbHeight, thumbHeight*0.5);
     drawText();
+    drawMinMaxValues(); //Displays the minimum and maximum values of the slider
   }
 
   void drawText()
   {
     textFont(widgetFont);
     textSize(20);
-    text(label, barX, barY - 20);
+    text(label, barX +barWidth/2, barY - 20);
     text(currentValue, barX + 80, barY - 20);
+  }
+
+  void drawMinMaxValues()
+  {
+    textAlign(LEFT, CENTER);
+    fill(labelColor);
+    textSize(16);
+    text(minValue, barX, barY + barHeight + gap*3);  
+    textAlign(RIGHT, CENTER);
+    text(maxValue, barX + barWidth, barY + barHeight + gap*3);  
+  }
+
+  void update()
+  {
+    if (mousePressed && mouseX >= x && mouseX <= x + barWidth && mouseY >= y && mouseY <= y + barHeight) {
+      currentValueFloat = constrain((mouseX - x) / barWidth, 0, 1);
+      isDragging = true;
+    } else {
+      isDragging = false;
+    }
+  }
+
+  float getValue()
+  {
+    return currentValue;
+  }
+
+  boolean isDragging()
+  {
+    return isDragging;
   }
 }
 
@@ -316,10 +565,12 @@ class Checkbox extends InteractiveWidget {
     super.draw();
     if (isChecked) {
       fill(0); // Fill with black if checked
-      rect(x + 5, y + 5, widgetWidth - 10, widgetHeight - 10);
+      rect(x, y, widgetWidth - 10, widgetHeight - 10);
     }
     if (mouseIntercept(mouseX, mouseY) && mousePressed && mouseButton == LEFT && !clickHandled) {
       isChecked = !isChecked;
+      clickSound.rewind();
+      clickSound.play();
       clickHandled = true; // Set the flag to indicate the click has been handled
     }
     if (!mousePressed) {
@@ -337,5 +588,83 @@ class Checkbox extends InteractiveWidget {
 
   boolean mouseIntercept(int mX, int mY) {
     return ((mX > x && mX < x + widgetWidth && mY > y && mY < y + widgetHeight));
+  }
+}
+// Added by Maria Ceanuri to control chekcboxes in reliability line graph
+class CheckboxExtended extends Checkbox {
+  FlightProvider provider;
+  CheckboxExtended(int x, int y, int checkboxSize, String label, color widgetColor, PFont widgetFont, int gap, boolean initialState, FlightProvider provider)
+  {
+    super ( x, y, checkboxSize, label, widgetColor, widgetFont, gap, initialState);
+    this.provider = provider;
+  }
+  void draw ()
+  {
+    super.draw();
+    provider.visible = isChecked;
+  }
+}
+// Code - Maria Ceanuri, edited by Manon
+//The RadioButton class facilitates the incorporation of radio buttons, which represent a collection of choices, with only one option selectable by the user at a given moment.
+class RadioButton extends InteractiveWidget {
+  boolean selected, draw;
+  RadioButton(int x, int y, int widgetWidth, String label, color widgetColor, PFont widgetFont, int gap, int curve, boolean draw) {
+    super(x, y, widgetWidth, widgetWidth, label, widgetColor, widgetFont, gap, curve, draw);
+    selected = false;
+    this.draw = draw;
+  }
+  String getLabel()
+  {
+    return label;
+  }
+  void draw() {
+    // Draw the radio button
+    if (draw)
+    {
+      textAlign(LEFT);
+      rectMode(CORNER);
+      imageMode(CORNER);
+      textFont(widgetFont);
+      textSize(16);
+      noStroke();
+      fill(255);
+      rect(x, y, widgetWidth, widgetWidth, curve);
+
+      // If selected, draw a dot in the center
+      if (selected) {
+        fill(0);
+        rect(x + widgetWidth/4 + 1, y + widgetWidth/4 + 1, widgetWidth/2, widgetWidth/2, curve);
+      }
+
+      // Display the label
+      fill(widgetColor);
+      textAlign(LEFT, CENTER);
+      text(label, x + gap, y + gap/2);
+    }
+  }
+
+  void mouseIntercept()
+  {
+    super.mouseIntercept(mouseX, mouseY);
+    if (mouseIntercept(mouseX, mouseY))
+    {
+      selected = !selected;
+    }
+    if (mouseIntercept(mouseX, mouseY)) {
+      stroke(255); // White border if the mouse is over
+    } else {
+      stroke(widgetColor); // Black border otherwise
+    }
+  }
+
+  void handleClick(ArrayList<RadioButton> radioButtons) {
+    mouseIntercept();
+    clickSound.rewind();
+    clickSound.play();
+    for (RadioButton radioButton : radioButtons) {
+      if (radioButton != this) {
+        radioButton.selected = false;
+      }
+    }
   }
 }

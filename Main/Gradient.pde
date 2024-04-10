@@ -1,14 +1,18 @@
+// gradient code - manon
+// The `Gradient` class provides the funtionality of creating customisable esthetic 
+// gradients. The user may enter as many or as litle colors as needed.
+
 class Gradient
 {
   int x, y;
-  float w, h;
+  float gradientWidth, gradientHeight;
   color[] colors;
-  Gradient(int x, int y, float w, float h, color[] colors)
+  Gradient(int x, int y, float gradientWidth, float gradientHeight, color[] colors)
   {
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
+    this.gradientWidth = gradientWidth;
+    this.gradientHeight = gradientHeight;
     this.colors = colors;
   }
 
@@ -19,20 +23,19 @@ class Gradient
       if (colors.length == 1)
       {
         background(colors[0]);
-      } else
+      } 
+      else
       {
-        for (int i = y; i <= y+h; i++)
+        for (int i = y; i <= y+gradientHeight; i++)
         {
-          float inter = map(i, y, y+h, 0, 1);
-          // Calculate the position of `inter` within the gradient segments
-          float scaledInter = inter * (colors.length - 1); // Scale interpolation to span all color segments
-          int index = int(scaledInter); // Determine the starting color index
-          // Ensure that the index does not exceed the bounds of the colors array
+          float amt = map(i, y, y+gradientHeight, 0, 1); 
+          float scaledAmt = amt * (colors.length - 1); 
+          int index = int(scaledAmt);
           index = constrain(index, 0, colors.length - 2);
-          float localInter = scaledInter - index; // Calculate local interpolation value
-          color gradientColor = lerpColor(colors[index], colors[index + 1], localInter);
+          float localAmt = scaledAmt - index; 
+          color gradientColor = lerpColor(colors[index], colors[index + 1], localAmt);
           stroke(gradientColor);
-          line(x, i, x+w, i);
+          line(x, i, x+gradientWidth, i);
         }
       }
     }

@@ -15,10 +15,11 @@ color[] backgroundColors = new color[]{lightBlue, blueGray, blueGray, darkBlueGr
 
 // color for each carrier (pre-programmed for esthetic purposes) :
 //color pink, darkPink, red, orange, yellow, green, darkGreen, blue, darkBlue, purple;
+//Courtesy of Manon :D
 color pink = color(204, 0, 76);
 color darkPink = color(255, 102, 178);
 color red = color(255, 102, 102);
-color orange = color(178, 102, 255);
+color orange = color(247, 190, 155);
 color yellow = color(255, 255, 102);
 color green = color(102, 255, 102);
 color darkGreen = color(0, 153, 76);
