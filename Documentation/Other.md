@@ -213,7 +213,7 @@ enterKey.setGain(-20);
 backSpaceKey.setGain(-20);
 ```
 
-## 4. `Loading Threads`
+## 5. `Loading Threads`
 
 ### Contributors :
 
