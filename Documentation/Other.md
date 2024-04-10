@@ -170,7 +170,7 @@ class Flight {
 |**distance**|`int`| An int of the distance travelled by the flight | 123 |
 
 
-## 5. `Loading Threads`
+## 4. `Music and Sounds`
 
 ### Contributors :
 
@@ -179,7 +179,7 @@ class Flight {
 
 ### Brief Description :
 
-When loading our data from the CSV into our [Flight](#3-flightclass-class) objects it prohibits processing from drawing anything leaving the screen blank until its finished loading. To create a less frustrating experience we implemented a loading screen using the `GifAnim` library. For the duration of the loading process a gif of an aeroplane created by Manon will play. When finished it will go to the main program and act as normal. This feature was implemented using Threads in processing.
+Using the pre-built `Minim` library, background music as well as sound effects were implemented. Click noises for the typing, mousePress, and interactions as well as a soothing melody in the background. Sourced most of the effects from [Pixabay](pixabay.com). The music was sourced from Spotify and is from [Undertale](undertale.com).
 
 #### Code:
 
@@ -213,9 +213,16 @@ enterKey.setGain(-20);
 backSpaceKey.setGain(-20);
 ```
 
+## 4. `Loading Threads`
+
+### Contributors :
+
+> Main : Joel Jojan
+> Editor(s) : N/A
+
 ### Brief Description :
 
-Using the pre-built `Minim` library, background music as well as sound effects were implemented. Click noises for the typing, mousePress, and interactions as well as a soothing melody in the background. Sourced most of the effects from [Pixabay](pixabay.com). The music was sourced from Spotify and is from [Undertale](undertale.com).
+When loading our data from the CSV into our [Flight](#3-flightclass-class) objects it prohibits processing from drawing anything leaving the screen blank until its finished loading. To create a less frustrating experience we implemented a loading screen using the `GifAnim` library. For the duration of the loading process a gif of an aeroplane created by Manon will play. When finished it will go to the main program and act as normal. This feature was implemented using Threads in processing.
 
 #### Code:
 
