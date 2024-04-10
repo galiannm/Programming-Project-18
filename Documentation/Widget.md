@@ -571,7 +571,7 @@ extends InteractiveWidget
 
 ###### Contributors :
 
-> Main : Maria Ceanuri
+> Main : Maria Ceanuri  
 > Editor(s) : N/A
 
 ###### Brief Description :

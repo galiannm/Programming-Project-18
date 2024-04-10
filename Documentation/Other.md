@@ -120,24 +120,24 @@ String flightDate;
 
 ```java
 class Flight {
-  String flightDate;            // flightDate = "01/21/20 00:00" of "1/4/2022 12:00:00 AM"
-  String provider;              // provider = "AA"
-  int flightNumber;             // flightNumber = int("1")
-  String originAirport;         // originAirport = "JFK"
-  String originCity;            // originCity = "Dallas"
-  String originState;           // originState = "TX"
-  String originWAC;             // OriginWAC = "2"
-  String destAirport;           // destAirport = "jFk"
-  String destCity;              // destCity = "New York"
-  String destState;             // destState = "NY"
-  String destWAC;               // destWAC = "2"
-  int expectedDepTime;          // expectedDepTime = 545  
-  String depTime;               // depTime = "545";
-  int expectedArrTime;          // expectedArrTime = 645
-  String arrTime;               // arrTime = "700"
-  boolean cancelled;            // cancelled == 1 = true; cancelled == 0 = false;
-  boolean diverted;             // diverted == 1 = true; diverted == 0 = false;
-  int distance;                 // distance = int("123")         
+  String flightDate;         // flightDate = "01/21/20 00:00" of "1/4/2022 12:00:00  AM"
+  String provider;           // provider = "AA"
+  int flightNumber;          // flightNumber = int("1")
+  String originAirport;      // originAirport = "JFK"
+  String originCity;         // originCity = "Dallas"
+  String originState;        // originState = "TX"
+  String originWAC;          // OriginWAC = "2"
+  String destAirport;        // destAirport = "jFk"
+  String destCity;           // destCity = "New York"
+  String destState;          // destState = "NY"
+  String destWAC;            // destWAC = "2"
+  int expectedDepTime;       // expectedDepTime = 545  
+  String depTime;            // depTime = "545";
+  int expectedArrTime;       // expectedArrTime = 645
+  String arrTime;            // arrTime = "700"
+  boolean cancelled;         // cancelled == 1 = true; cancelled == 0 = false;
+  boolean diverted;          // diverted == 1 = true; diverted == 0 = false;
+  int distance;              // distance = int("123")         
 }
 
  Flight(String[] data) {
@@ -174,7 +174,7 @@ class Flight {
 
 ### Contributors :
 
-> Main : Joel Jojan
+> Main : Joel Jojan  
 > Editor(s) : N/A
 
 ### Brief Description :
@@ -217,7 +217,7 @@ backSpaceKey.setGain(-20);
 
 ### Contributors :
 
-> Main : Joel Jojan
+> Main : Joel Jojan  
 > Editor(s) : N/A
 
 ### Brief Description :
