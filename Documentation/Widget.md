@@ -531,7 +531,7 @@ extends InteractiveWidget
 
 ##### Brief Description :
 
-TO DO
+The `Checkbox` class is used to generate the interactable checkboxes throughout the program.
 
 #### Class Summary :
 
@@ -562,8 +562,8 @@ extends InteractiveWidget
 |**checkboxSize**|`int`|size of the checkbox|
 |**label**|`String`|label of the checkbox|
 |**widgetFont**|`PFont`|font of the labels of the checkbox|
-|**gap**|`int`|TO DO|
-|**initialState**|`boolean`|flag that TO DO|
+|**gap**|`int`|Alignment Correction|
+|**initialState**|`boolean`|flag that indicates whether the box is checked/unchecked|
 
 ---
 
@@ -576,7 +576,7 @@ extends InteractiveWidget
 
 ###### Brief Description :
 
-The `CheckboxExtended` creates 10 checkboxes for the lineGraph with the names of the carriers.
+`CheckboxExtended` is a custom development by **Maria Ceanuri** to integrate checkbox more fluently into the linegraph page. It creates 10 checkboxes for the lineGraph with the names of the carriers.
 
 ###### Class Summary :
 
@@ -623,7 +623,7 @@ extends Checkbox
 
 ##### Brief Description :
 
-The RadioButton class facilitates the incorporation of radio buttons, which represent a collection of choices, with only one option selectable by the user at a given moment.
+The `RadioButton` class facilitates the incorporation of radio buttons, which represent a collection of choices, with only one option selectable by the user at a given moment.
 
 #### Class Summary :
 
