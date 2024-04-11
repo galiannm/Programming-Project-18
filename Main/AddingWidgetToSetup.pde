@@ -27,7 +27,7 @@ void addWidgetsToSetup()
 
   // input boxes
   yourFlightInfoInputBox = new InputBox(50, 130, 300, 50, 95, "Enter: FligthNo, Date, Airport, Carrier, DepState, ArrState");
-  chyronInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: Date, Airport");
+  chyronInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: Date, State");
   flightPathInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: DepState, ArrState");
   newFlightInfoInputBox = new InputBox(50, 130, 250, 50, 95, "Enter: DtartDate, EndDate, DepState, ArrState");
 
